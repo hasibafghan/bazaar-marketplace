@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     # my apps 
     'main.apps.MainConfig',
+    'category.apps.CategoryConfig',
+    'accounts.apps.AccountsConfig',
+
 
     # modules(third party apps)
     'django_cleanup.apps.CleanupConfig',
@@ -150,4 +153,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # LOGIN_REDIRECT_URL = ''
 # LOGOUT_REDIRECT_URL = ''
 
-# AUTH_USER_MODEL = 'accounts_auth.CustomUser'
+AUTH_USER_MODEL = 'accounts.Account'
+ 
