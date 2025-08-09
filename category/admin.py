@@ -5,7 +5,7 @@ from .models import Category
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('category_name', 'slug', 'description', 'category_image')
-    prepopulated_fields = {'slug': ('category_name',)}
+    prepopulated_fields = {'slug': ('category_name',)} # Automatically generate slug from category name
     search_fields = ('category_name',)
     list_filter = ('category_name',)
     ordering = ('category_name',)
