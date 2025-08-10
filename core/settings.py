@@ -79,6 +79,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # my context_processors section
+                'category.context_processors.category_list',
             ],
         },
     },
