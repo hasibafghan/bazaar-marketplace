@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'category.apps.CategoryConfig',
     'accounts.apps.AccountsConfig',
     'product.apps.ProductConfig',
+    'carts.apps.CartsConfig',
 
 
     # modules(third party apps)
