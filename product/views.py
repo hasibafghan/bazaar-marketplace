@@ -3,13 +3,19 @@ from .models import Product
 from category.models import Category
 from carts.models import Cart , CartItem 
 from carts.views import _cart_id
+from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
+
 
 def product_list(request):
-    products = Product.objects.all().filter(is_available = True)
+    products = Product.objects.all().filter(is_available = True).order_by('created_date')
     products_counter = products.count()
+    # pagination section
+    paginator = Paginator(products , 3)
+    page_number = request.GET.get('page')
+    page_products = paginator.get_page(page_number)
 
     context = {
-        'products' : products,
+        'products' : page_products,
         'products_counter' : products_counter
     }
 
@@ -18,14 +24,19 @@ def product_list(request):
 
 
 def products_by_category(request , category_slug):
-
     category = get_object_or_404(Category , slug = category_slug)
-    products = Product.objects.filter(category = category , is_available = True)
+    products = Product.objects.filter(category = category , is_available = True).order_by('created_date')
+    
+    paginator = Paginator(products , 3)
+    page_number = request.GET.get('page')
+    page_products = paginator.get_page(page_number)
+
     products_counter = products.count()
     
-    context = {
+
+    context = { 
         'category' : category,
-        'products' : products,
+        'products' : page_products,
         'products_counter' : products_counter
     }
 

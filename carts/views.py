@@ -48,7 +48,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
         grand_total = total + tax
 
     except cart_item.DoesNotExist:
-        pass #just ignore
+        return redirect('home')
 
     context = {
     'total': total,
