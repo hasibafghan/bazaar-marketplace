@@ -83,6 +83,7 @@ TEMPLATES = [
 
                 # my context_processors section
                 'category.context_processors.category_list',
+                'carts.context_processors.counter',
             ],
         },
     },

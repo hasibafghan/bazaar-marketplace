@@ -46,8 +46,12 @@
         <div class="container">
           <!-- ============================ COMPONENT 1 ================================= -->
           {% if not cart_items %}
-          <center><h3>Your Cart is Empty Would Like to Add Something!</h3></center><br>
-          <center><a href="{% url 'product_list' %}" class="btn btn-primary">Add Items</a></center>
+            <center>
+              <h3>Your Cart is Empty Would Like to Add Something!</h3>
+            </center><br />
+            <center>
+              <a href="{% url 'product_list' %}" class="btn btn-primary">Add Items</a>
+            </center>
           {% else %}
             <div class="row">
               <aside class="col-lg-9">
@@ -70,7 +74,7 @@
                                 <img src="{{ cart_item.product.images.url }}" class="img-sm" />
                               </div>
                               <figcaption class="info">
-                                <a href="{{cart_item.product.get_url}}" class="title text-dark">{{ cart_item.product.product_name }}</a>
+                                <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
                                 <p class="text-muted small">
                                   Color: 25 Mpx <br /> Size: Canon
                                 </p>
@@ -119,9 +123,9 @@
                     </dl>
                     <dl class="dlist-align">
                       <dt>Total:</dt>
-                      <a href="" class="text-right text-dark b"><strong>${{ grand_total }}</strong></a>
+                      <dd href="" class="text-right text-dark"><strong>${{ grand_total }}</strong></dd>
                     </dl>
-                    <hr />
+                    <hr/>
                     <p class="text-center mb-3">
                       <img src="{% static './images/misc/payments.png' %}" height="26" />
                     </p>
