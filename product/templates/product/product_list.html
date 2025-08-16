@@ -123,6 +123,7 @@
           <!-- sect-heading -->
 
           <div class="row">
+            {% if products %}              
             {% for product in products %}
               <div class="col-md-4">
                 <figure class="card card-product-grid">
@@ -142,6 +143,10 @@
                 </figure>
               </div> <!-- col.// -->
             {% endfor %}
+            {% else %}
+            <h3>No Product Found!</h3>
+            {% endif %}
+
           </div> <!-- row end.// -->
 
           <!-- pagination -->
