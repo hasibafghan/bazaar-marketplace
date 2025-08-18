@@ -3,7 +3,6 @@ from django.urls import reverse
 from category.models import Category
 
 
-
 class Product(models.Model):
     product_name    = models.CharField(max_length=200, unique=True)
     slug            = models.SlugField(max_length=200, unique=True)
@@ -23,6 +22,7 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
 
+#  ==========================| variation model |===============================
 
 variation_category_choice = (
     ('color' , 'color'),
@@ -35,5 +35,5 @@ class Variation(models.Model):
     is_active = models.BooleanField(default=True)
     created_date = models.DateTimeField(auto_now_add=True)
 
-    def __unicode__(self):
-        return self.product
+    def __str__(self):
+        return self.variation_value

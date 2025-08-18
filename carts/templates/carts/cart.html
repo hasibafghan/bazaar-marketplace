@@ -4,43 +4,6 @@
 {% block content %}
   <!DOCTYPE HTML>
   <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta http-equiv="pragma" content="no-cache" />
-      <meta http-equiv="cache-control" content="max-age=604800" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-
-      <title>GreatKart | One of the Biggest Online Shopping Platform</title>
-
-      <link href="images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
-      <!-- jQuery -->
-      <script src="{% static 'js/jquery-2.0.0.min.js' %}" type="text/javascript"></script>
-
-      <!-- Bootstrap4 files -->
-      <script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
-      <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" />
-
-      <!-- Font awesome 5 -->
-      <link href="{% static 'fonts/fontawesome/css/all.min.css' %}" type="text/css" rel="stylesheet" />
-
-      <!-- custom style -->
-      <link href="{% static 'css/ui.css' %}" rel="stylesheet" type="text/css" />
-      <link href="{% static 'css/responsive.css' %}" rel="stylesheet" media="only screen and (max-width: 1200px)" />
-
-      <!-- custom javascript -->
-      <script src="{% static 'js/script.js' %}" type="text/javascript"></script>
-
-      <script type="text/javascript">
-        /// some script
-        
-        // jquery ready start
-        $(document).ready(function () {
-          // jQuery code
-        })
-        // jquery end
-      </script>
-    </head>
     <body>
       <section class="section-content padding-y bg">
         <div class="container">
@@ -74,9 +37,13 @@
                                 <img src="{{ cart_item.product.images.url }}" class="img-sm" />
                               </div>
                               <figcaption class="info">
-                                <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
+                                <a href="{{ cart_item.product.get_url }}" class="title text-dark" style="font-weight: bold;">{{ cart_item.product.product_name }}</a>
                                 <p class="text-muted small">
-                                  Color: 25 Mpx <br /> Size: Canon
+                                  {% if cart_item.variations.all %}
+                                    {% for item in cart_item.variations.all %}
+                                      <p style="display: inline-block;">{{item.variation_category}}</p> : {{item.variation_value|capfirst}} <br>
+                                    {% endfor %}
+                                  {% endif %}
                                 </p>
                               </figcaption>
                             </figure>
@@ -125,7 +92,7 @@
                       <dt>Total:</dt>
                       <dd href="" class="text-right text-dark"><strong>${{ grand_total }}</strong></dd>
                     </dl>
-                    <hr/>
+                    <hr />
                     <p class="text-center mb-3">
                       <img src="{% static './images/misc/payments.png' %}" height="26" />
                     </p>

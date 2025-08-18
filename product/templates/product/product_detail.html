@@ -16,51 +16,52 @@
             </aside>
             <!-- right side -->
             <main class="col-md-6 border-left">
-              <form action="{% url 'add_cart' product.id %}" method="GET">
-              <article class="content-body">
-                <h2 class="title">{{ product.product_name }}</h2>
+              <form action="{% url 'add_cart' product.id %}" method="POST">
+                {% csrf_token %}
+                <article class="content-body">
+                  <h2 class="title">{{ product.product_name }}</h2>
 
-                <div class="mb-3">
-                  <var class="price h4">${{ product.price }}</var>
-                </div>
-
-                <p>{{ product.description }}</p>
-
-                <hr />
-                <div class="row">
-                  <div class="item-option-select">
-                    <h6>Choose Color</h6>
-                    <Select name="color" class="form-control">
-                      <option value="Silver">Silver</option>
-                      <option value="Gray">Gray</option>
-                      <option value="Gold">Gold</option>
-                      <option value="Black">Black</option>
-                    </Select>
+                  <div class="mb-3">
+                    <var class="price h4">${{ product.price }}</var>
                   </div>
-                </div> <!-- row.// -->
-                <div class="row">
-                  <div class="item-option-select">
-                    <h6>Select Size</h6>
-                    <Select name="size" class="form-control">
-                      <option value="S">S</option>
-                      <option value="M">M</option>
-                      <option value="L">L</option>
-                      <option value="XL">XL</option>
-                    </Select>
-                  </div>
-                </div> <!-- row.// -->
-                <hr />
 
-                {% if product.stock <= 0 %}
-                  <h4 class="text-danger">Sorry Out of Stock!</h4>
-                {% else %}
-                  {% if in_cart %}
-                    <a href="{% url 'cart' %}" class="btn btn-success"><span class="text">Already Added</span> <i class="fas fa-check"></i></a>
+                  <p>{{ product.description }}</p>
+
+                  <hr />
+                  <div class="row">
+                    <div class="item-option-select">
+                      <h6>Choose Color</h6>
+                      <select name="color" class="form-control" required>
+                        <option value="" hidden disabled selected>Choose Color</option>
+                        {% for i in product.variation_set.all %}
+                          {% if i.variation_category == 'color' and i.is_active %}
+                            <option value="{{ i.variation_value|lower }}">{{ i.variation_value|capfirst }}</option>
+                          {% endif %}
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div> <!-- row.// -->
+                  <div class="row">
+                    <div class="item-option-select">
+                      <h6>Select Size</h6>
+                      <select name="size" class="form-control" required>
+                        <option value="" hidden disabled selected>Choose Size</option>
+                        {% for i in product.variation_set.all %}
+                          {% if i.variation_category == 'size' and i.is_active %}
+                            <option value="{{ i.variation_value|lower }}">{{ i.variation_value|capfirst }}</option>
+                          {% endif %}
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div> <!-- row.// -->
+                  <hr />
+
+                  {% if product.stock <= 0 %}
+                    <h4 class="text-danger">Sorry Out of Stock!</h4>
                   {% else %}
                     <button href="" class="btn btn-primary"><span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
                   {% endif %}
-                {% endif %}
-              </article> <!-- product-info-aside .// -->
+                </article> <!-- product-info-aside .// -->
               </form>
             </main> <!-- col.// -->
           </div> <!-- row.// -->
