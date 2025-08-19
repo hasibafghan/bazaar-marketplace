@@ -9,6 +9,7 @@ def _cart_id(request):
         cart = request.session.create()
     return cart
 
+
 def add_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     product_variations = []
@@ -23,11 +24,13 @@ def add_cart(request, product_id):
                 product_variations.append(variation)
             except Variation.DoesNotExist:
                 pass
+
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
     except Cart.DoesNotExist:
         cart = Cart.objects.create(cart_id=_cart_id(request))
     cart.save()
+
     # CartItem Section: try to find an existing cart item with the same variations
     cart_items = CartItem.objects.filter(product=product, cart=cart)
     if cart_items.exists():
@@ -81,25 +84,29 @@ def cart(request, total=0, quantity=0, cart_items=None):
 
 
 
-def remove_cart_quantity(request, product_id):
+def remove_cart_quantity(request, product_id , cart_item_id ):
     cart = Cart.objects.get(cart_id = _cart_id(request))
     product = get_object_or_404(Product, id=product_id)
-    cart_item = CartItem.objects.get(product=product, cart=cart)
-    if cart_item.quantity > 1:
-        cart_item.quantity -= 1
-        cart_item.save()
-    else:
-        cart_item.delete()
+    try:
+        cart_item = CartItem.objects.get(product=product, cart=cart , id=cart_item_id)
+        if cart_item.quantity > 1:
+            cart_item.quantity -= 1
+            cart_item.save()
+        else:
+            cart_item.delete()
+    except:
+        pass
+
     return redirect('cart')
 
 
 
-def remove_cart_item(request, product_id): 
+def remove_cart_item(request, product_id , cart_item_id): 
     cart = Cart.objects.get(cart_id=_cart_id(request))
     product = get_object_or_404(Product, id=product_id)
 
     try:
-        cart_item = CartItem.objects.get(product=product, cart=cart)
+        cart_item = CartItem.objects.get(product=product, cart=cart  , id=cart_item_id)
         cart_item.delete()
     except CartItem.DoesNotExist:
         pass  
