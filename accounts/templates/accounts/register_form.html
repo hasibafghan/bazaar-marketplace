@@ -9,6 +9,7 @@
       <article class="card-body">
         <header class="mb-4">
           <h4 class="card-title">Sign up</h4>
+          {% include 'include/alerts.html' %}
         </header>
         <form method="post">
           {% csrf_token %}

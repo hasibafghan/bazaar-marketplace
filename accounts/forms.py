@@ -21,6 +21,8 @@ class RegistrationForm(forms.ModelForm):
     
 
 
+# ==================================| just for reminder and practice |============================================= 
+
 # from django import forms
 # from crispy_forms.helper import FormHelper
 # from crispy_forms.layout import Layout, Row, Column, Submit
