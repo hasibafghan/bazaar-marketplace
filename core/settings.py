@@ -137,8 +137,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
@@ -163,3 +163,17 @@ AUTH_USER_MODEL = 'accounts.Account'
 #     'django.contrib.auth.backends.ModelBackend',  # enables email or custom field as username
 # ]
  
+# settings.py
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+# Your Gmail address
+EMAIL_HOST_USER = "hasibalamyar2@gmail.com"
+
+# ⚡ Use your App Password (not your Gmail login password)
+EMAIL_HOST_PASSWORD = "noui jdwx gveu ppub"
+
+EMAIL_USE_SSL = False

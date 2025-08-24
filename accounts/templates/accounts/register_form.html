@@ -11,7 +11,7 @@
           <h4 class="card-title">Sign up</h4>
           {% include 'include/alerts.html' %}
         </header>
-        <form method="post">
+        <form method="POST" action="{% url 'register_user' %}">
           {% csrf_token %}
           {{ form|crispy }}
           <button type="submit" class="btn btn-primary">Register</button>
