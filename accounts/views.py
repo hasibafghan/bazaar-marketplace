@@ -138,7 +138,7 @@ def forgot_password(request):
 
 
 
-def resetpassword_validate(request , uidb64, token):
+def reset_password_validate(request , uidb64, token):
 
     try:
         uid = urlsafe_base64_decode(uidb64).decode()

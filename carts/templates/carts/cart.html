@@ -2,19 +2,24 @@
 {% load static %}
 
 {% block content %}
-  <!DOCTYPE HTML>
-  <html lang="en">
-    <body>
       <section class="section-content padding-y bg">
         <div class="container">
           <!-- ============================ COMPONENT 1 ================================= -->
           {% if not cart_items %}
-            <center>
-              <h3>Your Cart is Empty Would Like to Add Something!</h3>
-            </center><br />
-            <center>
-              <a href="{% url 'product_list' %}" class="btn btn-primary">Add Items</a>
-            </center>
+            <div class="row">
+          <div class="col-12 text-center">
+            <div class="card">
+              <div class="card-body py-5">
+                <i class="fa fa-shopping-cart fa-3x text-muted mb-3"></i>
+                <h3>Your cart is empty</h3>
+                <p class="text-muted">Looks like you haven't added any items to your cart yet.</p>
+                <a href="{% url 'product_list' %}" class="btn btn-primary mt-3">
+                  Start Shopping
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
           {% else %}
             <div class="row">
               <aside class="col-lg-9">
@@ -102,7 +107,7 @@
                     <p class="text-center mb-3">
                       <img src="{% static './images/misc/payments.png' %}" height="26" />
                     </p>
-                    <a href="./place-order.html" class="btn btn-primary btn-block">Checkout</a>
+                    <a href="{% url 'checkout' %}" class="btn btn-primary btn-block">Checkout</a>
                     <a href="{% url 'product_list' %}" class="btn btn-light btn-block">Continue Shopping</a>
                   </div> <!-- card-body.// -->
                 </div> <!-- card.// -->
@@ -114,6 +119,4 @@
         </div> <!-- container .// -->
       </section>
       <!-- ========================= SECTION CONTENT END// ========================= -->
-    </body>
-  </html>
 {% endblock %}
