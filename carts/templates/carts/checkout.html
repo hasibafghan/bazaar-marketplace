@@ -2,44 +2,173 @@
 {% load static %}
 
 {% block content %}
+  <style>
+    .stepper-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+    
+    .stepper-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+    
+    .stepper-item::before {
+      position: absolute;
+      content: '';
+      border-bottom: 3px solid #dee2e6;
+      width: 100%;
+      top: 25px;
+      left: -50%;
+      z-index: 1;
+    }
+    
+    .stepper-item::after {
+      position: absolute;
+      content: '';
+      border-bottom: 3px solid #dee2e6;
+      width: 100%;
+      top: 25px;
+      left: 50%;
+      z-index: 1;
+    }
+    
+    .stepper-item:first-child::before {
+      content: none;
+    }
+    
+    .stepper-item:last-child::after {
+      content: none;
+    }
+    
+    .step-counter {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid #dee2e6;
+      color: #6c757d;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .stepper-item.completed .step-counter {
+      background-color: #4e73df;
+      border-color: #4e73df;
+      color: white;
+    }
+    
+    .stepper-item.active .step-counter {
+      background-color: white;
+      border-color: #4e73df;
+      color: #4e73df;
+      transform: scale(1.1);
+      box-shadow: 0 0 0 5px rgba(78, 115, 223, 0.2);
+    }
+    
+    .stepper-item.completed::after,
+    .stepper-item.completed::before,
+    .stepper-item.active::before {
+      border-color: #4e73df;
+    }
+    
+    .step-name {
+      font-weight: 600;
+      color: #6c757d;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    
+    .stepper-item.completed .step-name,
+    .stepper-item.active .step-name {
+      color: #4e73df;
+      font-weight: 700;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .stepper-wrapper {
+        padding: 0 15px;
+      }
+    
+      .step-counter {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    
+      .step-name {
+        font-size: 0.8rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .step-counter {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+      }
+    
+      .step-name {
+        font-size: 0.75rem;
+      }
+    
+      .stepper-item::before,
+      .stepper-item::after {
+        top: 20px;
+      }
+    }
+  </style>
   <section class="section-content padding-y bg-light">
     <div class="container">
       <div class="row">
         <!-- Progress Indicator -->
-        <div class="col-12 mb-4">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="text-center flex-fill">
-                  <span class="badge bg-primary rounded-circle p-2 mb-2">1</span>
-                  <p class="mb-0 small">Cart</p>
-                </div>
-                <div class="flex-fill">
-                  <div class="progress" style="height: 2px;">
-                    <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="col-12 mb-5">
+          <div class="card shadow-sm border-0">
+            <div class="card-body py-4">
+              <div class="stepper-wrapper">
+                <!-- Step 1: Cart -->
+                <div class="stepper-item completed">
+                  <div class="step-counter">
+                    <i class="fas fa-shopping-cart"></i>
                   </div>
+                  <div class="step-name">Cart</div>
                 </div>
-                <div class="text-center flex-fill">
-                  <span class="badge bg-primary rounded-circle p-2 mb-2">2</span>
-                  <p class="mb-0 small">Details</p>
-                </div>
-                <div class="flex-fill">
-                  <div class="progress" style="height: 2px;">
-                    <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+                <!-- Step 2: Details -->
+                <div class="stepper-item active">
+                  <div class="step-counter">
+                    <i class="fas fa-user-edit"></i>
                   </div>
+                  <div class="step-name">Details</div>
                 </div>
-                <div class="text-center flex-fill">
-                  <span class="badge bg-secondary rounded-circle p-2 mb-2">3</span>
-                  <p class="mb-0 small">Payment</p>
-                </div>
-                <div class="flex-fill">
-                  <div class="progress" style="height: 2px;">
-                    <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+                <!-- Step 3: Payment -->
+                <div class="stepper-item">
+                  <div class="step-counter">
+                    <i class="fas fa-credit-card"></i>
                   </div>
+                  <div class="step-name">Payment</div>
                 </div>
-                <div class="text-center flex-fill">
-                  <span class="badge bg-secondary rounded-circle p-2 mb-2">4</span>
-                  <p class="mb-0 small">Confirmation</p>
+
+                <!-- Step 4: Confirmation -->
+                <div class="stepper-item">
+                  <div class="step-counter">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <div class="step-name">Confirmation</div>
                 </div>
               </div>
             </div>
@@ -52,9 +181,9 @@
             <div class="card-header bg-white py-3">
               <h4 class="mb-0"><i class="fas fa-truck mr-2 text-primary"></i>Billing & Shipping Information</h4>
             </div>
+            <form method="POST" action="{% url 'checkout' %}" id="checkout-form">
+              {% csrf_token %}
             <div class="card-body">
-              <form method="POST" action="{% url 'checkout' %}" id="checkout-form">
-                {% csrf_token %}
                 <div class="row">
                   <div class="form-group col-md-6 mb-3">
                     <label class="form-label">First Name <span class="text-danger">*</span></label>
@@ -72,8 +201,12 @@
                     <label class="form-label">Phone <span class="text-danger">*</span></label>
                     <input type="text" name="phone" class="form-control" required />
                   </div>
-                  <div class="form-group col-lg-12 mb-3">
-                    <label class="form-label">Address <span class="text-danger">*</span></label>
+                  <div class="form-group col-lg-6 mb-3">
+                    <label class="form-label">Address 1<span class="text-danger">*</span></label>
+                    <input type="text" name="address" class="form-control" required />
+                  </div>
+                  <div class="form-group col-lg-6 mb-3">
+                    <label class="form-label">Address 2<span class="text-danger">*</span></label>
                     <input type="text" name="address" class="form-control" required />
                   </div>
                   <div class="form-group col-lg-4 mb-3">
@@ -103,7 +236,7 @@
               <h4 class="mb-0"><i class="fas fa-credit-card mr-2 text-primary"></i>Payment Method</h4>
             </div>
             <div class="card-body">
-              <div class="form-check mb-3 p-3 border rounded">
+              <div class="form-check mb-3 p-3 pl-5 border rounded">
                 <input class="form-check-input" type="radio" name="payment_method" id="cod" value="COD" checked />
                 <label class="form-check-label d-flex align-items-center" for="cod">
                   <span class="flex-grow-1">
@@ -113,7 +246,7 @@
                   <i class="fas fa-money-bill-wave fa-2x text-success ms-3"></i>
                 </label>
               </div>
-              <div class="form-check mb-3 p-3 border rounded">
+              <div class="form-check mb-3 p-3 pl-5 border rounded">
                 <input class="form-check-input" type="radio" name="payment_method" id="paypal" value="PayPal" />
                 <label class="form-check-label d-flex align-items-center" for="paypal">
                   <span class="flex-grow-1">
@@ -131,7 +264,7 @@
         <aside class="col-lg-4">
           <div class="card shadow-sm rounded-lg sticky-top" style="top: 20px;">
             <div class="card-header bg-white py-3">
-              <a style="float: right;" href="{% url 'product_list' %}" class="btn btn-outline-secondary "><i class="fas fa-arrow-left mr-1"></i></a>
+              <a style="float: right;" href="{% url 'product_list' %}" class="btn btn-outline-secondary"><i class="fas fa-arrow-left mr-1"></i></a>
               <h4 class="mb-0"><i class="fas fa-receipt mr-2 text-primary"></i>Order Summary</h4>
             </div>
             <div class="card-body">
@@ -175,9 +308,9 @@
               </ul>
 
               <div class="d-grid gap-2">
-                <button type="submit" form="checkout-form" class="btn btn-primary btn-lg"><i class="fas fa-lock mr-1"></i>Place Order</button>
+                <button type="submit" form="checkout-form" class="btn btn-primary btn-lg"><i class="fas fa-lock mr-2"></i>Place Order</button>
               </div>
-
+              </form>
               <div class="mt-4 p-3 bg-light rounded">
                 <h6 class="mb-2"><i class="fas fa-shield-alt mr-2 text-success"></i>Secure Checkout</h6>
                 <p class="small text-muted mb-0">Your personal information is securely encrypted and protected.</p>
