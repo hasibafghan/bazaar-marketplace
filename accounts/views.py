@@ -4,6 +4,7 @@ from django.contrib.auth import login , logout , authenticate
 from .forms import RegistrationForm
 from .models import Account
 from django.contrib.auth.decorators import login_required
+
 from carts.models import CartItem , Cart
 from carts.views import _cart_id
 
@@ -57,46 +58,51 @@ def register_user(request):
     return render(request, 'accounts/register_form.html' , {'form' : form})
 
 
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth import login, authenticate
-from carts.models import Cart, CartItem
-from carts.views import _cart_id  # assuming you have this helper
 
 def login_user(request):
     if request.method == "POST":
         email = request.POST.get("email")
         password = request.POST.get("password")
 
-        user = authenticate(request, email=email, password=password)
-        if user:
+        user = authenticate(request, username=email, password=password)
+        if user is not None:
             # Merge guest cart with logged-in user's cart
             try:
                 cart = Cart.objects.get(cart_id=_cart_id(request))
-                cart_items = CartItem.objects.filter(cart=cart)
+                cart_item = CartItem.objects.filter(cart=cart)
 
-                if cart_items.exists():
-                    # Collect variations from current cart
-                    product_variations = [list(item.variations.all()) for item in cart_items]
+                # Getting the product variations by cart id
+                product_variation = []
+                for item in cart_item:
+                    variation = item.variations.all()
+                    product_variation.append(list(variation))
 
-                    # Collect variations from user's existing cart
-                    user_cart_items = CartItem.objects.filter(user=user)
-                    existing_variations = [list(item.variations.all()) for item in user_cart_items]
-                    existing_ids = [item.id for item in user_cart_items]
+                # Get the cart items from the user to access his product variations
+                cart_item = CartItem.objects.filter(user=user)
+                ex_var_list = []
+                id = []
+                for item in cart_item:
+                    existing_variation = item.variations.all()
+                    ex_var_list.append(list(existing_variation))
+                    id.append(item.id)
 
-                    # Merge or assign items
-                    for variation, item in zip(product_variations, cart_items):
-                        if variation in existing_variations:
-                            # Item exists → update quantity
-                            index = existing_variations.index(variation)
-                            existing_item = CartItem.objects.get(id=existing_ids[index])
-                            existing_item.quantity += item.quantity
-                            existing_item.save()
-                            item.delete()  # delete duplicate guest item
-                        else:
-                            # New variation → assign user
+                # product_variation = [1, 2, 3, 4, 6]
+                # ex_var_list = [4, 6, 3, 5]
+
+                for pr in product_variation:
+                    if pr in ex_var_list:
+                        index = ex_var_list.index(pr)
+                        item_id = id[index]
+                        item = CartItem.objects.get(id=item_id)
+                        item.quantity += 1
+                        item.user = user
+                        item.save()
+                    else:
+                        cart_item = CartItem.objects.filter(cart=cart)
+                        for item in cart_item:
                             item.user = user
                             item.save()
+                
             except Cart.DoesNotExist:
                 pass  # No guest cart → ignore
 
