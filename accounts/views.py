@@ -107,8 +107,22 @@ def login_user(request):
                 pass  # No guest cart → ignore
 
             login(request, user)
+            
+            # messages.success(request, 'You are now logged in.')
+            # url = request.META.get('HTTP_REFERER')
+
+            # try: 
+            #     query = requests.utils.urlparse(url).query
+            #     # next=/cart/checkout/
+            #     params = dict(x.split('=') for x in query.split('&'))
+            #     if 'next' in params:
+            #         nextPage = params['next']
+            #         return redirect(nextPage)
+            # except:
+            #     return redirect("dashboard")
+            
             messages.success(request, "Login successful.")
-            return redirect("dashboard")
+            return redirect("checkout")
 
         messages.error(request, "Invalid email or password.")
         return redirect("login_user")
