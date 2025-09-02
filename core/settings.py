@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     "crispy_forms",
     "crispy_bootstrap5",
+
+    #paypal
+    'paypal.standard.ipn',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -166,6 +169,8 @@ AUTH_USER_MODEL = 'accounts.Account'
  
 # settings.py
 
+
+# My email section
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
@@ -178,3 +183,8 @@ EMAIL_HOST_USER = "hasibalamyar2@gmail.com"
 EMAIL_HOST_PASSWORD = "noui jdwx gveu ppub"
 
 EMAIL_USE_SSL = False
+
+
+# Paypal settings
+PAYPAL_TEST = True
+PAYPAL_RECEIVER_EMAIL = "your.email+fakedata+bussiness+211124@gmail.com"

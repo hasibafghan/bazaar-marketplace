@@ -156,7 +156,7 @@
                 </div>
 
                 <!-- Step 3: Payment -->
-                <div class="stepper-item">
+                <div class="stepper-item active">
                   <div class="step-counter">
                     <i class="fas fa-credit-card"></i>
                   </div>
@@ -176,62 +176,52 @@
         </div>
 
         <!-- ================= BILLING / SHIPPING FORM ================= -->
+        <!-- Payment Options -->
         <aside class="col-lg-8">
+          <!-- ================= BILLING INFO ================= -->
           <div class="card shadow-sm rounded-lg mb-4">
             <div class="card-header bg-white py-3">
-              <h4 class="mb-0"><i class="fas fa-truck mr-2 text-primary"></i>Billing & Shipping Information</h4>
+              <h4 class="mb-0"><i class="fas fa-user mr-2 text-primary"></i>Billing Information</h4>
             </div>
             <div class="card-body">
-              <form action="{% url 'place_order' %}" method="POST" id="checkout-form">
-                {% csrf_token %}
-                <div class="row">
-                  <div class="form-group col-md-6 mb-3">
-                    <label class="form-label">First Name <span class="text-danger">*</span></label>
-                    <input type="text" name="first_name" class="form-control" required />
-                  </div>
-                  <div class="form-group col-md-6 mb-3">
-                    <label class="form-label">Last Name <span class="text-danger">*</span></label>
-                    <input type="text" name="last_name" class="form-control" required />
-                  </div>
-                  <div class="form-group col-md-6 mb-3">
-                    <label class="form-label">Email <span class="text-danger">*</span></label>
-                    <input type="email" name="email" class="form-control" required />
-                  </div>
-                  <div class="form-group col-md-6 mb-3">
-                    <label class="form-label">Phone <span class="text-danger">*</span></label>
-                    <input type="text" name="phone" class="form-control" required />
-                  </div>
-                  <div class="form-group col-lg-6 mb-3">
-                    <label class="form-label">Address 1<span class="text-danger">*</span></label>
-                    <input type="text" name="address_line_1" class="form-control" required />
-                  </div>
-                  <div class="form-group col-lg-6 mb-3">
-                    <label class="form-label">Address 2<span class="text-danger">*</span></label>
-                    <input type="text" name="address_line_2" class="form-control" required />
-                  </div>
-                  <div class="form-group col-lg-4 mb-3">
-                    <label class="form-label">City <span class="text-danger">*</span></label>
-                    <input type="text" name="city" class="form-control" required />
-                  </div>
-                  <div class="form-group col-lg-4 mb-3">
-                    <label class="form-label">State <span class="text-danger">*</span></label>
-                    <input type="text" name="state" class="form-control" required />
-                  </div>
-                  <div class="form-group col-lg-4 mb-3">
-                    <label class="form-label">Country <span class="text-danger">*</span></label>
-                    <input type="text" name="country" class="form-control" required />
-                  </div>
-                  <div class="form-group col-lg-12 mb-3">
-                    <label class="form-label">Order Note</label>
-                    <textarea name="order_note" class="form-control" rows="3" placeholder="Any special instructions for your order..."></textarea>
-                  </div>
-                  <div class="d-grid gap-2">
-                    <button type="submit" form="checkout-form" class="btn btn-primary btn-lg"><i class="fas fa-lock mr-2"></i>Place Order</button>
-                  </div>
-                </div>
-              </form>
+              <p>
+                <strong>Name:</strong> {{ order.first_name }} {{ order.last_name }}
+              </p>
+              <p>
+                <strong>Email:</strong> {{ order.email }}
+              </p>
+              <p>
+                <strong>Phone:</strong> {{ order.phone }}
+              </p>
+              <p>
+                <strong>Address:</strong> {{ order.address_line_1 }}{% if order.address_line_2 %}
+                  , {{ order.address_line_2 }}
+                {% endif %}
+              </p>
+              <p>
+                <strong>City:</strong> {{ order.city }}
+              </p>
+              <p>
+                <strong>State:</strong> {{ order.state }}
+              </p>
+              <p>
+                <strong>Country:</strong> {{ order.country }}
+              </p>
+              {% if order.order_note %}
+                <p>
+                  <strong>Note:</strong> {{ order.order_note }}
+                </p>
+              {% endif %}
             </div>
           </div>
+          <!-- Payment section -->
+          <h2>Complete Payment</h2>
+          <p>Order #{{ order.order_number }}</p>
+          <p>Total: ${{ grand_total }}</p>
+          <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Pay with PayPal</button>
+          </form>
         </aside>
 
         <!-- ================= ORDER SUMMARY ================= -->
@@ -292,7 +282,6 @@
     </div>
   </section>
 {% endblock %}
-
 
 {% block extra_js %}
   <script>

@@ -6,6 +6,38 @@ from django.contrib import messages
 import datetime
 
 
+from django.urls import reverse
+from paypal.standard.forms import PayPalPaymentsForm
+from django.conf import settings
+
+
+def paypal_payment(request, order_id):
+    if request.method != 'GET':
+        return HttpResponse("Invalid request method.", status=400)
+    
+    order = Order.objects.get(id=order_id, user=request.user, is_ordered=False)
+
+    paypal_dict = {
+        "business": settings.PAYPAL_RECEIVER_EMAIL,
+        "amount": str(order.order_total),   # must be string
+        "item_name": f"Order {order.id}",
+        "invoice": str(order.id),           # unique ID
+        "currency_code": "USD",
+        "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+        "return_url": request.build_absolute_uri(reverse('order_complete')),
+        "cancel_return": request.build_absolute_uri(reverse('checkout')),
+    }
+
+    form = PayPalPaymentsForm(initial=paypal_dict)
+    return render(request, "orders/payments.html", {"form": form, "order": order})
+
+
+
+# def payments(request):
+#     return render(request , 'orders/payments.html')
+
+
+
 def place_order(request, total=0, quantity=0):
     current_user = request.user
 
@@ -54,8 +86,18 @@ def place_order(request, total=0, quantity=0):
             order.save()
 
             messages.success(request, "Order placed successfully ✅")
-            return redirect('checkout')
+
+            context = {
+                'order': order,
+                'cart_items': cart_items,
+                'total': total,
+                'tax': tax,
+                'grand_total': grand_total,
+            }
+
+            return render(request, 'orders/payments.html', context)
+
+
         else:
             messages.error(request, "Form is not valid ❌")
             return redirect('checkout')
-
