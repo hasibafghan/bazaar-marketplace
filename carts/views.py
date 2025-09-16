@@ -164,7 +164,7 @@ def remove_cart_item(request, product_id, cart_item_id):
         # Delete empty cart items for this user (optional)
         if not CartItem.objects.filter(user=request.user).exists():
             # If you also want to clear guest cart entries, you can do it here
-            cart.delete()
+            pass
 
     else:
         cart = Cart.objects.get(cart_id=_cart_id(request))

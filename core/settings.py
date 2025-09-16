@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,7 +46,6 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'carts.apps.CartsConfig',
     'orders.apps.OrdersConfig',
-
 
     # modules(third party apps)
     # "widget_tweaks",
@@ -169,7 +169,7 @@ AUTH_USER_MODEL = 'accounts.Account'
  
 # settings.py
 
-
+#-----------------------------------------------
 # My email section
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
@@ -183,8 +183,8 @@ EMAIL_HOST_USER = "hasibalamyar2@gmail.com"
 EMAIL_HOST_PASSWORD = "noui jdwx gveu ppub"
 
 EMAIL_USE_SSL = False
-
+#-----------------------------------------------
 
 # Paypal settings
 PAYPAL_TEST = True
-PAYPAL_RECEIVER_EMAIL = "your.email+fakedata+bussiness+211124@gmail.com"
+PAYPAL_RECEIVER_EMAIL = "hasib.business_paypal@gmail.com"

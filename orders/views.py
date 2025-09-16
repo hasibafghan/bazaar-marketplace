@@ -1,41 +1,12 @@
-from django.shortcuts import render , HttpResponse , redirect
-from carts.models import CartItem , Cart
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.urls import reverse
+from django.contrib import messages
 from .models import Order
 from .forms import OrderForm
-from django.contrib import messages
-import datetime
-
-
-from django.urls import reverse
+from carts.models import CartItem
 from paypal.standard.forms import PayPalPaymentsForm
+import datetime, uuid
 from django.conf import settings
-
-
-def paypal_payment(request, order_id):
-    if request.method != 'GET':
-        return HttpResponse("Invalid request method.", status=400)
-    
-    order = Order.objects.get(id=order_id, user=request.user, is_ordered=False)
-
-    paypal_dict = {
-        "business": settings.PAYPAL_RECEIVER_EMAIL,
-        "amount": str(order.order_total),   # must be string
-        "item_name": f"Order {order.id}",
-        "invoice": str(order.id),           # unique ID
-        "currency_code": "USD",
-        "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
-        "return_url": request.build_absolute_uri(reverse('order_complete')),
-        "cancel_return": request.build_absolute_uri(reverse('checkout')),
-    }
-
-    form = PayPalPaymentsForm(initial=paypal_dict)
-    return render(request, "orders/payments.html", {"form": form, "order": order})
-
-
-
-# def payments(request):
-#     return render(request , 'orders/payments.html')
-
 
 
 def place_order(request, total=0, quantity=0):
@@ -57,7 +28,7 @@ def place_order(request, total=0, quantity=0):
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
-            # Create a new Order instance
+            # Create order
             order = Order()
             order.user = current_user
             order.first_name = form.cleaned_data['first_name']
@@ -75,29 +46,48 @@ def place_order(request, total=0, quantity=0):
             order.ip = request.META.get('REMOTE_ADDR')
             order.save()
 
-            # Generate order number
-            yr = int(datetime.date.today().strftime('%Y'))
-            mt = int(datetime.date.today().strftime('%m'))
-            dt = int(datetime.date.today().strftime('%d'))
-            d = datetime.date(yr, mt, dt)
-            current_date = d.strftime("%Y%m%d")  # e.g., 20250318
+            # Generate unique order number
+            current_date = datetime.date.today().strftime("%Y%m%d")
             order_number = current_date + str(order.id)
             order.order_number = order_number
             order.save()
 
             messages.success(request, "Order placed successfully ✅")
 
-            context = {
+            # 🔹 PayPal form dictionary
+            paypal_dict = {
+                "business": settings.PAYPAL_RECEIVER_EMAIL,
+                "amount": str(order.order_total),   # must be string
+                "item_name": f"Order {order.order_number}",
+                "invoice": str(uuid.uuid4()),      # unique ID
+                "currency_code": "USD",
+                "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+                "return_url": request.build_absolute_uri(reverse('order_complete')),
+                "cancel_return": request.build_absolute_uri(reverse('checkout_cancel')),
+            }
+
+            form = PayPalPaymentsForm(initial=paypal_dict)
+
+            return render(request, 'orders/payment_process.html', {
+                'form': form,
                 'order': order,
                 'cart_items': cart_items,
                 'total': total,
                 'tax': tax,
                 'grand_total': grand_total,
-            }
-
-            return render(request, 'orders/payments.html', context)
-
+            })
 
         else:
             messages.error(request, "Form is not valid ❌")
             return redirect('checkout')
+
+    else:
+        return HttpResponse("Invalid request method.", status=400)
+
+
+def order_complete(request):
+    return render(request, 'orders/payment_success.html')
+
+
+def checkout_cancel(request):
+    return render(request, 'orders/payment_cancelled.html')
