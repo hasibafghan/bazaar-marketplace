@@ -4,12 +4,13 @@ from django.contrib import messages
 from .models import Order
 from .forms import OrderForm
 from carts.models import CartItem
-from paypal.standard.forms import PayPalPaymentsForm
+
 import datetime, uuid
 from django.conf import settings
+from paypal.standard.forms import PayPalPaymentsForm
 
 
-def place_order(request, total=0, quantity=0):
+def payment_process(request, total=0, quantity=0):
     current_user = request.user
 
     cart_items = CartItem.objects.filter(user=current_user)
@@ -78,7 +79,7 @@ def place_order(request, total=0, quantity=0):
             })
 
         else:
-            messages.error(request, "Form is not valid ❌")
+            messages.error(request, "Form is not valid!")
             return redirect('checkout')
 
     else:
@@ -86,7 +87,22 @@ def place_order(request, total=0, quantity=0):
 
 
 def order_complete(request):
-    return render(request, 'orders/payment_success.html')
+    try:
+        order = Order.objects.filter(user=request.user, is_ordered=False).last()
+        if order:
+            order.is_ordered = True
+            order.save()
+
+            # ✅ Clear cart items for this user
+            CartItem.objects.filter(user=request.user).delete()
+
+        messages.success(request, "Payment successful and order completed 🎉")
+        return render(request, 'orders/payment_success.html',{'order': order})
+
+    except Exception as e:
+        messages.error(request, f"Something went wrong: {str(e)}")
+        return redirect('home')
+
 
 
 def checkout_cancel(request):

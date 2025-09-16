@@ -218,10 +218,10 @@
           <h2>Complete Payment</h2>
           <p>Order #{{ order.order_number }}</p>
           <p>Total: ${{ grand_total }}</p>
-          {% comment %} <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+          <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
             {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Pay with PayPal</button>
-          </form> {% endcomment %}
+          </form> 
           {{form.render}}
         </aside>
 

@@ -2,7 +2,7 @@ from django.urls import path , include
 from . import views
 
 urlpatterns = [
-    path('place_order/', views.place_order , name = 'place_order'),
+    path('payment_process/', views.payment_process , name = 'payment_process'),
     # path('payments/', views.payments , name = 'payments'),
     # Paypal URL
     path('paypal/', include('paypal.standard.ipn.urls')),

@@ -1,1 +1,200 @@
-<h1>Order Complete</h1>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Payment Successful
+{% endblock %}
+
+{% block content %}
+  <style>
+    .stepper-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto;
+      max-width: 800px;
+    }
+    
+    .stepper-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+    }
+    
+    .stepper-item::before {
+      position: absolute;
+      content: '';
+      border-bottom: 3px solid #dee2e6;
+      width: 100%;
+      top: 25px;
+      left: -50%;
+      z-index: 1;
+    }
+    
+    .stepper-item::after {
+      position: absolute;
+      content: '';
+      border-bottom: 3px solid #dee2e6;
+      width: 100%;
+      top: 25px;
+      left: 50%;
+      z-index: 1;
+    }
+    
+    .stepper-item:first-child::before {
+      content: none;
+    }
+    
+    .stepper-item:last-child::after {
+      content: none;
+    }
+    
+    .step-counter {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: white;
+      border: 3px solid #dee2e6;
+      color: #6c757d;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      transition: all 0.3s ease;
+    }
+    
+    .stepper-item.completed .step-counter {
+      background-color: #4e73df;
+      border-color: #4e73df;
+      color: white;
+    }
+    
+    .stepper-item.active .step-counter {
+      background-color: white;
+      border-color: #4e73df;
+      color: #4e73df;
+      transform: scale(1.1);
+      box-shadow: 0 0 0 5px rgba(78, 115, 223, 0.2);
+    }
+    
+    .stepper-item.completed::after,
+    .stepper-item.completed::before,
+    .stepper-item.active::before {
+      border-color: #4e73df;
+    }
+    
+    .step-name {
+      font-weight: 600;
+      color: #6c757d;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    
+    .stepper-item.completed .step-name,
+    .stepper-item.active .step-name {
+      color: #4e73df;
+      font-weight: 700;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .stepper-wrapper {
+        padding: 0 15px;
+      }
+    
+      .step-counter {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+      }
+    
+      .step-name {
+        font-size: 0.8rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .step-counter {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+      }
+    
+      .step-name {
+        font-size: 0.75rem;
+      }
+    
+      .stepper-item::before,
+      .stepper-item::after {
+        top: 20px;
+      }
+    }
+  </style>
+
+  <div class="col-12 mb-5">
+    <div class="card shadow-sm border-0">
+      <div class="card-body py-4">
+        <div class="stepper-wrapper">
+          <!-- Step 1: Cart -->
+          <div class="stepper-item completed">
+            <div class="step-counter">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="step-name">Cart</div>
+          </div>
+
+          <!-- Step 2: Details -->
+          <div class="stepper-item active">
+            <div class="step-counter">
+              <i class="fas fa-user-edit"></i>
+            </div>
+            <div class="step-name">Details</div>
+          </div>
+
+          <!-- Step 3: Payment -->
+          <div class="stepper-item active">
+            <div class="step-counter">
+              <i class="fas fa-credit-card"></i>
+            </div>
+            <div class="step-name">Payment</div>
+          </div>
+
+          <!-- Step 4: Confirmation -->
+          <div class="stepper-item active">
+            <div class="step-counter">
+              <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="step-name">Confirmation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="alert alert-success my-2" role="alert">
+      <h2>Payment Successful.</h2>
+      <p>Thank your order has been placed. We will deliver your product as soon as possible Thank for Choosing us.</p>
+    </div>
+
+    <div class="container">
+      <!-- ============================ COMPONENT 1 ================================= -->
+      <div class="row">
+        <div class="col-12 text-center">
+          <div class="card">
+            <div class="card-body py-5">
+              <i class="fa fa-shopping-cart fa-3x text-muted mb-3"></i>
+              <h3>Your cart is empty</h3>
+              <p class="text-muted">Do you want add new items into your cart </p>
+              <a href="{% url 'product_list' %}" class="btn btn-primary mt-3">Continue Shopping</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
