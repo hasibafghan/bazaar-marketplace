@@ -216,13 +216,12 @@
           </div>
           <!-- Payment section -->
           <h2>Complete Payment</h2>
-          <p>Order #{{ order.order_number }}</p>
           <p>Total: ${{ grand_total }}</p>
+          <div>{{ form.render }}</div>
           <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
             {{ form.as_p }}
             <button type="submit" class="btn btn-primary">Pay with PayPal</button>
-          </form> 
-          {{form.render}}
+          </form>
         </aside>
 
         <!-- ================= ORDER SUMMARY ================= -->
@@ -263,14 +262,16 @@
                   <strong>${{ tax }}</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span>Shipping</span>
-                  <strong class="text-success">FREE</strong>
+                  <span>Order ID</span>
+                  <strong class="text-success">{{ order.order_number }}</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
                   <span class="h5">Total</span>
                   <strong class="h5 text-dark">${{ grand_total }}</strong>
                 </li>
               </ul>
+
+              <div id="paypal-button-container"></div>
 
               <div class="mt-4 p-3 bg-light rounded">
                 <h6 class="mb-2"><i class="fas fa-shield-alt mr-2 text-success"></i>Secure Checkout</h6>
@@ -282,6 +283,70 @@
       </div>
     </div>
   </section>
+
+  <!----------------| Paypal |---------------------->
+
+  <!-- Include the PayPal JavaScript SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+
+  <script>
+    // Render the PayPal button into #paypal-button-container
+    paypal
+      .Buttons({
+        style: {
+          color: 'blue',
+          shape: 'pill',
+          label: 'pay',
+          height: 40
+        },
+    
+        // Create order directly in client
+        createOrder: function (data, actions) {
+          return actions.order.create({
+            purchase_units: [
+              {
+                amount: {
+                  value: '{{ grand_total }}', // Django passes your order total
+                  currency_code: 'USD'
+                },
+                description: 'Order #{{ order.order_number }}'
+              }
+            ]
+          })
+        },
+    
+        // Capture the order on client
+        onApprove: function (data, actions) {
+          return actions.order.capture().then(function (details) {
+            console.log('Payment completed by ' + details.payer.name.given_name)
+    
+            // ✅ Send to your backend
+            fetch("{% url 'order_complete' %}", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+              },
+              body: JSON.stringify({
+                orderID: data.orderID,
+                payerID: data.payerID,
+                paymentID: details.id,
+                order_number: '{{ order.order_number }}'
+              })
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.status === 'success') {
+                  window.location.href = "{% url 'order_complete' %}"
+                } else {
+                  alert('Payment failed on server.')
+                }
+              })
+          })
+        }
+      })
+      .render('#paypal-button-container')
+  </script>
 {% endblock %}
 
 {% block extra_js %}

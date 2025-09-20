@@ -1,13 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.urls import reverse
 from django.contrib import messages
-from .models import Order
+from .models import Order , Payment, OrderProduct
 from .forms import OrderForm
 from carts.models import CartItem
 
 import datetime, uuid
 from django.conf import settings
 from paypal.standard.forms import PayPalPaymentsForm
+from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
+
+
 
 
 def payment_process(request, total=0, quantity=0):
@@ -86,22 +90,60 @@ def payment_process(request, total=0, quantity=0):
         return HttpResponse("Invalid request method.", status=400)
 
 
+
+
+@csrf_exempt
 def order_complete(request):
     try:
+        # Transaction ID can come as `tx` or `txn_id`
+        transaction_id = (
+            request.GET.get("tx")
+            or request.POST.get("tx")
+            or request.GET.get("txn_id")
+            or request.POST.get("txn_id")
+            or request.GET.get("PayerID")
+            or request.POST.get("PayerID")
+        )
+
+        status = (
+            request.GET.get("st")
+            or request.POST.get("payment_status")
+            or "Completed"
+        )
+
+        amount = (
+            request.GET.get("amt")
+            or request.POST.get("mc_gross")
+        )
+
         order = Order.objects.filter(user=request.user, is_ordered=False).last()
         if order:
+            payment = Payment.objects.create(
+                user=request.user,
+                payment_id=transaction_id if transaction_id else f"ORDER-{order.order_number}",
+                payment_method="PayPal",
+                amount_paid=amount or str(order.order_total),
+                status=status,
+            )
+
+            order.payment = payment
             order.is_ordered = True
             order.save()
 
-            # ✅ Clear cart items for this user
+            # ✅ Clear cart
             CartItem.objects.filter(user=request.user).delete()
 
-        messages.success(request, "Payment successful and order completed 🎉")
-        return render(request, 'orders/payment_success.html',{'order': order})
+            messages.success(request, "Payment successful and order completed 🎉")
+            return render(request, "orders/payment_success.html", {
+                "order": order,
+                "payment": payment
+            })
+
+        return redirect("home")
 
     except Exception as e:
         messages.error(request, f"Something went wrong: {str(e)}")
-        return redirect('home')
+        return redirect("home")
 
 
 

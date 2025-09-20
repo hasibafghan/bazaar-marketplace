@@ -13,7 +13,7 @@ class Payment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.payment_id
+        return f"{self.user} + {self.payment_id}"
 
 
 
