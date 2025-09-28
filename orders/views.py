@@ -6,7 +6,7 @@ from .forms import OrderForm
 from carts.models import CartItem
 
 import datetime, uuid
-from django.conf import settings
+from core import settings
 from paypal.standard.forms import PayPalPaymentsForm
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
@@ -59,18 +59,39 @@ def payment_process(request, total=0, quantity=0):
 
             messages.success(request, "Order placed successfully ✅")
 
-            # 🔹 PayPal form dictionary
+
+            # # 🔹 PayPal form dictionary
+            # # host = request.get_host()
+
+            # paypal_dict = {
+            #     "business": settings.PAYPAL_RECEIVER_EMAIL,
+            #     "amount": str(order.order_total),   # must be string
+            #     "item_name": f"Order {order.order_number}",
+            #     "invoice": str(uuid.uuid4()),      # unique ID
+            #     "currency_code": "USD",
+                
+            #     "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
+            #     "return_url": request.build_absolute_uri(reverse('payment_success')),
+            #     "cancel_return": request.build_absolute_uri(reverse('payment_failed')),
+
+                
+
+            #     # 'notify_url': 'https://{}{}'.format(host, reverse("paypal-ipn")),
+            #     # 'return_url': 'https://{}{}'.format(host, reverse("payment_success")),
+            #     # 'cancel_return' : 'https://{}{}'.format(host, reverse("payment_failed"))
+            # }
+
             paypal_dict = {
                 "business": settings.PAYPAL_RECEIVER_EMAIL,
-                "amount": str(order.order_total),   # must be string
+                "amount": str(order.order_total),
                 "item_name": f"Order {order.order_number}",
-                "invoice": str(uuid.uuid4()),      # unique ID
+                "invoice": str(order.order_number),   # ✅ use order_number
                 "currency_code": "USD",
-                "notify_url": request.build_absolute_uri(reverse('paypal-ipn')),
-                "return_url": request.build_absolute_uri(reverse('order_complete')),
-                "cancel_return": request.build_absolute_uri(reverse('checkout_cancel')),
+                "notify_url": request.build_absolute_uri(reverse("paypal-ipn")),
+                "return_url": request.build_absolute_uri(reverse("payment_success")),
+                "cancel_return": request.build_absolute_uri(reverse("payment_failed")),
             }
-
+                
             form = PayPalPaymentsForm(initial=paypal_dict)
 
             return render(request, 'orders/payment_process.html', {
@@ -89,63 +110,84 @@ def payment_process(request, total=0, quantity=0):
     else:
         return HttpResponse("Invalid request method.", status=400)
 
+from paypal.standard.forms import PayPalPaymentsForm
+
 
 
 
 @csrf_exempt
-def order_complete(request):
+def payment_success(request):
+
+    import json
     try:
-        # Transaction ID can come as `tx` or `txn_id`
-        transaction_id = (
-            request.GET.get("tx")
-            or request.POST.get("tx")
-            or request.GET.get("txn_id")
-            or request.POST.get("txn_id")
-            or request.GET.get("PayerID")
-            or request.POST.get("PayerID")
-        )
+        if request.method == "POST" and request.content_type == "application/json":
+            data = json.loads(request.body.decode())
+            transaction_id = data.get("paymentID")
+            payer_id = data.get("payerID")
+            order_id = data.get("orderID")
+            order_number = data.get("order_number")
+            status = "Completed"
+            amount = None
+        else:
+            transaction_id = (
+                request.GET.get("tx")
+                or request.POST.get("tx")
+                or request.GET.get("txn_id")
+                or request.POST.get("txn_id")
+                or request.GET.get("PayerID")
+                or request.POST.get("PayerID")
+            )
+            status = (
+                request.GET.get("st")
+                or request.POST.get("payment_status")
+                or "Completed"
+            )
+            amount = (
+                request.GET.get("amt")
+                or request.POST.get("mc_gross")
+            )
+            order_number = request.GET.get("order_number") or request.POST.get("order_number")
 
-        status = (
-            request.GET.get("st")
-            or request.POST.get("payment_status")
-            or "Completed"
-        )
+        # Find the order
+        order = None
+        if order_number:
+            order = Order.objects.filter(order_number=order_number, is_ordered=False).last()
+        elif request.user.is_authenticated:
+            order = Order.objects.filter(user=request.user, is_ordered=False).last()
 
-        amount = (
-            request.GET.get("amt")
-            or request.POST.get("mc_gross")
-        )
-
-        order = Order.objects.filter(user=request.user, is_ordered=False).last()
         if order:
             payment = Payment.objects.create(
-                user=request.user,
+                user=order.user,
                 payment_id=transaction_id if transaction_id else f"ORDER-{order.order_number}",
                 payment_method="PayPal",
                 amount_paid=amount or str(order.order_total),
                 status=status,
             )
-
             order.payment = payment
             order.is_ordered = True
             order.save()
+            CartItem.objects.filter(user=order.user).delete()
 
-            # ✅ Clear cart
-            CartItem.objects.filter(user=request.user).delete()
+            # If AJAX, return JSON
+            if request.method == "POST" and request.content_type == "application/json":
+                return HttpResponse(json.dumps({"status": "success", "transaction_id": payment.payment_id}), content_type="application/json")
 
             messages.success(request, "Payment successful and order completed 🎉")
             return render(request, "orders/payment_success.html", {
                 "order": order,
                 "payment": payment
             })
-
-        return redirect("home")
-
+        else:
+            if request.method == "POST" and request.content_type == "application/json":
+                return HttpResponse(json.dumps({"status": "error", "message": "Order not found"}), content_type="application/json")
+            return redirect("home")
     except Exception as e:
+        if request.method == "POST" and request.content_type == "application/json":
+            return HttpResponse(json.dumps({"status": "error", "message": str(e)}), content_type="application/json")
         messages.error(request, f"Something went wrong: {str(e)}")
         return redirect("home")
 
 
 
-def checkout_cancel(request):
+def payment_failed(request):
     return render(request, 'orders/payment_cancelled.html')

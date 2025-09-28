@@ -26,9 +26,18 @@ SECRET_KEY = 'django-insecure-5i%0#f*@=f_5j!d_(-&o4t47lv=36%$@08wx(6jrzt(inylqg7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'shauna-hermitic-vella.ngrok-free.dev', 
+    '127.0.0.1',
+    'localhost', # Add this for good measure
+    '*'
+]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://shauna-hermitic-vella.ngrok-free.dev',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+]
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,6 +55,10 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'carts.apps.CartsConfig',
     'orders.apps.OrdersConfig',
+    
+    # my test_app
+    'test_paypal.apps.TestPaypalConfig',
+
 
     # modules(third party apps)
     # "widget_tweaks",

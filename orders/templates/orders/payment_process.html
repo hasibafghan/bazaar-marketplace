@@ -321,7 +321,7 @@
             console.log('Payment completed by ' + details.payer.name.given_name)
     
             // ✅ Send to your backend
-            fetch("{% url 'order_complete' %}", {
+            fetch("{% url 'payment_success' %}", {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -337,7 +337,7 @@
               .then((res) => res.json())
               .then((data) => {
                 if (data.status === 'success') {
-                  window.location.href = "{% url 'order_complete' %}"
+                  window.location.href = "{% url 'payment_success' %}"
                 } else {
                   alert('Payment failed on server.')
                 }
