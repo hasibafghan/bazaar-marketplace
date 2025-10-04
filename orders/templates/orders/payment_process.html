@@ -214,14 +214,8 @@
               {% endif %}
             </div>
           </div>
-          <!-- Payment section -->
           <h2>Complete Payment</h2>
           <p>Total: ${{ grand_total }}</p>
-          <div>{{ form.render }}</div>
-          <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Pay with PayPal</button>
-          </form>
         </aside>
 
         <!-- ================= ORDER SUMMARY ================= -->
@@ -284,69 +278,76 @@
     </div>
   </section>
 
-  <!----------------| Paypal |---------------------->
 
   <!-- Include the PayPal JavaScript SDK -->
-  <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=ATipOMypeAqWnRebiypP7bViOfjO_mjoUk2CPeGELn5Ql57jcCuEr8bqYOrKhSWYBx0qrsiQsWjIlGhx&currency=USD"></script>
 
-  <script>
-    // Render the PayPal button into #paypal-button-container
-    paypal
-      .Buttons({
-        style: {
-          color: 'blue',
-          shape: 'pill',
-          label: 'pay',
-          height: 40
-        },
-    
-        // Create order directly in client
-        createOrder: function (data, actions) {
-          return actions.order.create({
-            purchase_units: [
-              {
-                amount: {
-                  value: '{{ grand_total }}', // Django passes your order total
-                  currency_code: 'USD'
-                },
-                description: 'Order #{{ order.order_number }}'
-              }
-            ]
-          })
-        },
-    
-        // Capture the order on client
-        onApprove: function (data, actions) {
-          return actions.order.capture().then(function (details) {
-            console.log('Payment completed by ' + details.payer.name.given_name)
-    
-            // ✅ Send to your backend
-            fetch("{% url 'payment_success' %}", {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
-              },
-              body: JSON.stringify({
-                orderID: data.orderID,
-                payerID: data.payerID,
-                paymentID: details.id,
-                order_number: '{{ order.order_number }}'
-              })
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.status === 'success') {
-                  window.location.href = "{% url 'payment_success' %}"
-                } else {
-                  alert('Payment failed on server.')
-                }
-              })
-          })
-        }
-      })
-      .render('#paypal-button-container')
-  </script>
+
+<script>
+  paypal.Buttons({
+    style: { color: 'blue', shape: 'pill', label: 'pay', height: 40 },
+
+    createOrder: function (data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '{{ grand_total }}',
+            currency_code: 'USD'
+          },
+          description: 'Order #{{ order.order_number }}'
+        }]
+      });
+    },
+
+    onApprove: function (data, actions) {
+      return actions.order.capture().then(function (details) {
+        // send to backend and wait for response before redirect
+        return fetch("{% url 'payment_success' %}", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+          },
+          body: JSON.stringify({
+            orderID: data.orderID,
+            payerID: data.payerID,
+            paymentID: details.id,
+            order_number: '{{ order.order_number }}',
+            amount: '{{ grand_total }}'
+          }),
+          credentials: 'same-origin'
+        })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Network response not ok: ' + res.status);
+          return res.json();
+        })
+        .then(function (json) {
+          if (json.status === 'success') {
+            // Show server-confirmed success page
+            window.location.href = "{% url 'payment_success' %}?order={{ order.order_number }}";
+          } else {
+            alert('Server error: ' + (json.message || 'Unknown'));
+          }
+        })
+        .catch(function (err) {
+          console.error('Save payment error:', err);
+          alert('Error saving payment on server: ' + err.message);
+        });
+      });
+    },
+
+    onCancel: function (data) {
+      // redirect user to cancel page
+      window.location.href = "{% url 'payment_failed' %}?order={{ order.order_number }}";
+    },
+
+    onError: function (err) {
+      console.error('PayPal SDK error:', err);
+      alert('Payment error: ' + err.message || err);
+    }
+  }).render('#paypal-button-container');
+</script>
+
 {% endblock %}
 
 {% block extra_js %}
