@@ -127,9 +127,12 @@ def payment_success(request):
         # GET => show success page
         order_number = request.GET.get("order")
         order = None
+        payment = None
         if order_number:
             order = Order.objects.filter(order_number=order_number).select_related('payment').last()
-        context = {"order": order}
+            if order and order.payment:
+                payment = order.payment
+        context = {"order": order, "payment": payment}
         return render(request, "orders/payment_success.html", context)
 
     except Exception as e:

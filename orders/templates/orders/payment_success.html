@@ -181,6 +181,12 @@
       <p>Thank your order has been placed. We will deliver your product as soon as possible Thank for Choosing us.</p>
     </div>
 
+    {% if payment %}
+      <div class="alert alert-success">
+        <strong>Payment ID:</strong> {{ payment.payment_id }}
+      </div>
+    {% endif %}
+
     <div class="container">
       <!-- ============================ COMPONENT 1 ================================= -->
       <div class="row">
