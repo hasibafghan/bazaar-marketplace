@@ -132,6 +132,12 @@ def payment_success(request):
                 orderproduct.product_price = item.product.price
                 orderproduct.ordered = True
                 orderproduct.save()
+
+                # reduce the quantity of the sold products
+                item.product.stock -= item.quantity
+                item.product.save()
+
+
                 # If you have variations, copy them too
                 if hasattr(item, 'variations'):
                     orderproduct.variations.set(item.variations.all())
