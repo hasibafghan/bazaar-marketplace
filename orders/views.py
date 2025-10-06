@@ -56,6 +56,7 @@ def payment_process(request, total=0, quantity=0):
 
             messages.success(request, "Order placed successfully ✅")
 
+
             # Only pass order/cart context, no PayPal form
             return render(request, 'orders/payment_process.html', {
                 'order': order,
@@ -118,6 +119,22 @@ def payment_success(request):
             order.payment = payment
             order.is_ordered = True
             order.save()
+
+            # Move the cart items to OrderProduct table
+            cart_items = CartItem.objects.filter(user=order.user)
+            for item in cart_items:
+                orderproduct = OrderProduct()
+                orderproduct.order = order
+                orderproduct.payment = payment
+                orderproduct.user = order.user
+                orderproduct.product = item.product
+                orderproduct.quantity = item.quantity
+                orderproduct.product_price = item.product.price
+                orderproduct.ordered = True
+                orderproduct.save()
+                # If you have variations, copy them too
+                if hasattr(item, 'variations'):
+                    orderproduct.variations.set(item.variations.all())
 
             # clear cart
             CartItem.objects.filter(user=order.user).delete()
