@@ -9,6 +9,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json, traceback
 
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
+
 
 
 def payment_process(request, total=0, quantity=0):
@@ -137,10 +140,19 @@ def payment_success(request):
                 item.product.stock -= item.quantity
                 item.product.save()
 
-
                 # If you have variations, copy them too
                 if hasattr(item, 'variations'):
                     orderproduct.variations.set(item.variations.all())
+
+            # Prepare and send order confirmation email
+            mail_subject = 'Thank you for your order!'
+            message = render_to_string('orders/order_received_email.html', {
+                'user': order.user,
+                'order': order,
+            })
+            to_email = order.email
+            send_email = EmailMessage(mail_subject, message, to=[to_email])
+            send_email.send()
 
             # clear cart
             CartItem.objects.filter(user=order.user).delete()

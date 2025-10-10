@@ -1,0 +1,19 @@
+
+{% autoescape off %}
+
+Hi {{ user.username }},
+Thank you for your order! We are excited to let you know that we have received your order and it is now being processed.
+Here are the details of your order:
+
+Order Number: {{ order.order_number }}
+Order Date: {{ order.created_at }}
+Total Amount: ${{ order.order_total }}
+
+We will notify you once your order has been shipped. If you have any questions or need further assistance, please feel free to contact our customer support team.
+Thank you for choosing our store. We appreciate your business!
+Best regards,
+The Bazaar Marketplace Team
+    
+{% endautoescape %}
+
+
