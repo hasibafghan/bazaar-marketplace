@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.contrib import messages
 from .models import ReviewRating
 from .forms import ReviewForm
+from orders.models import OrderProduct
 
 
 
@@ -89,9 +90,16 @@ def product_detail(request, category_slug, product_slug):
     except Exception as e:
         raise e
 
+    # check if the user has purchased the product for leaving a review
+    try:
+        orderproduct = OrderProduct.objects.filter(user = request.user , product = product).exists()
+    except orderproduct.DoesNotExist:
+        orderproduct = None
+
     context = {
         'product' : product,
-        'in_cart' : in_cart
+        'in_cart' : in_cart,
+        'orderproduct' : orderproduct,
     }
 
     return render(request, 'product/product_detail.html', context )
