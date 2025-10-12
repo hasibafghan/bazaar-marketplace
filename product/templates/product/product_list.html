@@ -123,94 +123,45 @@
           <!-- sect-heading -->
 
           <div class="row">
-            {% if products %}              
-            {% for product in products %}
-              <div class="col-md-4">
-                <figure class="card card-product-grid">
-                  <div class="img-wrap">
-                    <a href="{% url 'product_detail' product.category.slug product.slug %}"><img src="{{ product.images.url }}" /></a>
-                  </div> <!-- img-wrap.// -->
-                  <figcaption class="info-wrap">
-                    <div class="fix-height">
-                      <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
-                      <div class="price-wrap mt-2">
-                        <span class="price">${{ product.price }}</span>
-                        <del class="price-old">${{ product.old_price }}</del>
-                      </div> <!-- price-wrap.// -->
-                    </div>
-                    <a href="{{ product.get_url }}" class="btn btn-block btn-primary">View Details</a>
-                  </figcaption>
-                </figure>
-              </div> <!-- col.// -->
-            {% endfor %}
+            {% if products %}
+              {% for product in products %}
+                <div class="col-md-4">
+                  <figure class="card card-product-grid">
+                    <div class="img-wrap">
+                      <a href="{% url 'product_detail' product.category.slug product.slug %}"><img src="{{ product.images.url }}" /></a>
+                    </div> <!-- img-wrap.// -->
+                    <figcaption class="info-wrap">
+                      <div class="fix-height">
+                        <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+                        <div class="price-wrap mt-2">
+                          <span class="price">${{ product.price }}</span>
+                          <del class="price-old">${{ product.old_price }}</del>
+                        </div> <!-- price-wrap.// -->
+                      </div>
+                      <a href="{{ product.get_url }}" class="btn btn-block btn-primary">View Details</a>
+                    </figcaption>
+                  </figure>
+                </div> <!-- col.// -->
+              {% endfor %}
             {% else %}
-            <h3>No Product Found!</h3>
+              <h3>No Product Found!</h3>
             {% endif %}
-
           </div> <!-- row end.// -->
 
           <!-- pagination -->
           <nav class="mt-4" aria-label="Page navigation sample">
-              <nav class="mt-4" aria-label="Page navigation">
-                  {% if products.has_other_pages %}
-                  <ul class="pagination">
-            {# Previous Button #}
-            {% if products.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ products.previous_page_number }}">Previous</a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">Previous</a>
-                </li>
-            {% endif %}
-    
-            {# Only show 3 pages around current #}
-            {% for i in products.paginator.page_range %}
-                {% if i >= products.number|add:"-1" and i <= products.number|add:"1" %}
-                    {% if products.number == i %}
-                        <li class="page-item active">
-                            <a class="page-link" href="#">{{ i }}</a>
-                        </li>
-                    {% else %}
-                        <li class="page-item">
-                            <a class="page-link" href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ i }}">{{ i }}</a>
-                        </li> 
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-    
-            {# Next Button #}
-            {% if products.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}page={{ products.next_page_number }}">Next</a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            {% endif %}
-        </ul>
-    {% endif %}
-    
-            </nav>
-          </nav>
-        </main> <!-- col.// -->
-      </div>
-    </div> <!-- container .// -->
-  </section>
-  <!-- ========================= SECTION CONTENT END// ========================= -->
-{% endblock %}
-
-          <!-- THIS IS A FEATURE THAT WHEN THE ITEMS THAT YOR SEARCH END IT SHOW ANOTHER PRODUCTS! -->
-          {% comment %} <nav class="mt-4" aria-label="Page navigation sample">
             <nav class="mt-4" aria-label="Page navigation">
               {% if products.has_other_pages %}
                 <ul class="pagination">
                   {# Previous Button #}
                   {% if products.has_previous %}
                     <li class="page-item">
-                      <a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>
+                      <a class="page-link"
+                        href="?{% if request.GET.search %}
+                          search={{ request.GET.search }}&
+                        {% endif %}page={{ products.previous_page_number }}">
+                        Previous
+                      </a>
                     </li>
                   {% else %}
                     <li class="page-item disabled">
@@ -227,7 +178,12 @@
                         </li>
                       {% else %}
                         <li class="page-item">
-                          <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                          <a class="page-link"
+                            href="?{% if request.GET.search %}
+                              search={{ request.GET.search }}&
+                            {% endif %}page={{ i }}">
+                            {{ i }}
+                          </a>
                         </li>
                       {% endif %}
                     {% endif %}
@@ -236,7 +192,12 @@
                   {# Next Button #}
                   {% if products.has_next %}
                     <li class="page-item">
-                      <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+                      <a class="page-link"
+                        href="?{% if request.GET.search %}
+                          search={{ request.GET.search }}&
+                        {% endif %}page={{ products.next_page_number }}">
+                        Next
+                      </a>
                     </li>
                   {% else %}
                     <li class="page-item disabled">
@@ -246,4 +207,56 @@
                 </ul>
               {% endif %}
             </nav>
-          </nav> {% endcomment %}
+          </nav>
+        </main> <!-- col.// -->
+      </div>
+    </div> <!-- container .// -->
+  </section>
+  <!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}
+
+<!-- THIS IS A FEATURE THAT WHEN THE ITEMS THAT YOR SEARCH END IT SHOW ANOTHER PRODUCTS! -->
+{% comment %} <nav class="mt-4" aria-label="Page navigation sample">
+  <nav class="mt-4" aria-label="Page navigation">
+    {% if products.has_other_pages %}
+      <ul class="pagination">
+        {# Previous Button #}
+        {% if products.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#">Previous</a>
+          </li>
+        {% endif %}
+
+        {# Only show 3 pages around current #}
+        {% for i in products.paginator.page_range %}
+          {% if i >= products.number|add:'-1' and i <= products.number|add:'1' %}
+            {% if products.number == i %}
+              <li class="page-item active">
+                <a class="page-link" href="#">{{ i }}</a>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+              </li>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        {# Next Button #}
+        {% if products.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ products.next_page_number }}">Next</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        {% endif %}
+      </ul>
+    {% endif %}
+  </nav>
+</nav> {% endcomment %}

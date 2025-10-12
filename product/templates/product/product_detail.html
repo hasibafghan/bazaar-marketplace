@@ -4,6 +4,13 @@
   <body>
     <section class="section-content padding-y bg">
       <div class="container">
+        {% if messages %}
+          <div class="messages">
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
         <!-- ============================ COMPONENT 1 ================================= -->
         <div class="card">
           <div class="row no-gutters">
@@ -106,25 +113,75 @@
           </div>
         </form>
         <br />
-
         <div class="row">
           <div class="col-md-9">
             <header class="section-heading">
               <h3>Customer Reviews</h3>
             </header>
 
-            <article class="box mb-3">
-              <div class="icontext w-100">
-                <img src="{% static './images/avatars/avatar1.jpg' %}" class="img-xs icon rounded-circle" />
-                <div class="text">
-                  <span class="date text-muted float-md-right">24.04.2020</span>
-                  <h6 class="mb-1">Mike John</h6>
+            {% for review in reviews %}
+              <article class="box mb-3">
+                <div class="icontext w-100">
+                  <img src="{% static './images/avatars/avatar1.jpg' %}" class="img-xs icon rounded-circle" />
+                  <div class="text">
+                    <span class="date text-muted float-md-right">{{ review.created_at }}</span>
+                    <h6 class="mb-1">{{ review.user.show_full_name }}</h6>
+                    <div class="">
+                      <span class="text-warning">
+                        <!-- Star 1 -->
+                        {% if review.rating >= 1 %}
+                          <i class="fas fa-star"></i>
+                        {% elif review.rating >= 0.5 %}
+                          <i class="fas fa-star-half-alt"></i>
+                        {% else %}
+                          <i class="far fa-star"></i>
+                        {% endif %}
+
+                        <!-- Star 2 -->
+                        {% if review.rating >= 2 %}
+                          <i class="fas fa-star"></i>
+                        {% elif review.rating >= 1.5 %}
+                          <i class="fas fa-star-half-alt"></i>
+                        {% else %}
+                          <i class="far fa-star"></i>
+                        {% endif %}
+
+                        <!-- Star 3 -->
+                        {% if review.rating >= 3 %}
+                          <i class="fas fa-star"></i>
+                        {% elif review.rating >= 2.5 %}
+                          <i class="fas fa-star-half-alt"></i>
+                        {% else %}
+                          <i class="far fa-star"></i>
+                        {% endif %}
+
+                        <!-- Star 4 -->
+                        {% if review.rating >= 4 %}
+                          <i class="fas fa-star"></i>
+                        {% elif review.rating >= 3.5 %}
+                          <i class="fas fa-star-half-alt"></i>
+                        {% else %}
+                          <i class="far fa-star"></i>
+                        {% endif %}
+
+                        <!-- Star 5 -->
+                        {% if review.rating >= 5 %}
+                          <i class="fas fa-star"></i>
+                        {% elif review.rating >= 4.5 %}
+                          <i class="fas fa-star-half-alt"></i>
+                        {% else %}
+                          <i class="far fa-star"></i>
+                        {% endif %}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div> <!-- icontext.// -->
-              <div class="mt-3">
-                <p>Dummy comment Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
-              </div>
-            </article>
+                <div class="mt-3">
+                  <h6>{{ review.subject }}</h6>
+                  <p>{{ review.review }}</p>
+                </div>
+              </article>
+            {% endfor %}
           </div> <!-- col.// -->
         </div> <!-- row.// -->
       </div> <!-- container .// -->

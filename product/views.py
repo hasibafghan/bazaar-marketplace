@@ -96,10 +96,14 @@ def product_detail(request, category_slug, product_slug):
     except orderproduct.DoesNotExist:
         orderproduct = None
 
+    # show reviews
+    reviews = ReviewRating.objects.filter(product_id = product.id  , status = True)
+
     context = {
         'product' : product,
         'in_cart' : in_cart,
         'orderproduct' : orderproduct,
+        'reviews' : reviews,
     }
 
     return render(request, 'product/product_detail.html', context )
