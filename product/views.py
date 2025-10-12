@@ -1,4 +1,4 @@
-from django.shortcuts import render , get_object_or_404 
+from django.shortcuts import render , get_object_or_404 , redirect 
 from .models import Product
 from category.models import Category
 from carts.models import Cart , CartItem 
@@ -6,6 +6,8 @@ from carts.views import _cart_id
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 from django.db.models import Q
 from django.contrib import messages
+from .models import ReviewRating
+from .forms import ReviewForm
 
 
 
@@ -95,4 +97,26 @@ def product_detail(request, category_slug, product_slug):
     return render(request, 'product/product_detail.html', context )
 
 
-
+def submit_review(request , product_id):
+    if request.method == 'POST':
+        url = request.META.get('HTTP_REFERER')
+        try:
+            reviews = ReviewRating.objects.get(user__id = request.user.id , product__id = product_id)
+            forms = ReviewForm(request.POST , instance = reviews)
+            forms.save()
+            messages.success(request , 'Thank you! Your review has been updated.')
+            return redirect(url)
+        
+        except ReviewRating.DoesNotExist:
+            form = ReviewForm(request.POST)
+            if form.is_valid():
+                data = ReviewRating()
+                data.subject = form.cleaned_data['subject']
+                data.review = form.cleaned_data['review']
+                data.rating = form.cleaned_data['rating']
+                data.ip = request.META.get('REMOTE_ADDR')
+                data.product_id = product_id
+                data.user_id = request.user.id
+                data.save()
+                messages.success(request , 'Thank you! Your review has been submitted.')
+                return redirect(url)
