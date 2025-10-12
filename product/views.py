@@ -91,9 +91,12 @@ def product_detail(request, category_slug, product_slug):
         raise e
 
     # check if the user has purchased the product for leaving a review
-    try:
-        orderproduct = OrderProduct.objects.filter(user = request.user , product = product).exists()
-    except orderproduct.DoesNotExist:
+    if request.user.is_authenticated:
+        try:
+            orderproduct = OrderProduct.objects.filter(user = request.user , product = product).exists()
+        except orderproduct.DoesNotExist:
+            orderproduct = None
+    else:
         orderproduct = None
 
     # show reviews
