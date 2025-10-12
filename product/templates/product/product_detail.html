@@ -23,6 +23,25 @@
             </aside>
             <!-- right side -->
             <main class="col-md-6 border-left">
+              <div class="card rating-card">
+                <div class="card-body text-center">
+                  <div class="rating-score display-4 fw-bold text-primary">{{ product.averageReview|floatformat:1 }}</div>
+                  <div class="stars my-2">
+                    {% with avg_rating=product.averageReview %}
+                      {% for i in '12345' %}
+                        {% if avg_rating >= forloop.counter %}
+                          <i class="fas fa-star text-warning"></i>
+                        {% elif avg_rating >= forloop.counter|add:'-0.5' %}
+                          <i class="fas fa-star-half-alt text-warning"></i>
+                        {% else %}
+                          <i class="far fa-star text-warning"></i>
+                        {% endif %}
+                      {% endfor %}
+                    {% endwith %}
+                  </div>
+                  <div class="rating-text text-muted">Average Rating</div>
+                </div>
+              </div>
               <form action="{% url 'add_cart' product.id %}" method="POST">
                 {% csrf_token %}
                 <article class="content-body">
