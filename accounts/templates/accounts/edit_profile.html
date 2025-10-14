@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+  <!-- ========================= SECTION CONTENT ========================= -->
+  <section class="section-content padding-y bg-light">
+    <div class="container">
+      {% include 'include/alerts.html' %}
+      <div class="row">
+        {% include 'include/dashboard_sidebar.html' %}
+        <main class="col-md-9">
+          <article class="card shadow-sm border-0">
+            <header class="card-header bg-white py-3 border-bottom">
+              <strong class="d-inline-block h5 mb-0 text-dark"><i class="fas fa-user-edit me-2 text-primary"></i>Edit Your Profile</strong>
+            </header>
+            <div class="card-body p-4">
+              <form method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+                {% csrf_token %}
+                <div class="row">
+                  <!-- Profile Picture Section -->
+                  <div class="col-md-4 text-center mb-4 mb-md-0">
+                    <div class="profile-picture-container position-relative">
+                      <img src="{% if profile_form.instance.profile_picture %}
+                          {{ profile_form.instance.profile_picture.url }}
+                        {% else %}
+                          
+                          
+                          https://www.w3schools.com/howto/img_avatar.png
+
+
+                        {% endif %}"
+                        alt="Profile Picture"
+                        width="150"
+                        height="150"
+                        class="rounded-circle shadow-sm border"
+                        id="profile-preview" />
+                      <div class="mt-3">
+                        {% render_field profile_form.profile_picture class='form-control d-none' id='profile-picture-input' accept='image/*' %}
+                        <label for="profile-picture-input" class="btn btn-outline-primary btn-sm cursor-pointer"><i class="fas fa-camera me-1"></i>Change Photo</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Form Fields Section -->
+                  <div class="col-md-8">
+                    <div class="row">
+                      <!-- User Form Fields -->
+                      {% for field in user_form %}
+                        <div class="col-md-6 mb-3">
+                          <label for="{{ field.id_for_label }}" class="form-label fw-semibold text-dark">
+                            {{ field.label }}
+                            {% if field.field.required %}
+                              <span class="text-danger">*</span>
+                            {% endif %}
+                          </label>
+                          {% if field.errors %}
+                            {% render_field field class='form-control is-invalid' placeholder=field.label %}
+                            {% for error in field.errors %}
+                              <div class="invalid-feedback d-block">
+                                <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                              </div>
+                            {% endfor %}
+                          {% else %}
+                            {% render_field field class='form-control' placeholder=field.label %}
+                          {% endif %}
+                          {% if field.help_text %}
+                            <small class="form-text text-muted mt-1"><i class="fas fa-info-circle me-1"></i>{{ field.help_text }}</small>
+                          {% endif %}
+                        </div>
+                      {% endfor %}
+
+                      <!-- Profile Form Fields (excluding profile_picture) -->
+                      {% for field in profile_form %}
+                        {% if field.name != 'profile_picture' %}
+                          <div class="col-12 mb-3">
+                            <label for="{{ field.id_for_label }}" class="form-label fw-semibold text-dark">
+                              {{ field.label }}
+                              {% if field.field.required %}
+                                <span class="text-danger">*</span>
+                              {% endif %}
+                            </label>
+
+                            {% if field.name == 'address_line_1' or field.name == 'address_line_2' %}
+                              {% if field.errors %}
+                                {% render_field field class='form-control is-invalid' placeholder=field.label rows='2' %}
+                                {% for error in field.errors %}
+                                  <div class="invalid-feedback d-block">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                                  </div>
+                                {% endfor %}
+                              {% else %}
+                                {% render_field field class='form-control' placeholder=field.label rows='2' %}
+                              {% endif %}
+                            {% elif field.field.widget.input_type == 'textarea' %}
+                              {% if field.errors %}
+                                {% render_field field class='form-control is-invalid' placeholder=field.label rows='4' %}
+                                {% for error in field.errors %}
+                                  <div class="invalid-feedback d-block">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                                  </div>
+                                {% endfor %}
+                              {% else %}
+                                {% render_field field class='form-control' placeholder=field.label rows='4' %}
+                              {% endif %}
+                            {% else %}
+                              {% if field.errors %}
+                                {% render_field field class='form-control is-invalid' placeholder=field.label %}
+                                {% for error in field.errors %}
+                                  <div class="invalid-feedback d-block">
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ error }}
+                                  </div>
+                                {% endfor %}
+                              {% else %}
+                                {% render_field field class='form-control' placeholder=field.label %}
+                              {% endif %}
+                            {% endif %}
+
+                            {% if field.help_text %}
+                              <small class="form-text text-muted mt-1"><i class="fas fa-info-circle me-1"></i>{{ field.help_text }}</small>
+                            {% endif %}
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-flex gap-2 mt-4 pt-3 border-top">
+                      <button type="submit" class="btn btn-primary px-4"><i class="fas fa-save me-2"></i>Save Changes</button>
+                      <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary px-4"><i class="fas fa-times me-2"></i>Cancel</a>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </article>
+        </main>
+      </div> <!-- row.// -->
+    </div>
+  </section>
+  <!-- ========================= SECTION CONTENT END// ========================= -->
+
+  <script>
+    // Profile picture preview
+    document.getElementById('profile-picture-input').addEventListener('change', function (e) {
+      const file = e.target.files[0]
+      if (file) {
+        const reader = new FileReader()
+        reader.onload = function (e) {
+          document.getElementById('profile-preview').src = e.target.result
+        }
+        reader.readAsDataURL(file)
+      }
+    })
+    
+    // Add focus styles dynamically
+    document.addEventListener('DOMContentLoaded', function () {
+      const inputs = document.querySelectorAll('.form-control')
+      inputs.forEach((input) => {
+        input.addEventListener('focus', function () {
+          this.parentElement.classList.add('focused')
+        })
+        input.addEventListener('blur', function () {
+          this.parentElement.classList.remove('focused')
+        })
+      })
+    })
+  </script>
+
+  <style>
+    .form-control:focus {
+      border-color: #4e73df;
+      box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+    }
+    
+    .cursor-pointer {
+      cursor: pointer;
+    }
+    
+    .profile-picture-container {
+      transition: all 0.3s ease;
+    }
+    
+    .profile-picture-container:hover img {
+      transform: scale(1.05);
+    }
+    
+    .form-label {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .invalid-feedback {
+      font-size: 0.8rem;
+    }
+    
+    .form-text {
+      font-size: 0.8rem;
+    }
+    
+    .btn {
+      border-radius: 0.375rem;
+      font-weight: 500;
+    }
+    
+    .card {
+      border-radius: 0.5rem;
+    }
+  </style>
+{% endblock %}

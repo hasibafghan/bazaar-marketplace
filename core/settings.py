@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     "crispy_forms",
     "crispy_bootstrap5",
+    'widget_tweaks',
 
     #paypal
     'paypal.standard.ipn',
