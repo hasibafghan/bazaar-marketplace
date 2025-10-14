@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Account
+from .models import Account , UserProfile
 
 
 
@@ -25,7 +25,9 @@ class AccountAdmin(UserAdmin):
     list_filter = ()
     fieldsets = ()
 
+
 admin.site.register(Account, AccountAdmin)
+admin.site.register(UserProfile)
 
 
     # def has_add_permission(self, request):
