@@ -244,7 +244,7 @@ def dashboard(request):
     return render(request , 'accounts/dashboard.html', context)
 
 
-
+@login_required(login_url='login_user')
 def my_orders(request):
     orders = Order.objects.filter(user = request.user , is_ordered = True).order_by('-created_at')
     context = {
@@ -277,3 +277,26 @@ def edit_profile(request):
     return render(request, 'accounts/edit_profile.html', context)
 
 
+@login_required(login_url='login_user')
+def change_password(request):
+    if request.method == "POST":
+        current_password = request.POST.get('current_password')
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_new_password')
+
+        user = Account.objects.get(username__exact = request.user.username)
+
+        if new_password == confirm_password:
+            success = user.check_password(current_password)
+            if success:
+                user.set_password(new_password)
+                user.save()
+                messages.success(request , 'Your password has been updated')
+                return redirect('change_password')
+            
+            else:
+                messages.error(request, 'Current_password is wrong!')
+
+        else:
+            messages.warning(request , 'Passwords does not match!')
+    return render(request, 'accounts/change_password.html')
