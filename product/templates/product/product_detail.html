@@ -1,18 +1,33 @@
-{% extends 'base.html' %}
+{% extends 'include/base.html' %}
 {% load static %}
 {% block content %}
   <body>
     <section class="section-content padding-y bg">
       <div class="container">
-      {% include 'include/alerts.html' %}
+        {% include 'include/alerts.html' %}
         <!-- ============================ COMPONENT 1 ================================= -->
         <div class="card">
           <div class="row no-gutters">
             <aside class="col-md-6">
               <article class="gallery-wrap">
-                <div class="img-big-wrap">
-                  <a style="pointer-events: none;" href=""><img src="{{ product.images.url }}" /></a>
-                </div> <!-- img-big-wrap.// -->
+                <div class="img-big-wrap text-center">
+                  <img id="mainImage" src="{{ product.images.url }}" alt="{{ product.product_name }}" class="img-fluid main-img" />
+                </div>
+
+                <ul class="thumb-list d-flex justify-content-center mt-3">
+                    <li class="thumb-item"><img src="{{ product.images.url }}" alt="Product Image" class="thumb-img" onclick="changeMainImage('{{ product.images.url }}')" /></li>
+                  {% for image in product_gallery %}
+                    <li class="thumb-item">
+                      <img src="{{ image.image.url }}" alt="Product Image" class="thumb-img" onclick="changeMainImage('{{ image.image.url }}')" />
+                    </li>
+                  {% endfor %}
+                </ul>
+
+                <script>
+                  function changeMainImage(url) {
+                    document.getElementById('mainImage').src = url
+                  }
+                </script>
               </article> <!-- gallery-wrap .end// -->
             </aside>
             <!-- right side -->

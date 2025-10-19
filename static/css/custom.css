@@ -37,3 +37,46 @@
   color: #cc9000;
 }
 
+
+/* =================== for product detail =============== */
+.img-big-wrap {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #f8f8f8;
+}
+
+.main-img {
+  max-width: 100%;
+  height: auto;
+  transition: 0.3s ease-in-out;
+}
+
+.thumb-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.thumb-item {
+  border: 2px solid transparent;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.thumb-item:hover,
+.thumb-item.active {
+  border-color: #007bff;
+}
+
+.thumb-img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  display: block;
+}
+
