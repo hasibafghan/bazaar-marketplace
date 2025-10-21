@@ -9,23 +9,62 @@ from django.contrib import messages
 from .models import ReviewRating
 from .forms import ReviewForm
 from orders.models import OrderProduct
+from django.db.models import Min, Max
+from django.db.models import Min, Max
+
 
 
 
 def product_list(request):
-    products = Product.objects.all().filter(is_available = True).order_by('created_date')
+    # Get all available products
+    products = Product.objects.all().filter(is_available=True).order_by('created_date')
+    
+    # Get min and max prices - force min to 0
+    price_range = products.aggregate(
+        min_price=Min('price'),
+        max_price=Max('price')
+    )
+    min_price = 0  # Always start from 0
+    max_price = int(price_range['max_price'] or 1000)
+    
+    # Handle price filtering
+    min_filter = request.GET.get('min_price')
+    max_filter = request.GET.get('max_price')
+    
+    if min_filter:
+        products = products.filter(price__gte=min_filter)
+    if max_filter:
+        products = products.filter(price__lte=max_filter)
+    
+    # Generate price options starting from 0
+    price_options = []
+    current = 0
+    while current <= max_price:
+        price_options.append(current)
+        if current < 50:
+            current += 10
+        elif current < 200:
+            current += 50
+        else:
+            current += 100
+    
+    # Pagination
     products_counter = products.count()
-    # pagination section
-    paginator = Paginator(products , 3)
+    paginator = Paginator(products, 3)
     page_number = request.GET.get('page')
     page_products = paginator.get_page(page_number)
 
     context = {
-        'products' : page_products,
-        'products_counter' : products_counter
+        'products': page_products,
+        'products_counter': products_counter,
+        'min_price': min_price,
+        'max_price': max_price,
+        'price_options': price_options,
+        'selected_min': min_filter,
+        'selected_max': max_filter,
     }
-
-    return render (request , 'product/product_list.html' , context) 
+    
+    return render(request, 'product/product_list.html', context)
 
 
 
