@@ -56,8 +56,7 @@ INSTALLED_APPS = [
     'carts.apps.CartsConfig',
     'orders.apps.OrdersConfig',
     
-    # my test_app
-    'test_paypal.apps.TestPaypalConfig',
+
 
 
     # modules(third party apps)
@@ -67,8 +66,6 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     'widget_tweaks',
 
-    #paypal
-    'paypal.standard.ipn',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

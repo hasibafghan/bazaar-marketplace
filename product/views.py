@@ -1,9 +1,9 @@
 from django.shortcuts import render , get_object_or_404 , redirect 
 from .models import Product , ProductGallery
 from category.models import Category
-from carts.models import Cart , CartItem 
+from carts.models import CartItem 
 from carts.views import _cart_id
-from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
+from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib import messages
 from .models import ReviewRating

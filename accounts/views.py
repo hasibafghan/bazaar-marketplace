@@ -247,6 +247,7 @@ def dashboard(request):
     return render(request , 'accounts/dashboard.html', context)
 
 
+
 @login_required(login_url='login_user')
 def my_orders(request):
     orders = Order.objects.filter(user = request.user , is_ordered = True).order_by('-created_at')
@@ -278,6 +279,7 @@ def edit_profile(request):
         'profile_form': profile_form,
     }
     return render(request, 'accounts/edit_profile.html', context)
+
 
 
 @login_required(login_url='login_user')
