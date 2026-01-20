@@ -23,8 +23,5 @@ class UserProfileAdmin(admin.ModelAdmin):
     list_display_links = ( 'user',)
     search_fields = ('user__email', 'user__first_name', 'user__last_name', 'city', 'state', 'country')
 
-
-
-
 admin.site.register(Account, AccountAdmin)
 admin.site.register(UserProfile , UserProfileAdmin)

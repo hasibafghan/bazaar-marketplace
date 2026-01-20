@@ -51,7 +51,7 @@ def register_user(request):
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
-
+ 
             messages.success(request, "We send a verification code to your email!")
             return redirect("register_user")
         
@@ -125,7 +125,7 @@ def login_user(request):
             #     return redirect("dashboard")
             
             messages.success(request, "Login successful.")
-            return redirect("checkout")
+            return redirect("home")
 
         messages.error(request, "Invalid email or password.")
         return redirect("login_user")

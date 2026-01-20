@@ -10,8 +10,6 @@ from .models import ReviewRating
 from .forms import ReviewForm
 from orders.models import OrderProduct
 from django.db.models import Min, Max
-from django.db.models import Min, Max
-
 
 
 
