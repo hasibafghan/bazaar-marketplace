@@ -246,6 +246,26 @@ def dashboard(request):
     }
     return render(request , 'accounts/dashboard.html', context)
 
+@login_required(login_url='login_user')
+def dashboard(request):
+    orders = Order.objects.filter(
+        user_id=request.user.id,
+        is_ordered=True
+    ).order_by('-created_at')
+
+    orders_count = orders.count()
+
+    userprofile, created = UserProfile.objects.get_or_create(
+        user=request.user
+    )
+
+    context = {
+        'orders_count': orders_count,
+        'userprofile': userprofile,
+    }
+    return render(request, 'accounts/dashboard.html', context)
+
+
 
 
 @login_required(login_url='login_user')

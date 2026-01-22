@@ -139,6 +139,10 @@ def product_detail(request, category_slug, product_slug):
     # show reviews
     reviews = ReviewRating.objects.filter(product_id = product.id  , status = True)
 
+    # get user profile image
+    user_profile = None
+    if request.user.is_authenticated:
+        user_profile = request.user.userprofile 
 
     # get product gallery images
     product_gallery = ProductGallery.objects.filter(product_id = product.id)
@@ -149,6 +153,7 @@ def product_detail(request, category_slug, product_slug):
         'orderproduct' : orderproduct,
         'reviews' : reviews,
         'product_gallery' : product_gallery,
+        'userprofile': user_profile,
     }
 
     return render(request, 'product/product_detail.html', context )
