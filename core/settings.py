@@ -191,7 +191,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "hasibalamyar2@gmail.com"
 
 # ⚡ Use your App Password (not your Gmail login password)
-EMAIL_HOST_PASSWORD = "noui jdwx gveu ppub"
+EMAIL_HOST_PASSWORD = "nztk dhso muwi oliy"
 
 EMAIL_USE_SSL = False
 #-----------------------------------------------
