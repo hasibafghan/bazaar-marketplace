@@ -150,12 +150,19 @@
             {% for review in reviews %}
               <article class="box mb-3">
                 <div class="icontext w-100">
-                  {% if userprofile.profile_picture %}
-                        <img src="{{ userprofile.profile_picture.url }}" alt="User Profile Picture" class="img-xs icon rounded-circle" />
+                  {% if review.user.userprofile.profile_picture %}
+                        <img src="{{ review.user.userprofile.profile_picture.url }}" alt="User Profile Picture" class="img-xs icon rounded-circle" />
                       {% else %}
-                        {% comment %} <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Default Profile Picture" class="img-xs icon rounded-circle" /> {% endcomment %}
-                        <img src="{% static './images/avatars/avatar1.jpg' %}" class="img-xs icon rounded-circle" />
+                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Default Profile Picture" class="img-xs icon rounded-circle" />
+                        {% comment %} <img src="{% static './images/avatars/avatar1.jpg' %}" class="img-xs icon rounded-circle" /> {% endcomment %}
                       {% endif %}
+
+                      {% comment %} {% if review.user.userprofile.profile_picture %}
+   <img src="{{ review.user.userprofile.profile_picture.url }}">
+{% else %}
+   <img src="https://www.w3schools.com/howto/img_avatar.png">
+{% endif %} {% endcomment %}
+
                   
                   <div class="text">
                     <span class="date text-muted float-md-right">{{ review.created_at }}</span>

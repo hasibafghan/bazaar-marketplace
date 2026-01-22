@@ -111,7 +111,7 @@ def search_product(request):
     })
 
 
-
+from accounts.models import UserProfile
 
 def product_detail(request, category_slug, product_slug):
     try:
@@ -139,10 +139,9 @@ def product_detail(request, category_slug, product_slug):
     # show reviews
     reviews = ReviewRating.objects.filter(product_id = product.id  , status = True)
 
-    # get user profile image
-    user_profile = None
-    if request.user.is_authenticated:
-        user_profile = request.user.userprofile 
+    # # get user profile image
+    # userprofile = None
+    # userprofile = UserProfile.objects.get_or_create(user_id = request.user.id) 
 
     # get product gallery images
     product_gallery = ProductGallery.objects.filter(product_id = product.id)
@@ -153,10 +152,10 @@ def product_detail(request, category_slug, product_slug):
         'orderproduct' : orderproduct,
         'reviews' : reviews,
         'product_gallery' : product_gallery,
-        'userprofile': user_profile,
+        # 'userprofile': userprofile,
     }
-
     return render(request, 'product/product_detail.html', context )
+
 
 
 def submit_review(request , product_id):

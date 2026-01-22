@@ -233,7 +233,6 @@ def reset_password(request):
         return render(request , 'accounts/reset_password.html')
     
 
-
 @login_required(login_url='login_user')
 def dashboard(request):
     orders = Order.objects.order_by('-created_at').filter(user_id = request.user.id , is_ordered = True)
