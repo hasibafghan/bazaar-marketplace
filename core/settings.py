@@ -191,7 +191,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "hasibalamyar2@gmail.com"
 
 # ⚡ Use your App Password (not your Gmail login password)
-EMAIL_HOST_PASSWORD = "nztk dhso muwi oliy"
+EMAIL_HOST_PASSWORD = "mzkg gtqi zzxd ptuf"
 
 EMAIL_USE_SSL = False
 #-----------------------------------------------
@@ -199,3 +199,5 @@ EMAIL_USE_SSL = False
 # Paypal settings
 PAYPAL_TEST = True
 PAYPAL_RECEIVER_EMAIL = "hasib.business_paypal@gmail.com"
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'   
