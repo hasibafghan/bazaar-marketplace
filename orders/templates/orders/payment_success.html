@@ -6,8 +6,8 @@
 {% block content %}
 <section class="section-content padding-y bg-light">
   <div class="container">
-    <!-- Progress Indicator -->
-    <div class="row">
+    <!-- Progress Indicator (HIDDEN WHEN PRINTING) -->
+    <div class="row d-print-none">
       <div class="col-12 mb-5">
         <div class="card shadow-sm border-0">
           <div class="card-body py-4">
@@ -49,8 +49,8 @@
       </div>
     </div>
 
-    <!-- Success Alert -->
-    <div class="row justify-content-center">
+    <!-- Success Alert (HIDDEN WHEN PRINTING) -->
+    <div class="row justify-content-center d-print-none">
       <div class="col-lg-10">
         <div class="alert alert-success border-0 shadow-sm">
           <div class="text-center">
@@ -62,15 +62,22 @@
       </div>
     </div>
 
-    <!-- Order Summary -->
+    <!-- PRINTABLE ORDER SUMMARY -->
     <div class="row justify-content-center">
       <div class="col-lg-10">
-        <div class="card shadow-sm border-0">
+        <div class="card shadow-sm border-0 printable-area">
           <div class="card-body p-4">
+            <!-- Printable Header -->
+            <div class="text-center d-none d-print-block">
+              <h2 class="mb-1">PAYMENT RECEIPT</h2>
+              <p class="text-muted mb-3">This is your official payment receipt</p>
+              <hr>
+            </div>
+            
             <div class="row">
               <div class="col-md-6 mb-3 mb-md-0">
                 <div class="text-center text-md-start">
-                  <img src="{% static 'images/logo.png' %}" alt="Company Logo" class="img-fluid mb-3" style="max-height: 50px;">
+                  <img src="{% static 'images/logo.png' %}" alt="Company Logo" class="img-fluid mb-3 d-print-none" style="max-height: 50px;">
                   <h5 class="text-muted">Thank you for your order</h5>
                 </div>
               </div>
@@ -111,7 +118,7 @@
                       <td>
                         <div class="d-flex align-items-center">
                           <img src="{{ order_product.product.images.url }}" alt="{{ order_product.product.product_name }}" 
-                               class="img-fluid rounded me-3" width="60">
+                               class="img-fluid rounded me-3 d-print-none" width="60">
                           <div>
                             <h6 class="mb-0">{{ order_product.product.product_name }}</h6>
                             {% if order_product.variation %}
@@ -193,8 +200,8 @@
             </div>
             {% endif %}
 
-            <!-- Thank You Message -->
-            <div class="text-center mt-4 pt-3  border-top">
+            <!-- Thank You Message (HIDDEN WHEN PRINTING) -->
+            <div class="text-center mt-4 pt-3 border-top d-print-none">
               <p class="text-muted mb-3">Thank you for shopping with us! We'll send you a confirmation email shortly.</p>
               
               <!-- Action Buttons -->
@@ -215,8 +222,8 @@
       </div>
     </div>
 
-    <!-- Empty Cart Message (Optional) -->
-    <div class="row justify-content-center mt-4">
+    <!-- Empty Cart Message (HIDDEN WHEN PRINTING) -->
+    <div class="row justify-content-center mt-4 d-print-none">
       <div class="col-lg-8">
         <div class="card border-0 bg-light">
           <div class="card-body text-center py-4">
@@ -234,6 +241,49 @@
 </section>
 
 <style>
+/* Hide elements when printing */
+@media print {
+  /* Hide everything except the printable area */
+  body * {
+    visibility: hidden;
+  }
+  
+  .printable-area, .printable-area * {
+    visibility: visible;
+  }
+  
+  .printable-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* Hide print button */
+  .btn {
+    display: none !important;
+  }
+  
+  /* Remove background colors for better printing */
+  .table-light {
+    background-color: #f8f9fa !important;
+  }
+  
+  .badge {
+    border: 1px solid #000 !important;
+    background-color: transparent !important;
+    color: #000 !important;
+  }
+  
+  /* Show print-only elements */
+  .d-print-block {
+    display: block !important;
+  }
+}
+
+/* Stepper styles */
 .stepper-wrapper {
   display: flex;
   justify-content: space-between;
@@ -357,4 +407,27 @@
   }
 }
 </style>
+
+<script>
+// Print optimization
+function optimizeForPrint() {
+  // Add print-specific classes
+  document.querySelectorAll('.printable-area img').forEach(img => {
+    img.classList.add('d-print-none');
+  });
+}
+
+// Attach print event listener
+document.addEventListener('DOMContentLoaded', function() {
+  // Before print
+  window.addEventListener('beforeprint', function() {
+    optimizeForPrint();
+  });
+  
+  // After print
+  window.addEventListener('afterprint', function() {
+    // Optional: restore any changes if needed
+  });
+});
+</script>
 {% endblock %}

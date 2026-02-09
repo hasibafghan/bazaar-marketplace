@@ -96,7 +96,23 @@
       color: #4e73df;
       font-weight: 700;
     }
-    
+
+    /* Payment Processing Styles */
+    .payment-processing {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .stepper-wrapper {
@@ -131,6 +147,18 @@
       }
     }
   </style>
+
+  <div id="payment-processing" class="payment-processing" style="display: none;">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    <h3 class="mt-4 text-primary">Processing Payment...</h3>
+    <p class="text-muted mt-2">Please wait while we confirm your payment</p>
+    <div class="progress mt-3" style="width: 300px;">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
+    </div>
+  </div>
+
   <section class="section-content padding-y bg-light">
     <div class="container">
       <div class="row">
@@ -148,7 +176,7 @@
                 </div>
 
                 <!-- Step 2: Details -->
-                <div class="stepper-item active">
+                <div class="stepper-item completed">
                   <div class="step-counter">
                     <i class="fas fa-user-edit"></i>
                   </div>
@@ -175,54 +203,71 @@
           </div>
         </div>
 
-        <!-- ================= BILLING / SHIPPING FORM ================= -->
-        <!-- Payment Options -->
+        <!-- ================= BILLING INFO ================= -->
         <aside class="col-lg-8">
-          <!-- ================= BILLING INFO ================= -->
           <div class="card shadow-sm rounded-lg mb-4">
             <div class="card-header bg-white py-3">
               <h4 class="mb-0"><i class="fas fa-user mr-2 text-primary"></i>Billing Information</h4>
             </div>
             <div class="card-body">
               <p>
-                <strong>Name:</strong> {{ order.first_name }} {{ order.last_name }}
+                <strong>Name:</strong> {{ form_data.first_name }} {{ form_data.last_name }}
               </p>
               <p>
-                <strong>Email:</strong> {{ order.email }}
+                <strong>Email:</strong> {{ form_data.email }}
               </p>
               <p>
-                <strong>Phone:</strong> {{ order.phone }}
+                <strong>Phone:</strong> {{ form_data.phone }}
               </p>
               <p>
-                <strong>Address:</strong> {{ order.address_line_1 }}{% if order.address_line_2 %}
-                  , {{ order.address_line_2 }}
+                <strong>Address:</strong> {{ form_data.address_line_1 }}
+                {% if form_data.address_line_2 %}
+                  , {{ form_data.address_line_2 }}
                 {% endif %}
               </p>
               <p>
-                <strong>City:</strong> {{ order.city }}
+                <strong>City:</strong> {{ form_data.city }}
               </p>
               <p>
-                <strong>State:</strong> {{ order.state }}
+                <strong>State:</strong> {{ form_data.state }}
               </p>
               <p>
-                <strong>Country:</strong> {{ order.country }}
+                <strong>Country:</strong> {{ form_data.country }}
               </p>
-              {% if order.order_note %}
+              {% if form_data.order_note %}
                 <p>
-                  <strong>Note:</strong> {{ order.order_note }}
+                  <strong>Note:</strong> {{ form_data.order_note }}
                 </p>
               {% endif %}
             </div>
           </div>
-          <h2>Complete Payment</h2>
-          <p>Total: ${{ grand_total }}</p>
+          
+          <!-- Payment Method Card -->
+          <div class="card shadow-sm rounded-lg">
+            <div class="card-header bg-white py-3">
+              <h4 class="mb-0"><i class="fas fa-credit-card mr-2 text-primary"></i>Payment Method</h4>
+            </div>
+            <div class="card-body">
+              <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i>
+                You will be redirected to PayPal's secure payment page to complete your payment.
+              </div>
+              
+              <div id="paypal-button-container"></div>
+              
+              <div class="mt-4">
+                <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">
+                  <i class="fas fa-edit me-2"></i>Edit Billing Details
+                </a>
+              </div>
+            </div>
+          </div>
         </aside>
 
         <!-- ================= ORDER SUMMARY ================= -->
         <aside class="col-lg-4">
           <div class="card shadow-sm rounded-lg sticky-top" style="top: 20px;">
             <div class="card-header bg-white py-3">
-              <a style="float: right;" href="{% url 'product_list' %}" class="btn btn-outline-secondary"><i class="fas fa-arrow-left mr-1"></i></a>
               <h4 class="mb-0"><i class="fas fa-receipt mr-2 text-primary"></i>Order Summary</h4>
             </div>
             <div class="card-body">
@@ -243,33 +288,59 @@
                         {% endif %}
                       </div>
                     </div>
-                    <span class="text-dark fw-bold">${{ cart_item.sub_total }}</span>
+                    <span class="text-dark fw-bold">${{ cart_item.sub_total|floatformat:2 }}</span>
                   </li>
                 {% endfor %}
 
                 <li class="list-group-item d-flex justify-content-between bg-light">
                   <span>Subtotal</span>
-                  <strong>${{ total }}</strong>
+                  <strong>${{ total|floatformat:2 }}</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span>Tax</span>
-                  <strong>${{ tax }}</strong>
+                  <span>Tax (2%)</span>
+                  <strong>${{ tax|floatformat:2 }}</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span>Order ID</span>
-                  <strong class="text-success">{{ order.order_number }}</strong>
+                  <span>Shipping</span>
+                  <strong class="text-success">FREE</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span class="h5">Total</span>
-                  <strong class="h5 text-dark">${{ grand_total }}</strong>
+                  <span>Order Reference</span>
+                  <strong class="text-warning">{{ temp_order_number }}</strong>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <span class="h5">Total Amount</span>
+                  <strong class="h5 text-dark">${{ grand_total|floatformat:2 }}</strong>
                 </li>
               </ul>
 
+              <!-- PayPal Button Container -->
               <div id="paypal-button-container"></div>
+
+              <!-- Important Note -->
+              <div class="alert alert-warning mt-3">
+                <small>
+                  <i class="fas fa-exclamation-triangle me-1"></i>
+                  <strong>Note:</strong> Your order will be created and confirmed only after successful payment.
+                </small>
+              </div>
 
               <div class="mt-4 p-3 bg-light rounded">
                 <h6 class="mb-2"><i class="fas fa-shield-alt mr-2 text-success"></i>Secure Checkout</h6>
                 <p class="small text-muted mb-0">Your personal information is securely encrypted and protected.</p>
+                <div class="d-flex justify-content-center mt-2">
+                  <img src="https://www.paypalobjects.com/webstatic/mktg/logo-center/logo_paypal_106x29.png" 
+                       alt="PayPal" 
+                       class="img-fluid"
+                       style="height: 25px;">
+                </div>
+              </div>
+              
+              <!-- Back Button -->
+              <div class="mt-3">
+                <a href="{% url 'checkout' %}" class="btn btn-outline-secondary w-100">
+                  <i class="fas fa-arrow-left mr-1"></i>Back to Checkout
+                </a>
               </div>
             </div>
           </div>
@@ -278,99 +349,103 @@
     </div>
   </section>
 
-
   <!-- Include the PayPal JavaScript SDK -->
-  <script src="https://www.paypal.com/sdk/js?client-id=ATipOMypeAqWnRebiypP7bViOfjO_mjoUk2CPeGELn5Ql57jcCuEr8bqYOrKhSWYBx0qrsiQsWjIlGhx&currency=USD"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=ATipOMypeAqWnRebiypP7bViOfjO_mjoUk2CPeGELn5Ql57jcCuEr8bqYOrKhSWYBx0qrsiQsWjIlGhx&currency=USD&intent=capture"></script>
 
-
-<script>
-  paypal.Buttons({
-    style: { color: 'blue', shape: 'pill', label: 'pay', height: 40 },
-
-    createOrder: function (data, actions) {
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: '{{ grand_total }}',
-            currency_code: 'USD'
-          },
-          description: 'Order #{{ order.order_number }}'
-        }]
-      });
-    },
-
-    onApprove: function (data, actions) {
-      return actions.order.capture().then(function (details) {
-        // send to backend and wait for response before redirect
-        return fetch("{% url 'payment_success' %}", {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': '{{ csrf_token }}'
-          },
-          body: JSON.stringify({
-            orderID: data.orderID,
-            payerID: data.payerID,
-            paymentID: details.id,
-            order_number: '{{ order.order_number }}',
-            amount: '{{ grand_total }}'
-          }),
-          credentials: 'same-origin'
-        })
-        .then(function (res) {
-          if (!res.ok) throw new Error('Network response not ok: ' + res.status);
-          return res.json();
-        })
-        .then(function (json) {
-          if (json.status === 'success') {
-            // Show server-confirmed success page
-            window.location.href = "{% url 'payment_success' %}?order={{ order.order_number }}";
-          } else {
-            alert('Server error: ' + (json.message || 'Unknown'));
-          }
-        })
-        .catch(function (err) {
-          console.error('Save payment error:', err);
-          alert('Error saving payment on server: ' + err.message);
-        });
-      });
-    },
-
-    onCancel: function (data) {
-      // redirect user to cancel page
-      window.location.href = "{% url 'payment_failed' %}?order={{ order.order_number }}";
-    },
-
-    onError: function (err) {
-      console.error('PayPal SDK error:', err);
-      alert('Payment error: ' + err.message || err);
-    }
-  }).render('#paypal-button-container');
-</script>
-
-{% endblock %}
-
-{% block extra_js %}
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Add interactivity to payment method selection
-      const paymentMethods = document.querySelectorAll('.form-check-input')
-      paymentMethods.forEach((method) => {
-        method.addEventListener('change', function () {
-          document.querySelectorAll('.form-check').forEach((box) => {
-            box.style.borderColor = '#dee2e6'
-            box.style.boxShadow = 'none'
-          })
-    
-          if (this.checked) {
-            this.closest('.form-check').style.borderColor = '#4e73df'
-            this.closest('.form-check').style.boxShadow = '0 0 0 0.2rem rgba(78, 115, 223, 0.25)'
-          }
-        })
-      })
-    
-      // Trigger initial state
-      document.querySelector('.form-check-input:checked').dispatchEvent(new Event('change'))
-    })
+    document.addEventListener('DOMContentLoaded', function() {
+      const paymentProcessing = document.getElementById('payment-processing');
+      const paypalButtonContainer = document.getElementById('paypal-button-container');
+      
+      // Initialize PayPal button
+      paypal.Buttons({
+        style: {
+          color: 'blue',
+          shape: 'pill',
+          label: 'pay',
+          height: 40,
+          layout: 'vertical'
+        },
+
+        createOrder: function(data, actions) {
+          // Show processing overlay
+          paymentProcessing.style.display = 'flex';
+          
+          return actions.order.create({
+            purchase_units: [{
+              description: 'Order Payment',
+              amount: {
+                value: '{{ grand_total|floatformat:2 }}',
+                currency_code: 'USD'
+              }
+            }]
+          });
+        },
+
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            // Update processing message
+            paymentProcessing.querySelector('h3').textContent = 'Completing Your Order...';
+            paymentProcessing.querySelector('p').textContent = 'Creating your order in our system';
+            
+            // Send payment data to backend to create order
+            return fetch("{% url 'payment_success' %}", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+              },
+              body: JSON.stringify({
+                paymentID: details.id,
+                payerID: details.payer.payer_id,
+                status: details.status,
+                amount: '{{ grand_total|floatformat:2 }}',
+                payer_email: details.payer.email_address,
+                payer_name: details.payer.name.given_name + ' ' + details.payer.name.surname
+              })
+            })
+            .then(function(response) {
+              if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.status);
+              }
+              return response.json();
+            })
+            .then(function(result) {
+              if (result.status === 'success') {
+                // Update processing message
+                paymentProcessing.querySelector('h3').textContent = 'Payment Successful!';
+                paymentProcessing.querySelector('p').textContent = 'Redirecting to confirmation page...';
+                
+                // Redirect to success page
+                setTimeout(function() {
+                  window.location.href = result.redirect_url || 
+                    "{% url 'payment_success' %}?order=" + result.order_number;
+                }, 1500);
+              } else {
+                throw new Error(result.message || 'Payment processing failed');
+              }
+            })
+            .catch(function(error) {
+              console.error('Error:', error);
+              paymentProcessing.style.display = 'none';
+              alert('Error: ' + error.message);
+              window.location.href = "{% url 'payment_failed' %}";
+            });
+          });
+        },
+
+        onCancel: function(data) {
+          paymentProcessing.style.display = 'none';
+          window.location.href = "{% url 'payment_failed' %}?reason=cancelled";
+        },
+
+        onError: function(err) {
+          console.error('PayPal SDK error:', err);
+          paymentProcessing.style.display = 'none';
+          alert('PayPal Error: ' + (err.message || 'Please try again or contact support.'));
+        }
+
+      }).render('#paypal-button-container');
+    });
   </script>
 {% endblock %}

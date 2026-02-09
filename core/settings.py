@@ -200,4 +200,5 @@ EMAIL_USE_SSL = False
 PAYPAL_TEST = True
 PAYPAL_RECEIVER_EMAIL = "hasib.business_paypal@gmail.com"
 
+# Security settings for PayPal integration to allow popups and prevent cross-origin issues
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'   
