@@ -133,7 +133,7 @@
               {% if orderproduct %}
                 <input type="submit" value="Submit Review" class="btn btn-primary" />
               {% else %}
-                <p>you must purchase the product before leave a review!</p>
+                <p class="">Note: you must purchase the product before leave a review!</p>
               {% endif %}
             {% else %}
               <a href="{% url 'login_user' %}?next={{ request.path }}" class="btn btn-primary">Login to Submit Review</a>
