@@ -93,8 +93,8 @@ def search_product(request):
 
     if query:
         products = Product.objects.filter(
-            Q(product_name__icontains=query) |
-            Q(description__icontains=query)
+            Q(translations__product_name__icontains=query) |
+            Q(translations__description__icontains=query)
         ).order_by('-id')
     else:
         products = Product.objects.all().order_by('-id')

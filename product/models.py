@@ -3,11 +3,14 @@ from django.urls import reverse
 from category.models import Category
 from accounts.models import Account
 from django.db.models import Avg
+from parler.models import TranslatableModel, TranslatedFields
 
-class Product(models.Model):
-    product_name    = models.CharField(max_length=200, unique=True)
-    slug            = models.SlugField(max_length=200, unique=True)
-    description     = models.TextField(max_length=500, blank=True)
+class Product(TranslatableModel):
+    translations = TranslatedFields(
+        product_name=models.CharField(max_length=200),
+        description=models.TextField(max_length=500, blank=True),
+    )
+    slug            = models.SlugField(max_length=200, unique=True)  # Non-translatable for URL
     price           = models.IntegerField()
     old_price       = models.IntegerField()
     images          = models.ImageField(upload_to='products')
@@ -48,11 +51,13 @@ class Variation(models.Model):
         return self.variation_value
     
 
-class ReviewRating(models.Model):
+class ReviewRating(TranslatableModel):
+    translations = TranslatedFields(
+        subject=models.CharField(max_length=100, blank=True),
+        review=models.TextField(max_length=500, blank=True),
+    )
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
-    subject = models.CharField(max_length=100, blank=True)
-    review = models.TextField(max_length=500, blank=True)
     rating = models.FloatField()
     ip = models.CharField(max_length=20, blank=True)
     status = models.BooleanField(default=True)

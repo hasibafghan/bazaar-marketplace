@@ -1,0 +1,172 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-11 00:25+0430\n"
+"PO-Revision-Date: 2026-04-09 04:28+0000\n"
+"Last-Translator: ali ali <ali@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.10.3\n"
+
+#: .\core\settings.py:151
+msgid "English"
+msgstr "انگلیسی"
+
+#: .\core\settings.py:152
+msgid "Persian"
+msgstr "فارسی"
+
+#: .\templates\include\base.html:13
+msgid "Tanzaib | One of the Biggest Online Shopping Platform"
+msgstr ""
+
+#: .\templates\include\footer.html:9
+msgid "About Our Company"
+msgstr "درباره شرکت ما"
+
+#: .\templates\include\footer.html:10
+msgid ""
+"We provide quality products and excellent customer service. Shop with "
+"confidence knowing we have served thousands of satisfied customers."
+msgstr ""
+"ما محصولات با کیفیت و خدمات عالی به مشتریان ارائه می‌دهیم. با اطمینان خاطر "
+"خرید کنید و بدانید که ما مفتخریم اعتماد هزار ها مشتری را با خود داریم!"
+
+#: .\templates\include\footer.html:21
+msgid "Quick Links"
+msgstr "لینک های سریع"
+
+#: .\templates\include\footer.html:24
+msgid "Home"
+msgstr "خانه"
+
+#: .\templates\include\footer.html:27
+msgid "Shop"
+msgstr "فروشگاه"
+
+#: .\templates\include\footer.html:30
+msgid "About"
+msgstr "درباره ما"
+
+#: .\templates\include\footer.html:33
+msgid "Contact"
+msgstr "تماس با ما"
+
+#: .\templates\include\footer.html:36
+msgid "FAQ"
+msgstr "FAQ"
+
+#: .\templates\include\footer.html:43
+msgid "Customer Service"
+msgstr "خدمات مشتریان"
+
+#: .\templates\include\footer.html:46
+msgid "My Account"
+msgstr "حساب من"
+
+#: .\templates\include\footer.html:49
+msgid "Order Tracking"
+msgstr "ردگیری سفارش"
+
+#: .\templates\include\footer.html:52
+msgid "Wishlist"
+msgstr "سبد اروزی خرید"
+
+#: .\templates\include\footer.html:55
+msgid "Returns"
+msgstr "برگشت"
+
+#: .\templates\include\footer.html:58
+msgid "Shipping"
+msgstr "خریداری"
+
+#: .\templates\include\footer.html:65
+msgid "Contact Info"
+msgstr "اطلاعات ما"
+
+#: .\templates\include\footer.html:74 .\templates\include\footer.html:98
+msgid "123 Street, Avenue ABC"
+msgstr "سرک سوم وزیر اکبر خان"
+
+#: .\templates\include\footer.html:80
+msgid "Subscribe to Newsletter"
+msgstr "اشتراک گزاری در ولاگ ها"
+
+#: .\templates\include\footer.html:83
+msgid "Subscribe"
+msgstr "اشتراک گزاری"
+
+#: .\templates\include\footer.html:93
+msgid "Copyright 2026 Tanzaib LMT ©All Rights Reserved."
+msgstr ".حق ©کاپی رایت برای شرکت تن زیب محفوظ است"
+
+#: .\templates\include\header.html:22
+msgid "Language"
+msgstr "زبان"
+
+#: .\templates\include\header.html:53
+msgid "Email"
+msgstr "ایمیل"
+
+#: .\templates\include\header.html:56
+msgid "Call us"
+msgstr "تماس با ما"
+
+#: .\templates\include\header.html:75
+msgid "Categories"
+msgstr "دسته بندی ها"
+
+#: .\templates\include\header.html:77
+msgid "All Products"
+msgstr "تمام محصولات"
+
+#: .\templates\include\header.html:87
+msgid "Store"
+msgstr "فروشگاه"
+
+#: .\templates\include\header.html:107
+msgid "Welcome"
+msgstr "خوش آمدید"
+
+#: .\templates\include\header.html:109
+msgid "Dashboard"
+msgstr "داشبورد"
+
+#: .\templates\include\header.html:110
+msgid "Logout"
+msgstr "خروج"
+
+#: .\templates\include\header.html:113
+msgid "Welcome Guest!"
+msgstr "کاربر مهمان خوش آمدید!"
+
+#: .\templates\include\header.html:115
+msgid "Login"
+msgstr "ورود"
+
+#: .\templates\include\header.html:116
+msgid "Register"
+msgstr "ثبت نام"
+
+#~ msgid "Copyright"
+#~ msgstr "تمام حقوق این ویب سایت مختص شرکت"
+
+#~ msgid "Your Company Name"
+#~ msgstr "تن زیب میباشد"
+
+#~ msgid "All Rights Reserved."
+#~ msgstr "©تمام حقوق محفوظ است."
+
+#~ msgid "dir"
+#~ msgstr "rtl"

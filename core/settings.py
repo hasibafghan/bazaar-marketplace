@@ -10,8 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -55,16 +56,17 @@ INSTALLED_APPS = [
     'product.apps.ProductConfig',
     'carts.apps.CartsConfig',
     'orders.apps.OrdersConfig',
-    
-
-
-
+ 
     # modules(third party apps)
     # "widget_tweaks",
     'django_cleanup.apps.CleanupConfig',
     "crispy_forms",
     "crispy_bootstrap5",
     'widget_tweaks',
+
+    # translation packages
+    'rosetta',
+    'parler',
 
 ]
 
@@ -75,6 +77,9 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    'django.middleware.locale.LocaleMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -87,7 +92,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -140,11 +145,34 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = [
+    ('en' , _('English')),
+    ('fa' , _('Persian')),
+]
+
+
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'en'},
+        {'code': 'fa'},
+    ),
+    'default': {
+        'fallbacks': ['en'],
+        'hide_untranslated': False,
+    }
+}
+
+ROSETTA_STORAGE_CLASS = 'rosetta.storage.CacheRosettaStorage'
+ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True
+ROSETTA_MESSAGES_PER_PAGE = 50
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 
@@ -161,6 +189,11 @@ STATICFILES_DIRS = [
 # Media files
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# translation files
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale')
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -179,7 +212,7 @@ AUTH_USER_MODEL = 'accounts.Account'
 # ]
  
 # settings.py
-
+LOGIN_URL = '/accounts/login_user/'
 #-----------------------------------------------
 # My email section
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
@@ -202,3 +235,16 @@ PAYPAL_RECEIVER_EMAIL = "hasib.business_paypal@gmail.com"
 
 # Security settings for PayPal integration to allow popups and prevent cross-origin issues
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'   
+
+
+#==============================
+# rosetta settings
+ROSETTA_ACCESS_CONTROL_FUNCTION = 'core.permissions.is_user_allowed_for_rosetta'
+# (Optional but helpful) Rosetta requires login by default
+ROSETTA_REQUIRES_AUTH = True
+
+# Your other Rosetta settings...
+ROSETTA_STORAGE_CLASS = 'rosetta.storage.CacheRosettaStorage'
+ROSETTA_ENABLE_TRANSLATION_SUGGESTIONS = True
+# ...
+
