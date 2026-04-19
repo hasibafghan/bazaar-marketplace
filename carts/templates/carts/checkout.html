@@ -1,5 +1,6 @@
 {% extends 'include/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
   <style>
@@ -144,7 +145,7 @@
                   <div class="step-counter">
                     <i class="fas fa-shopping-cart"></i>
                   </div>
-                  <div class="step-name">Cart</div>
+                  <div class="step-name">{% trans "Cart" %}</div>
                 </div>
 
                 <!-- Step 2: Details -->
@@ -152,7 +153,7 @@
                   <div class="step-counter">
                     <i class="fas fa-user-edit"></i>
                   </div>
-                  <div class="step-name">Details</div>
+                  <div class="step-name">{% trans "Details" %}</div>
                 </div>
 
                 <!-- Step 3: Payment -->
@@ -160,7 +161,7 @@
                   <div class="step-counter">
                     <i class="fas fa-credit-card"></i>
                   </div>
-                  <div class="step-name">Payment</div>
+                  <div class="step-name">{% trans "Payment" %}</div>
                 </div>
 
                 <!-- Step 4: Confirmation -->
@@ -168,7 +169,7 @@
                   <div class="step-counter">
                     <i class="fas fa-check-circle"></i>
                   </div>
-                  <div class="step-name">Confirmation</div>
+                  <div class="step-name">{% trans "Confirmation" %}</div>
                 </div>
               </div>
             </div>
@@ -179,54 +180,54 @@
         <aside class="col-lg-8">
           <div class="card shadow-sm rounded-lg mb-4">
             <div class="card-header bg-white py-3">
-              <h4 class="mb-0"><i class="fas fa-truck mr-2 text-primary"></i>Billing & Shipping Information</h4>
+              <h4 class="mb-0"><i class="fas fa-truck mr-2 text-primary"></i>{% trans "Billing & Shipping Information" %}</h4>
             </div>
             <div class="card-body">
               <form action="{% url 'payment_process' %}" method="POST" id="checkout-form">
                 {% csrf_token %}
                 <div class="row">
                   <div class="form-group col-md-6 mb-3">
-                    <label class="form-label">First Name <span class="text-danger">*</span></label>
+                    <label class="form-label">{% trans "First Name" %} <span class="text-danger">*</span></label>
                     <input type="text" name="first_name" class="form-control" required />
                   </div>
                   <div class="form-group col-md-6 mb-3">
-                    <label class="form-label">Last Name <span class="text-danger">*</span></label>
+                    <label class="form-label">{% trans "Last Name" %} <span class="text-danger">*</span></label>
                     <input type="text" name="last_name" class="form-control" required />
                   </div>
                   <div class="form-group col-md-6 mb-3">
-                    <label class="form-label">Email <span class="text-danger">*</span></label>
+                    <label class="form-label">{% trans "Email" %} <span class="text-danger">*</span></label>
                     <input type="email" name="email" class="form-control" required />
                   </div>
                   <div class="form-group col-md-6 mb-3">
-                    <label class="form-label">Phone <span class="text-danger">*</span></label>
+                    <label class="form-label">{% trans "Phone" %} <span class="text-danger">*</span></label>
                     <input type="text" name="phone" class="form-control" required />
                   </div>
                   <div class="form-group col-lg-6 mb-3">
-                    <label class="form-label">Address 1<span class="text-danger">*</span></label>
+                    <label class="form-label">{% trans "Address 1" %}<span class="text-danger">*</span></label>
                     <input type="text" name="address_line_1" class="form-control" required />
                   </div>
                   <div class="form-group col-lg-6 mb-3">
-                    <label class="form-label">Address 2<span class="text-danger">*</span></label>
+                    <label class="form-label">{% trans "Address 2" %}<span class="text-danger">*</span></label>
                     <input type="text" name="address_line_2" class="form-control" required />
                   </div>
                   <div class="form-group col-lg-4 mb-3">
-                    <label class="form-label">City <span class="text-danger">*</span></label>
+                    <label class="form-label">{% trans "City" %} <span class="text-danger">*</span></label>
                     <input type="text" name="city" class="form-control" required />
                   </div>
                   <div class="form-group col-lg-4 mb-3">
-                    <label class="form-label">State <span class="text-danger">*</span></label>
+                    <label class="form-label">{% trans "State" %} <span class="text-danger">*</span></label>
                     <input type="text" name="state" class="form-control" required />
                   </div>
                   <div class="form-group col-lg-4 mb-3">
-                    <label class="form-label">Country <span class="text-danger">*</span></label>
+                    <label class="form-label">{% trans "Country" %} <span class="text-danger">*</span></label>
                     <input type="text" name="country" class="form-control" required />
                   </div>
                   <div class="form-group col-lg-12 mb-3">
-                    <label class="form-label">Order Note</label>
+                    <label class="form-label">{% trans "Order Note" %}</label>
                     <textarea name="order_note" class="form-control" rows="3" placeholder="Any special instructions for your order..."></textarea>
                   </div>
                   <div class="d-grid gap-2">
-                    <button type="submit" form="checkout-form" class="btn btn-primary btn-lg"><i class="fas fa-lock mr-2"></i>Place Order</button>
+                    <button type="submit" form="checkout-form" class="btn btn-primary btn-lg"><i class="fas fa-lock mr-2"></i>{% trans "Place Order" %}</button>
                   </div>
                 </div>
               </form>
@@ -239,7 +240,7 @@
           <div class="card shadow-sm rounded-lg sticky-top" style="top: 20px;">
             <div class="card-header bg-white py-3">
               <a style="float: right;" href="{% url 'product_list' %}" class="btn btn-outline-secondary"><i class="fas fa-arrow-left mr-1"></i></a>
-              <h4 class="mb-0"><i class="fas fa-receipt mr-2 text-primary"></i>Order Summary</h4>
+              <h4 class="mb-0"><i class="fas fa-receipt mr-2 text-primary"></i>{% trans "Order Summary" %}</h4>
             </div>
             <div class="card-body">
               <ul class="list-group mb-3">
@@ -249,7 +250,7 @@
                       <img src="{{ cart_item.product.images.url }}" alt="{{ cart_item.product.product_name }}" class="img-fluid rounded me-3" width="50" />
                       <div>
                         <h6 class="my-0">{{ cart_item.product.product_name|truncatewords:4 }}</h6>
-                        <small class="text-muted">Qty: {{ cart_item.quantity }}</small>
+                        <small class="text-muted">{% trans "Qty" %}: {{ cart_item.quantity }}</small>
                         {% if cart_item.variations.all %}
                           <div class="mt-1">
                             {% for item in cart_item.variations.all %}
@@ -264,26 +265,27 @@
                 {% endfor %}
 
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span>Subtotal</span>
+                  <span>{% trans "Subtotal" %}</span>
                   <strong>${{ total }}</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span>Tax</span>
+                  <span>{% trans "Tax" %}</span>
                   <strong>${{ tax }}</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span>Shipping</span>
+                  <span>{% trans "Shipping" %}</span>
                   <strong class="text-success">FREE</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span class="h5">Total</span>
+                  <span class="h5">{% trans "Total" %}</span>
                   <strong class="h5 text-dark">${{ grand_total }}</strong>
                 </li>
               </ul>
 
               <div class="mt-4 p-3 bg-light rounded">
-                <h6 class="mb-2"><i class="fas fa-shield-alt mr-2 text-success"></i>Secure Checkout</h6>
-                <p class="small text-muted mb-0">Your personal information is securely encrypted and protected.</p>
+                <h6 class="mb-2"><i class="fas fa-shield-alt mr-2 text-success"></i>{% trans "Secure Checkout" %}</h6>
+                <p class="small text-muted mb-0">{% trans "Your personal information is securely encrypted and protected." %}</p>
+                  <img class="w-100 h-100" src="https://t4.ftcdn.net/jpg/04/71/85/99/360_F_471859928_TYDUq0K4PX6sbePnRwMMjV4PMSA0iWy0.jpg" 
               </div>
             </div>
           </div>

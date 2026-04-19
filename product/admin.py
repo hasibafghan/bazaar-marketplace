@@ -16,10 +16,10 @@ class ProductAdmin(TranslatableAdmin):
     list_per_page = 20
     inlines = [ProductGalleryinline]
 
-class VariationAdmin(admin.ModelAdmin):
-    list_display = ('product' , 'variation_category' , 'variation_value' , 'is_active', 'created_date' )
-    list_editable = ( 'is_active', )
-    list_filter = ('product' , 'variation_category' , 'variation_value' ,)
+class VariationAdmin(TranslatableAdmin):
+    list_display = ('product', 'variation_category', 'is_active', 'created_date')
+    list_editable = ('is_active',)
+    list_filter = ('product', 'variation_category', 'is_active')
     
 
 admin.site.register(Product, ProductAdmin)

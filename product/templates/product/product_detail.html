@@ -1,4 +1,5 @@
 {% extends 'include/base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
   <body>
@@ -48,7 +49,7 @@
                       {% endfor %}
                     {% endwith %}
                   </div>
-                  <div class="rating-text text-muted">Average Rating</div>
+                  <div class="rating-text text-muted">{% trans "Average Rating" %}</div>
                 </div>
               </div>
               <form action="{% url 'add_cart' product.id %}" method="POST">
@@ -63,38 +64,45 @@
                   <p>{{ product.description }}</p>
 
                   <hr />
-                  <div class="row">
-                    <div class="item-option-select">
-                      <h6>Choose Color</h6>
-                      <select name="color" class="form-control" required>
-                        <option value="" hidden disabled selected>Choose Color</option>
-                        {% for i in product.variation_set.all %}
-                          {% if i.variation_category == 'color' and i.is_active %}
-                            <option value="{{ i.variation_value|lower }}">{{ i.variation_value|capfirst }}</option>
-                          {% endif %}
-                        {% endfor %}
-                      </select>
-                    </div>
-                  </div> <!-- row.// -->
-                  <div class="row">
-                    <div class="item-option-select">
-                      <h6>Select Size</h6>
-                      <select name="size" class="form-control" required>
-                        <option value="" hidden disabled selected>Choose Size</option>
-                        {% for i in product.variation_set.all %}
-                          {% if i.variation_category == 'size' and i.is_active %}
-                            <option value="{{ i.variation_value|lower }}">{{ i.variation_value|capfirst }}</option>
-                          {% endif %}
-                        {% endfor %}
-                      </select>
-                    </div>
-                  </div> <!-- row.// -->
+                  {% regroup product.variation_set.all by variation_category as variations_by_category %}
+                  
+                  {% for category in variations_by_category %}
+                    {% if category.grouper == 'color' %}
+                      <div class="row">
+                        <div class="item-option-select">
+                          <h6>{% trans "Select Color" %}</h6>
+                          <select name="color" class="form-control">
+                            <option value="" hidden disabled selected>{% trans "Choose Color" %}</option>
+                            {% for i in category.list %}
+                              {% if i.is_active %}
+                                <option value="{{ i.variation_value|lower }}">{{ i.variation_value|capfirst }}</option>
+                              {% endif %}
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div> <!-- row.// -->
+                    {% elif category.grouper == 'size' %}
+                      <div class="row">
+                        <div class="item-option-select">
+                          <h6>{% trans "Select Size" %}</h6>
+                          <select name="size" class="form-control">
+                            <option value="" hidden disabled selected>{% trans "Choose Size" %}</option>
+                            {% for i in category.list %}
+                              {% if i.is_active %}
+                                <option value="{{ i.variation_value|lower }}">{{ i.variation_value|capfirst }}</option>
+                              {% endif %}
+                            {% endfor %}
+                          </select>
+                        </div>
+                      </div> <!-- row.// -->
+                    {% endif %}
+                  {% endfor %}
                   <hr />
 
                   {% if product.stock <= 0 %}
-                    <h4 class="text-danger">Sorry Out of Stock!</h4>
+                    <h4 class="text-danger">{% trans "Sorry, this product is out of stock!" %}</h4>
                   {% else %}
-                    <button href="" class="btn btn-primary"><span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i></button>
+                    <button href="" class="btn btn-primary"><span class="text">{% trans "Add to cart" %}</span> <i class="fas fa-shopping-cart"></i></button>
                   {% endif %}
                 </article> <!-- product-info-aside .// -->
               </form>
@@ -106,10 +114,10 @@
         <br />
         <form method="POST" action="{% url 'submit_review' product.id %}">
           {% csrf_token %}
-          <h5>Write Your Review</h5>
+          <h5>{% trans "Write Your Review" %}</h5>
           <div>
             <!-- Rating stars -->
-            <label>How do you rate this product?</label>
+            <label>{% trans "How do you rate this product?" %}</label>
             <br />
             <div class="rate">
               <input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10" title="5 stars"></label>
@@ -124,19 +132,19 @@
               <input type="radio" name="rating" id="rating1" value="0.5" required /><label for="rating1" title="0.5 stars" class="half"></label>
             </div>
             <br />
-            Review Title:<input type="text" class="form-control" name="subject" />
+            {% trans "Review Title" %}:<input type="text" class="form-control" name="subject" />
             <br />
-            Review:<textarea name="review" rows="4" class="form-control"></textarea>
+            {% trans "Review" %}:<textarea name="review" rows="4" class="form-control"></textarea>
             <br />
 
             {% if user.is_authenticated %}
               {% if orderproduct %}
-                <input type="submit" value="Submit Review" class="btn btn-primary" />
+                <input type="submit" value="{% trans 'Submit Review' %}" class="btn btn-primary" />
               {% else %}
-                <p class="">Note: you must purchase the product before leave a review!</p>
+                <p class="text-muted">{% trans "Note: you must purchase the product before leave a review!" %}</p>
               {% endif %}
             {% else %}
-              <a href="{% url 'login_user' %}?next={{ request.path }}" class="btn btn-primary">Login to Submit Review</a>
+              <a href="{% url 'login_user' %}?next={{ request.path }}" class="btn btn-primary">{% trans "Login to Submit Review" %}</a>
             {% endif %}
           </div>
         </form>
@@ -144,7 +152,7 @@
         <div class="row">
           <div class="col-md-9">
             <header class="section-heading">
-              <h3>Customer Reviews</h3>
+              <h3>{% trans "Customer Reviews" %}</h3>
             </header>
 
             {% for review in reviews %}

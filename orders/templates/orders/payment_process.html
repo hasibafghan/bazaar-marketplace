@@ -1,5 +1,6 @@
 {% extends 'include/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
   <style>
@@ -150,10 +151,10 @@
 
   <div id="payment-processing" class="payment-processing" style="display: none;">
     <div class="spinner-border text-primary" role="status">
-      <span class="visually-hidden">Loading...</span>
+      <span class="visually-hidden">{% trans "Loading..." %}</span>
     </div>
-    <h3 class="mt-4 text-primary">Processing Payment...</h3>
-    <p class="text-muted mt-2">Please wait while we confirm your payment</p>
+    <h3 class="mt-4 text-primary">{% trans "Processing Payment..." %}</h3>
+    <p class="text-muted mt-2">{% trans "Please wait while we checking you payment" %}</p>
     <div class="progress mt-3" style="width: 300px;">
       <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 100%"></div>
     </div>
@@ -172,7 +173,7 @@
                   <div class="step-counter">
                     <i class="fas fa-shopping-cart"></i>
                   </div>
-                  <div class="step-name">Cart</div>
+                  <div class="step-name">{% trans "Cart" %}</div>
                 </div>
 
                 <!-- Step 2: Details -->
@@ -180,7 +181,7 @@
                   <div class="step-counter">
                     <i class="fas fa-user-edit"></i>
                   </div>
-                  <div class="step-name">Details</div>
+                  <div class="step-name">{% trans "Details" %}</div>
                 </div>
 
                 <!-- Step 3: Payment -->
@@ -188,7 +189,7 @@
                   <div class="step-counter">
                     <i class="fas fa-credit-card"></i>
                   </div>
-                  <div class="step-name">Payment</div>
+                  <div class="step-name">{% trans "Payment" %}</div>
                 </div>
 
                 <!-- Step 4: Confirmation -->
@@ -196,7 +197,7 @@
                   <div class="step-counter">
                     <i class="fas fa-check-circle"></i>
                   </div>
-                  <div class="step-name">Confirmation</div>
+                  <div class="step-name">{% trans "Confirmation" %}</div>
                 </div>
               </div>
             </div>
@@ -207,36 +208,36 @@
         <aside class="col-lg-8">
           <div class="card shadow-sm rounded-lg mb-4">
             <div class="card-header bg-white py-3">
-              <h4 class="mb-0"><i class="fas fa-user mr-2 text-primary"></i>Billing Information</h4>
+              <h4 class="mb-0"><i class="fas fa-user mr-2 text-primary"></i>{% trans "Billing Information" %}</h4>
             </div>
             <div class="card-body">
               <p>
-                <strong>Name:</strong> {{ form_data.first_name }} {{ form_data.last_name }}
+                <strong>{% trans "Name" %}:</strong> {{ form_data.first_name }} {{ form_data.last_name }}
               </p>
               <p>
-                <strong>Email:</strong> {{ form_data.email }}
+                <strong>{% trans "Email" %}:</strong> {{ form_data.email }}
               </p>
               <p>
-                <strong>Phone:</strong> {{ form_data.phone }}
+                <strong>{% trans "Phone" %}:</strong> {{ form_data.phone }}
               </p>
               <p>
-                <strong>Address:</strong> {{ form_data.address_line_1 }}
+                <strong>{% trans "Address" %}:</strong> {{ form_data.address_line_1 }}
                 {% if form_data.address_line_2 %}
                   , {{ form_data.address_line_2 }}
                 {% endif %}
               </p>
               <p>
-                <strong>City:</strong> {{ form_data.city }}
+                <strong>{% trans "City" %}:</strong> {{ form_data.city }}
               </p>
               <p>
-                <strong>State:</strong> {{ form_data.state }}
+                <strong>{% trans "State" %}:</strong> {{ form_data.state }}
               </p>
               <p>
-                <strong>Country:</strong> {{ form_data.country }}
+                <strong>{% trans "Country" %}:</strong> {{ form_data.country }}
               </p>
               {% if form_data.order_note %}
                 <p>
-                  <strong>Note:</strong> {{ form_data.order_note }}
+                  <strong>{% trans "Note" %}:</strong> {{ form_data.order_note }}
                 </p>
               {% endif %}
             </div>
@@ -245,19 +246,19 @@
           <!-- Payment Method Card -->
           <div class="card shadow-sm rounded-lg">
             <div class="card-header bg-white py-3">
-              <h4 class="mb-0"><i class="fas fa-credit-card mr-2 text-primary"></i>Payment Method</h4>
+              <h4 class="mb-0"><i class="fas fa-credit-card mr-2 text-primary"></i>{% trans "Payment Method" %}</h4>
             </div>
             <div class="card-body">
               <div class="alert alert-info">
                 <i class="fas fa-info-circle me-2"></i>
-                You will be redirected to PayPal's secure payment page to complete your payment.
+               {% trans "You will be redirected to PayPal's secure payment page to complete your payment." %} 
               </div>
               
               <div id="paypal-button-container"></div>
               
               <div class="mt-4">
                 <a href="{% url 'checkout' %}" class="btn btn-outline-secondary">
-                  <i class="fas fa-edit me-2"></i>Edit Billing Details
+                  <i class="fas fa-edit me-2"></i>{% trans "Edit Billing Details" %}
                 </a>
               </div>
             </div>
@@ -268,7 +269,7 @@
         <aside class="col-lg-4">
           <div class="card shadow-sm rounded-lg sticky-top" style="top: 20px;">
             <div class="card-header bg-white py-3">
-              <h4 class="mb-0"><i class="fas fa-receipt mr-2 text-primary"></i>Order Summary</h4>
+              <h4 class="mb-0"><i class="fas fa-receipt mr-2 text-primary"></i>{% trans "Order Summary" %}</h4>
             </div>
             <div class="card-body">
               <ul class="list-group mb-3">
@@ -278,7 +279,7 @@
                       <img src="{{ cart_item.product.images.url }}" alt="{{ cart_item.product.product_name }}" class="img-fluid rounded me-3" width="50" />
                       <div>
                         <h6 class="my-0">{{ cart_item.product.product_name|truncatewords:4 }}</h6>
-                        <small class="text-muted">Qty: {{ cart_item.quantity }}</small>
+                        <small class="text-muted">{% trans "Qty" %}: {{ cart_item.quantity }}</small>
                         {% if cart_item.variations.all %}
                           <div class="mt-1">
                             {% for item in cart_item.variations.all %}
@@ -293,23 +294,23 @@
                 {% endfor %}
 
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span>Subtotal</span>
+                  <span>{% trans "Subtotal" %}</span>
                   <strong>${{ total|floatformat:2 }}</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span>Tax (2%)</span>
+                  <span>{% trans "Tax (2%)" %}</span>
                   <strong>${{ tax|floatformat:2 }}</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span>Shipping</span>
+                  <span>{% trans "Shipping" %}</span>
                   <strong class="text-success">FREE</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span>Order Reference</span>
+                  <span>{% trans "Order Reference" %}</span>
                   <strong class="text-warning">{{ temp_order_number }}</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between bg-light">
-                  <span class="h5">Total Amount</span>
+                  <span class="h5">{% trans "Total Amount" %}</span>
                   <strong class="h5 text-dark">${{ grand_total|floatformat:2 }}</strong>
                 </li>
               </ul>
@@ -321,15 +322,15 @@
               <div class="alert alert-warning mt-3">
                 <small>
                   <i class="fas fa-exclamation-triangle me-1"></i>
-                  <strong>Note:</strong> Your order will be created and confirmed only after successful payment.
+                  <strong>{% trans "Note" %}:</strong> {% trans "Your order will be created and confirmed only after successful payment." %}
                 </small>
               </div>
 
               <div class="mt-4 p-3 bg-light rounded">
-                <h6 class="mb-2"><i class="fas fa-shield-alt mr-2 text-success"></i>Secure Checkout</h6>
-                <p class="small text-muted mb-0">Your personal information is securely encrypted and protected.</p>
+                <h6 class="mb-2"><i class="fas fa-shield-alt mr-2 text-success"></i>{% trans "Secure Checkout" %}</h6>
+                <p class="small text-muted mb-0"> {% trans "Your personal information is securely encrypted and protected." %}</p>
                 <div class="d-flex justify-content-center mt-2">
-                  <img src="https://www.paypalobjects.com/webstatic/mktg/logo-center/logo_paypal_106x29.png" 
+                  <img class="w-100 h-100" src="https://t4.ftcdn.net/jpg/04/71/85/99/360_F_471859928_TYDUq0K4PX6sbePnRwMMjV4PMSA0iWy0.jpg" 
                        alt="PayPal" 
                        class="img-fluid"
                        style="height: 25px;">

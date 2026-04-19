@@ -44,7 +44,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">USD</a>
+            <a href="#" class="nav-link">{% trans "USD" %}</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -74,6 +74,7 @@
             <button class="btn btn-primary dropdown-toggle w-100" data-toggle="dropdown"><i class="fa fa-bars"></i> {% trans 'Categories' %}</button>
             <div class="dropdown-menu w-100">
               <a class="dropdown-item" href="{% url 'product_list' %}">{% trans 'All Products' %}</a>
+              <div class="dropdown-divider m-auto" style="width: 85%;"></div>
               {% for cat in categories %}
                 <a class="dropdown-item" href="{% url 'products_by_category' cat.slug %}">{{ cat.category_name }}</a>
               {% endfor %}
@@ -90,9 +91,9 @@
         <div class="col-lg-3 col-md-6 col-12 order-5 order-lg-4 mb-2 mb-lg-0">
           <form action="{% url 'search_product' %}" method="GET" class="search">
             <div class="input-group">
-              <input type="text" name="search" class="form-control" placeholder="Search" value="{{ request.GET.search|default:'' }}" />
+              <input type="text" name="search" class="form-control" placeholder="{% trans 'Search' %}" value="{{ request.GET.search|default:'' }}" />
               <div class="input-group-append">
-                <button class="btn btn-primary" type="submit" value="Seaسسسrch"><i class="fa fa-search"></i></button>
+                <button class="btn btn-primary" type="submit" value="{% trans 'Search' %}"><i class="fa fa-search"></i></button>
               </div>
             </div>
           </form>
@@ -104,15 +105,15 @@
             <div class="widget-header mr-3 text-center text-lg-left">
               {% if user.is_authenticated %}
                 <small class="title text-muted">!{% trans 'Welcome' %} {{ user.first_name|capfirst }}</small>
-                <div>
-                  <a href="{% url 'dashboard' %}">{% trans 'Dashboard' %}</a> <span class="dark-transp">|</span>
-                  <a href="{% url 'logout_user' %}">{% trans 'Logout' %}</a>
+                <div >
+                  <a href="{% url 'dashboard' %}" class="text-decoration-none">{% trans 'Dashboard' %}</a> <span class="dark-transp">|</span>
+                  <a href="{% url 'logout_user' %}" class="text-decoration-none">{% trans 'Logout' %}</a>
                 </div>
               {% else %}
                 <small class="title text-muted">{% trans 'Welcome Guest!' %}</small>
-                <div>
-                  <a href="{% url 'login_user' %}">{% trans 'Login' %}</a> <span class="dark-transp">|</span>
-                  <a href="{% url 'register_user' %}">{% trans 'Register' %}</a>
+                <div >
+                  <a  href="{% url 'login_user' %}" class="text-decoration-none">{% trans 'Login' %}</a> <span class="dark-transp">|</span>
+                  <a  href="{% url 'register_user' %}" class="text-decoration-none">{% trans 'Register' %}</a>
                 </div>
               {% endif %}
             </div>

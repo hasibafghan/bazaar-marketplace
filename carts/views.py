@@ -23,13 +23,14 @@ def add_cart(request, product_id):
         if request.method == 'POST':
             for key, value in request.POST.items():
                 try:
-                    variation = Variation.objects.get(
+                    variation = Variation.objects.filter(
                         product=product,
                         variation_category__iexact=key,
-                        variation_value__iexact=value
-                    )
-                    product_variations.append(variation)
-                except Variation.DoesNotExist:
+                        translations__variation_value__iexact=value
+                    ).first()
+                    if variation:
+                        product_variations.append(variation)
+                except Exception:
                     pass
 
         # CartItem Section: try to find an existing cart item with the same variations
@@ -60,13 +61,14 @@ def add_cart(request, product_id):
         if request.method == 'POST':
             for key, value in request.POST.items():
                 try:
-                    variation = Variation.objects.get(
+                    variation = Variation.objects.filter(
                         product=product,
                         variation_category__iexact=key,
-                        variation_value__iexact=value
-                    )
-                    product_variations.append(variation)
-                except Variation.DoesNotExist:
+                        translations__variation_value__iexact=value
+                    ).first()
+                    if variation:
+                        product_variations.append(variation)
+                except Exception:
                     pass
 
         try:

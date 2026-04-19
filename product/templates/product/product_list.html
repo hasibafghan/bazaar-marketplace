@@ -1,11 +1,12 @@
 {% extends 'include/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
   <!-- ========================= SECTION PAGETOP ========================= -->
   <section class="section-pagetop bg">
     <div class="container">
-      <h2 class="title-page">Our Store</h2>
+      <h2 class="title-page">{% trans "Our Store" %}</h2>
     </div> <!-- container // -->
   </section>
   <!-- ========================= SECTION INTRO END// ========================= -->
@@ -18,20 +19,20 @@
           <div class="card">
             <article class="filter-group">
               <header class="card-header">
-                <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+                <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="text-decoration-none">
                   <i class="icon-control fa fa-chevron-down"></i>
-                  <h6 class="title">Categories</h6>
+                  <h6 class="title">{% trans "Categories" %}</h6>
                 </a>
               </header>
               <div class="filter-content collapse show" id="collapse_1" style="">
                 <div class="card-body">
                   <ul class="list-menu">
                     <li>
-                      <a class="dropdown-item text-dark" href="{% url 'product_list' %}">All Products</a>
+                      <a class="dropdown-item text-dark" href="{% url 'product_list' %}">{% trans "All Products" %}</a>
                     </li>
                     {% for cat in categories %}
                       <li>
-                        <a class="dropdown-item text-dark" href="{% url 'products_by_category' cat.slug %}">{{ cat.category_name }}</a>
+                        <a class="dropdown-item text-dark text-hover-primary category-link" href="{% url 'products_by_category' cat.slug %}">{{ cat.category_name }}</a>
                       </li>
                     {% endfor %}
                   </ul>
@@ -73,9 +74,9 @@
 
 <article class="filter-group">
     <header class="card-header">
-        <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+        <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="text-decoration-none">
             <i class="icon-control fa fa-chevron-down"></i>
-            <h6 class="title">Price range</h6>
+            <h6 class="title ">{% trans "Price range" %}</h6>
         </a>
     </header>
     <div class="filter-content collapse show" id="collapse_3" style="">
@@ -91,9 +92,9 @@
                 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Min</label>
+                        <label>{% trans "Min" %}</label>
                         <select name="min_price" class="form-control" onchange="this.form.submit()">
-                            <option value="">Any Min</option>
+                            <option value="">{% trans "Any Min" %}</option>
                             <option value="0" {% if selected_min == '0' or not selected_min %}selected{% endif %}>$0</option>
                             {% for price in price_options %}
                                 {% if price > 0 %}
@@ -105,9 +106,9 @@
                         </select>
                     </div>
                     <div class="form-group col-md-6">
-                        <label>Max</label>
+                        <label>{% trans "Max" %}</label>
                         <select name="max_price" class="form-control" onchange="this.form.submit()">
-                            <option value="">Any Max</option>
+                            <option value="">{% trans "Any Max" %}</option>
                             {% for price in price_options %}
                                 <option value="{{ price }}" {% if selected_max == price|stringformat:"i" %}selected{% endif %}>
                                     ${{ price }}
@@ -122,19 +123,19 @@
                 
                 <!-- Quick Price Buttons -->
                 <div class="mt-2">
-                    <small class="text-muted">Quick select:</small>
+                    <small class="">{% trans "Quick select:" %}</small>
                     <div class="btn-group btn-group-sm w-100 mt-1">
                         <a href="?{% if request.GET.page %}page={{ request.GET.page }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}min_price=0&max_price=50" 
                            class="btn btn-outline-secondary {% if selected_min == '0' and selected_max == '50' %}active{% endif %}">
-                            Under $50
+                            {% trans "Under $50" %}
                         </a>
                         <a href="?{% if request.GET.page %}page={{ request.GET.page }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}min_price=50&max_price=100" 
                            class="btn btn-outline-secondary {% if selected_min == '50' and selected_max == '100' %}active{% endif %}">
-                            $50-100
+                            {% trans "$50-100" %}
                         </a>
                         <a href="?{% if request.GET.page %}page={{ request.GET.page }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}min_price=100&max_price=200" 
                            class="btn btn-outline-secondary {% if selected_min == '100' and selected_max == '200' %}active{% endif %}">
-                            $100-200
+                            {% trans "$100-200" %}
                         </a>
                     </div>
                 </div>
@@ -144,7 +145,7 @@
                 <div class="mt-2">
                     <a href="?{% if request.GET.page %}page={{ request.GET.page }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}{% endif %}" 
                        class="btn btn-sm btn-outline-danger w-100">
-                        Clear Price Filter
+                        {% trans "Clear Price Filter" %}
                     </a>
                 </div>
                 {% endif %}
@@ -157,7 +158,7 @@
         <main class="col-md-9">
           <header class="border-bottom mb-4 pb-3">
             <div class="form-inline">
-              <span class="mr-md-auto">{{ products_counter }} Items found</span>
+              <span class="mr-md-auto">{{ products_counter }} {% trans "Items found" %}</span>
             </div>
           </header>
           <!-- sect-heading -->
@@ -172,19 +173,19 @@
                     </div> <!-- img-wrap.// -->
                     <figcaption class="info-wrap">
                       <div class="fix-height">
-                        <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+                        <a href="{{ product.get_url }}" class="title text-decoration-none">{{ product.product_name }}</a>
                         <div class="price-wrap mt-2">
                           <span class="price">${{ product.price }}</span>
                           <del class="price-old">${{ product.old_price }}</del>
                         </div> <!-- price-wrap.// -->
                       </div>
-                      <a href="{{ product.get_url }}" class="btn btn-block btn-primary">View Details</a>
+                      <a href="{{ product.get_url }}" class="btn btn-block btn-primary">{% trans "View Details" %}</a>
                     </figcaption>
                   </figure>
                 </div> <!-- col.// -->
               {% endfor %}
             {% else %}
-              <h3>No Product Found!</h3>
+              <h3> {% trans "No Product Found!" %}</h3>
             {% endif %}
           </div> <!-- row end.// -->
 
@@ -202,12 +203,12 @@
                           search={{ request.GET.search }}&
 
                         {% endif %}page={{ products.previous_page_number }}">
-                        Previous
+                        {% trans "Previous" %}
                       </a>
                     </li>
                   {% else %}
                     <li class="page-item disabled">
-                      <a class="page-link" href="#">Previous</a>
+                      <a class="page-link" href="#">{% trans "Previous" %}</a>
                     </li>
                   {% endif %}
 
@@ -242,12 +243,12 @@
                           search={{ request.GET.search }}&
 
                         {% endif %}page={{ products.next_page_number }}">
-                        Next
+                        {% trans "Next" %}
                       </a>
                     </li>
                   {% else %}
                     <li class="page-item disabled">
-                      <a class="page-link" href="#">Next</a>
+                      <a class="page-link" href="#">{% trans "Next" %}</a>
                     </li>
                   {% endif %}
                 </ul>

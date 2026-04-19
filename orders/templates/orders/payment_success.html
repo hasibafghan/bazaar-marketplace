@@ -1,7 +1,8 @@
 {% extends 'include/base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Payment Successful{% endblock %}
+{% block title %} {% trans "Payment Successful" %} {% endblock %}
 
 {% block content %}
 <section class="section-content padding-y bg-light">
@@ -17,7 +18,7 @@
                 <div class="step-counter">
                   <i class="fas fa-shopping-cart"></i>
                 </div>
-                <div class="step-name">Cart</div>
+                <div class="step-name">{% trans "Cart" %}</div>
               </div>
 
               <!-- Step 2: Details -->
@@ -25,7 +26,7 @@
                 <div class="step-counter">
                   <i class="fas fa-user-edit"></i>
                 </div>
-                <div class="step-name">Details</div>
+                <div class="step-name">{% trans "Details" %}</div>
               </div>
 
               <!-- Step 3: Payment -->
@@ -33,7 +34,7 @@
                 <div class="step-counter">
                   <i class="fas fa-credit-card"></i>
                 </div>
-                <div class="step-name">Payment</div>
+                <div class="step-name">{% trans "Payment" %}</div>
               </div>
 
               <!-- Step 4: Confirmation -->
@@ -41,7 +42,7 @@
                 <div class="step-counter">
                   <i class="fas fa-check-circle"></i>
                 </div>
-                <div class="step-name">Confirmation</div>
+                <div class="step-name">{% trans "Confirmation" %}</div>
               </div>
             </div>
           </div>
@@ -55,8 +56,8 @@
         <div class="alert alert-success border-0 shadow-sm">
           <div class="text-center">
             <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
-            <h2 class="alert-heading">Payment Successful!</h2>
-            <p class="mb-0">Thank you! Your order has been placed successfully. We will deliver your products as soon as possible.</p>
+            <h2 class="alert-heading">{% trans "Payment Successful!" %}</h2>
+            <p class="mb-0">{% trans "Thank you! Your order has been placed successfully. We will deliver your products as soon as possible." %}</p>
           </div>
         </div>
       </div>
@@ -69,8 +70,8 @@
           <div class="card-body p-4">
             <!-- Printable Header -->
             <div class="text-center d-none d-print-block">
-              <h2 class="mb-1">PAYMENT RECEIPT</h2>
-              <p class="text-muted mb-3">This is your official payment receipt</p>
+              <h2 class="mb-1">{% trans "PAYMENT RECEIPT" %}</h2>
+              <p class="text-muted mb-3">{% trans "This is your official payment receipt" %}</p>
               <hr>
             </div>
             
@@ -78,21 +79,21 @@
               <div class="col-md-6 mb-3 mb-md-0">
                 <div class="text-center text-md-start">
                   <img src="{% static 'images/logo.png' %}" alt="Company Logo" class="img-fluid mb-3 d-print-none" style="max-height: 50px;">
-                  <h5 class="text-muted">Thank you for your order</h5>
+                  <h5 class="text-muted">{% trans "Thank you for your order" %}</h5>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="text-center text-md-end">
-                  <h5 class="text-muted">Order Details</h5>
+                  <h5 class="text-muted">{% trans "Order Details" %}</h5>
                   <ul class="list-unstyled">
                     {% if order %}
-                    <li><strong>Order #:</strong> {{ order.order_number }}</li>
+                    <li><strong>{% trans "Order #" %}:</strong> {{ order.order_number }}</li>
                     {% endif %}
                     {% if payment %}
-                    <li><strong>Transaction #:</strong> {{ payment.payment_id }}</li>
+                    <li><strong>{% trans "Transaction #" %}:</strong> {{ payment.payment_id }}</li>
                     {% endif %}
-                    <li><strong>Date:</strong> {% now "F j, Y" %}</li>
-                    <li><strong>Status:</strong> <span class="badge bg-success">PAID</span></li>
+                    <li><strong>{% trans "Date" %}:</strong> {% now "F j, Y" %}</li>
+                    <li><strong>{% trans "Status" %}:</strong> <span class="badge bg-success">{% trans "PAID" %}</span></li>
                   </ul>
                 </div>
               </div>
@@ -105,10 +106,10 @@
               <table class="table table-bordered">
                 <thead class="table-light">
                   <tr>
-                    <th class="text-center">Product</th>
-                    <th class="text-center">Quantity</th>
-                    <th class="text-center">Price</th>
-                    <th class="text-center">Total</th>
+                    <th class="text-center">{% trans "Product" %}</th>
+                    <th class="text-center">{% trans "Quantity" %}</th>
+                    <th class="text-center">{% trans "Price" %}</th>
+                    <th class="text-center">{% trans "Total" %}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -135,7 +136,7 @@
                   {% else %}
                     <!-- Fallback sample data -->
                     <tr>
-                      <td>Product Name</td>
+                      <td>{% trans "Product Name" %}</td>
                       <td class="text-center">1</td>
                       <td class="text-center">${{ order.order_total|default:"0.00" }}</td>
                       <td class="text-center">${{ order.order_total|default:"0.00" }}</td>
@@ -144,19 +145,19 @@
                 </tbody>
                 <tfoot class="table-light">
                   <tr>
-                    <th colspan="3" class="text-end">Subtotal:</th>
+                    <th colspan="3" class="text-end">{% trans "Subtotal" %}:</th>
                     <th class="text-center">${{ order.order_total|default:"0.00" }}</th>
                   </tr>
                   <tr>
-                    <th colspan="3" class="text-end">Tax:</th>
+                    <th colspan="3" class="text-end">{% trans "Tax" %}:</th>
                     <th class="text-center">${{ order.tax|default:"0.00" }}</th>
                   </tr>
                   <tr>
-                    <th colspan="3" class="text-end">Shipping:</th>
-                    <th class="text-center text-success">FREE</th>
+                    <th colspan="3" class="text-end">{% trans "Shipping" %}:</th>
+                    <th class="text-center text-success">{% trans "FREE" %}</th>
                   </tr>
                   <tr>
-                    <th colspan="3" class="text-end">Grand Total:</th>
+                    <th colspan="3" class="text-end">{% trans "Grand Total" %}:</th>
                     <th class="text-center">${{ order.order_total|default:"0.00" }}</th>
                   </tr>
                 </tfoot>
@@ -167,7 +168,7 @@
             {% if order %}
             <div class="row mt-4">
               <div class="col-md-6">
-                <h6 class="text-muted">Billing Information</h6>
+                <h6 class="text-muted">{% trans "Billing Information" %}</h6>
                 <address class="mb-0">
                   <strong>{{ order.first_name }} {{ order.last_name }}</strong><br>
                   {{ order.address_line_1 }}<br>
@@ -178,7 +179,7 @@
                 </address>
               </div>
               <div class="col-md-6">
-                <h6 class="text-muted">Shipping Information</h6>
+                <h6 class="text-muted">{% trans "Shipping Information" %}</h6>
                 <address class="mb-0">
                   <strong>{{ order.first_name }} {{ order.last_name }}</strong><br>
                   {{ order.address_line_1 }}<br>
@@ -194,7 +195,7 @@
             {% if order.order_note %}
             <div class="row mt-4">
               <div class="col-12">
-                <h6 class="text-muted">Order Note</h6>
+                <h6 class="text-muted">{% trans "Order Note" %}</h6>
                 <p class="mb-0 p-3 bg-light rounded">{{ order.order_note }}</p>
               </div>
             </div>
@@ -202,18 +203,18 @@
 
             <!-- Thank You Message (HIDDEN WHEN PRINTING) -->
             <div class="text-center mt-4 pt-3 border-top d-print-none">
-              <p class="text-muted mb-3">Thank you for shopping with us! We'll send you a confirmation email shortly.</p>
+              <p class="text-muted mb-3">{% trans "Thank you for shopping with us! We'll send you a confirmation email shortly." %}</p>
               
               <!-- Action Buttons -->
               <div class="d-flex justify-content-center gap-3 flex-wrap">
                 <a href="{% url 'product_list' %}" class="btn btn-primary mx-1 my-1">
-                  <i class="fas fa-shopping-bag mx-2"></i>Continue Shopping
+                  <i class="fas fa-shopping-bag mx-2"></i>{% trans "Continue Shopping" %}
                 </a>
                 <a href="{% url 'home' %}" class="btn btn-outline-secondary mx-1 my-1">
-                  <i class="fas fa-home mx-2"></i>Back to Home
+                  <i class="fas fa-home mx-2"></i>{% trans "Back to Home" %}
                 </a>
                 <button onclick="window.print()" class="btn btn-outline-primary mx-1 my-1">
-                  <i class="fas fa-print mx-2"></i>Print Receipt
+                  <i class="fas fa-print mx-2"></i>{% trans "Print Receipt" %}
                 </button>
               </div>
             </div>
@@ -228,10 +229,10 @@
         <div class="card border-0 bg-light">
           <div class="card-body text-center py-4">
             <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
-            <h4 class="text-muted">Your cart is now empty</h4>
-            <p class="text-muted">Ready to discover more amazing products?</p>
+            <h4 class="text-muted">{% trans "Your cart is now empty" %}</h4>
+            <p class="text-muted">{% trans "Ready to discover more amazing products?" %}</p>
             <a href="{% url 'product_list' %}" class="btn btn-outline-primary">
-              <i class="fas fa-plus me-2"></i>Explore More Products
+              <i class="fas fa-plus me-2"></i>{% trans "Explore More Products" %}
             </a>
           </div>
         </div>

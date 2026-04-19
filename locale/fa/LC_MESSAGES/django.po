@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-11 00:25+0430\n"
-"PO-Revision-Date: 2026-04-09 04:28+0000\n"
-"Last-Translator: ali ali <ali@gmail.com>\n"
+"POT-Creation-Date: 2026-04-19 16:29+0430\n"
+"PO-Revision-Date: 2026-04-19 16:29+0000\n"
+"Last-Translator: admin admin <admin@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,458 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Translated-Using: django-rosetta 0.10.3\n"
+
+#: .\accounts\templates\accounts\account_verification_email.html:4
+#: .\accounts\templates\accounts\reset_password_email.html:5
+#: .\orders\templates\orders\order_received_email.html:5
+msgid "Hi"
+msgstr "سلام"
+
+#: .\accounts\templates\accounts\account_verification_email.html:5
+msgid ""
+"Please click on the link below to verify your email address and activate "
+"your account:"
+msgstr ""
+"لطفاً برای تأیید آدرس ایمیل و فعال‌سازی حساب کاربری خود، روی لینک زیر کلیک "
+"کنید:"
+
+#: .\accounts\templates\accounts\account_verification_email.html:8
+#: .\accounts\templates\accounts\reset_password_email.html:10
+msgid "If you did not make this request, please ignore this email."
+msgstr "اگر شما این درخواست را نداده‌اید، لطفاً این ایمیل را نادیده بگیرید."
+
+#: .\accounts\templates\accounts\account_verification_email.html:9
+#: .\accounts\templates\accounts\reset_password_email.html:11
+msgid "Thanks,"
+msgstr "با تشکر،"
+
+#: .\accounts\templates\accounts\account_verification_email.html:10
+#: .\accounts\templates\accounts\reset_password_email.html:12
+#: .\orders\templates\orders\order_received_email.html:16
+msgid "The Tanzib Team"
+msgstr "تیم تن زیب"
+
+#: .\accounts\templates\accounts\change_password.html:14
+msgid "Change Your Password"
+msgstr "تغییر رمز عبور"
+
+#: .\accounts\templates\accounts\change_password.html:20
+msgid "Current Password"
+msgstr "رمز عبور فعلی"
+
+#: .\accounts\templates\accounts\change_password.html:27
+msgid "Please enter your current password."
+msgstr "لطفاً رمز عبور فعلی خود را وارد کنید."
+
+#: .\accounts\templates\accounts\change_password.html:31
+msgid "New Password"
+msgstr "رمز عبور جدید"
+
+#: .\accounts\templates\accounts\change_password.html:38
+msgid "Must be at least 8 characters."
+msgstr "باید حداقل ۸ حرف باشد."
+
+#: .\accounts\templates\accounts\change_password.html:39
+msgid "Please provide a valid new password."
+msgstr "لطفاً یک رمز عبور جدید معتبر وارد کنید."
+
+#: .\accounts\templates\accounts\change_password.html:43
+msgid "Confirm New Password"
+msgstr "تأیید رمز عبور جدید"
+
+#: .\accounts\templates\accounts\change_password.html:50
+msgid "Passwords do not match."
+msgstr "رمزهای عبور مطابقت ندارند."
+
+#: .\accounts\templates\accounts\change_password.html:53
+msgid "Update Password"
+msgstr "به‌روزرسانی رمز عبور"
+
+#: .\accounts\templates\accounts\dashboard.html:15
+msgid "Login as:"
+msgstr "ورود به عنوان:"
+
+#: .\accounts\templates\accounts\dashboard.html:22
+msgid "Total Orders"
+msgstr "مجموع سفارشات"
+
+#: .\accounts\templates\accounts\dashboard.html:24
+msgid "View Orders"
+msgstr "مشاهده سفارشات"
+
+#: .\accounts\templates\accounts\edit_profile.html:15
+msgid "Edit Your Profile"
+msgstr "ویرایش پروفایل"
+
+#: .\accounts\templates\accounts\edit_profile.html:131
+msgid "Save Changes"
+msgstr "ذخیره تغییرات"
+
+#: .\accounts\templates\accounts\edit_profile.html:132
+msgid "Cancel"
+msgstr "انصراف"
+
+#: .\accounts\templates\accounts\forgot_password.html:10
+msgid "Forgot Password"
+msgstr "فراموشی رمز عبور"
+
+#: .\accounts\templates\accounts\forgot_password.html:16
+#: .\accounts\templates\accounts\login_form.html:16
+msgid "Email Address"
+msgstr "آدرس ایمیل"
+
+#: .\accounts\templates\accounts\forgot_password.html:20
+msgid "Back To Login!"
+msgstr "بازگشت به صفحه ورود!"
+
+#: .\accounts\templates\accounts\forgot_password.html:23
+msgid "Submit"
+msgstr "ارسال"
+
+#: .\accounts\templates\accounts\forgot_password.html:30
+#: .\accounts\templates\accounts\login_form.html:33
+#: .\accounts\templates\accounts\reset_password.html:30
+msgid "Don't have account?"
+msgstr "حساب کاربری ندارید؟"
+
+#: .\accounts\templates\accounts\forgot_password.html:30
+#: .\accounts\templates\accounts\login_form.html:33
+#: .\accounts\templates\accounts\register_form.html:12
+#: .\accounts\templates\accounts\reset_password.html:30
+msgid "Sign up"
+msgstr "ثبت نام"
+
+#: .\accounts\templates\accounts\login_form.html:10
+msgid "Sign in"
+msgstr "ورود"
+
+#: .\accounts\templates\accounts\login_form.html:19
+#: .\accounts\templates\accounts\reset_password.html:16
+msgid "Password"
+msgstr "رمز عبور"
+
+#: .\accounts\templates\accounts\login_form.html:23
+msgid "Forgot password?"
+msgstr "رمز عبور را فراموش کرده‌اید؟"
+
+#: .\accounts\templates\accounts\login_form.html:26
+#: .\templates\include\header.html:116
+msgid "Login"
+msgstr "ورود"
+
+#: .\accounts\templates\accounts\my_orders.html:14
+msgid "Your"
+msgstr "تاریخچه"
+
+#: .\accounts\templates\accounts\my_orders.html:14
+msgid "Order History"
+msgstr "سفارشات شما"
+
+#: .\accounts\templates\accounts\my_orders.html:22
+msgid "Order"
+msgstr "سفارش"
+
+#: .\accounts\templates\accounts\my_orders.html:23
+msgid "Billing Name"
+msgstr "نام پرداخت‌کننده"
+
+#: .\accounts\templates\accounts\my_orders.html:24
+#: .\carts\templates\carts\checkout.html:202
+#: .\orders\templates\orders\payment_process.html:221
+msgid "Phone"
+msgstr "تلفن"
+
+#: .\accounts\templates\accounts\my_orders.html:25
+msgid "Order Total"
+msgstr "مجموع سفارش"
+
+#: .\accounts\templates\accounts\my_orders.html:26
+#: .\accounts\templates\accounts\order_detail.html:44
+#: .\orders\templates\orders\payment_success.html:95
+msgid "Date"
+msgstr "تاریخ"
+
+#: .\accounts\templates\accounts\order_detail.html:6
+#: .\orders\templates\orders\payment_success.html:5
+msgid "Payment Successful"
+msgstr "پرداخت موفقیت‌آمیز"
+
+#: .\accounts\templates\accounts\order_detail.html:21
+#: .\orders\templates\orders\payment_success.html:82
+msgid "Thank you for your order"
+msgstr "از سفارش شما متشکریم"
+
+#: .\accounts\templates\accounts\order_detail.html:26
+#: .\orders\templates\orders\payment_success.html:87
+msgid "Order Details"
+msgstr "جزئیات سفارش"
+
+#: .\accounts\templates\accounts\order_detail.html:30
+#: .\orders\templates\orders\payment_success.html:90
+msgid "Order #"
+msgstr "شماره سفارش #"
+
+#: .\accounts\templates\accounts\order_detail.html:34
+#: .\orders\templates\orders\payment_success.html:93
+msgid "Transaction #"
+msgstr "شماره تراکنش #"
+
+#: .\accounts\templates\accounts\order_detail.html:47
+#: .\orders\templates\orders\payment_success.html:96
+msgid "Status"
+msgstr "وضعیت"
+
+#: .\accounts\templates\accounts\order_detail.html:61
+#: .\carts\templates\carts\cart.html:31
+#: .\orders\templates\orders\payment_success.html:109
+msgid "Product"
+msgstr "محصول"
+
+#: .\accounts\templates\accounts\order_detail.html:62
+#: .\carts\templates\carts\cart.html:32
+#: .\orders\templates\orders\payment_success.html:110
+msgid "Quantity"
+msgstr "مقدار"
+
+#: .\accounts\templates\accounts\order_detail.html:63
+#: .\carts\templates\carts\cart.html:33
+#: .\orders\templates\orders\payment_success.html:111
+msgid "Price"
+msgstr "قیمت"
+
+#: .\accounts\templates\accounts\order_detail.html:64
+#: .\carts\templates\carts\cart.html:104
+#: .\carts\templates\carts\checkout.html:280
+#: .\orders\templates\orders\payment_success.html:112
+msgid "Total"
+msgstr "مجموع"
+
+#: .\accounts\templates\accounts\order_detail.html:128
+#: .\orders\templates\orders\payment_success.html:139
+msgid "Product Name"
+msgstr "نام محصول"
+
+#: .\accounts\templates\accounts\order_detail.html:137
+#: .\carts\templates\carts\checkout.html:268
+#: .\orders\templates\orders\payment_process.html:297
+#: .\orders\templates\orders\payment_success.html:148
+msgid "Subtotal"
+msgstr "جمع جزء"
+
+#: .\accounts\templates\accounts\order_detail.html:141
+#: .\carts\templates\carts\cart.html:100
+#: .\carts\templates\carts\checkout.html:272
+#: .\orders\templates\orders\payment_success.html:152
+msgid "Tax"
+msgstr "مالیات"
+
+#: .\accounts\templates\accounts\order_detail.html:145
+#: .\carts\templates\carts\checkout.html:276
+#: .\orders\templates\orders\payment_process.html:305
+#: .\orders\templates\orders\payment_success.html:156
+#: .\templates\include\footer.html:58
+msgid "Shipping"
+msgstr "حمل و نقل"
+
+#: .\accounts\templates\accounts\order_detail.html:149
+#: .\orders\templates\orders\payment_success.html:160
+msgid "Grand Total"
+msgstr "جمع کل"
+
+#: .\accounts\templates\accounts\order_detail.html:160
+#: .\orders\templates\orders\payment_process.html:211
+#: .\orders\templates\orders\payment_success.html:171
+msgid "Billing Information"
+msgstr "اطلاعات پرداخت"
+
+#: .\accounts\templates\accounts\order_detail.html:173
+#: .\orders\templates\orders\payment_success.html:182
+msgid "Shipping Information"
+msgstr "اطلاعات حمل و نقل"
+
+#: .\accounts\templates\accounts\order_detail.html:191
+#: .\carts\templates\carts\checkout.html:226
+#: .\orders\templates\orders\payment_success.html:198
+msgid "Order Note"
+msgstr "یادداشت سفارش"
+
+#: .\accounts\templates\accounts\order_detail.html:199
+#: .\orders\templates\orders\payment_success.html:206
+msgid ""
+"Thank you for shopping with us! We'll send you a confirmation email shortly."
+msgstr ""
+"از خرید شما متشکریم! به زودی یک ایمیل تأیید برای شما ارسال خواهیم کرد."
+
+#: .\accounts\templates\accounts\order_detail.html:203
+#: .\carts\templates\carts\cart.html:112
+#: .\orders\templates\orders\payment_cancelled.html:194
+#: .\orders\templates\orders\payment_success.html:211
+msgid "Continue Shopping"
+msgstr "ادامه خرید"
+
+#: .\accounts\templates\accounts\order_detail.html:204
+#: .\orders\templates\orders\payment_success.html:214
+msgid "Back to Home"
+msgstr "بازگشت به خانه"
+
+#: .\accounts\templates\accounts\order_detail.html:205
+#: .\orders\templates\orders\payment_success.html:217
+msgid "Print Receipt"
+msgstr "چاپ رسید"
+
+#: .\accounts\templates\accounts\register_form.html:18
+#: .\templates\include\header.html:117
+msgid "Register"
+msgstr "ثبت نام"
+
+#: .\accounts\templates\accounts\register_form.html:24
+msgid "Already have an account?"
+msgstr "قبلاً حساب کاربری ساخته‌اید؟"
+
+#: .\accounts\templates\accounts\register_form.html:24
+msgid "Log In"
+msgstr "ورود"
+
+#: .\accounts\templates\accounts\reset_password.html:10
+msgid "Reset Password"
+msgstr "بازنشانی رمز عبور"
+
+#: .\accounts\templates\accounts\reset_password.html:19
+msgid "Confirm Password"
+msgstr "تأیید رمز عبور"
+
+#: .\accounts\templates\accounts\reset_password.html:23
+msgid "Reset"
+msgstr "بازنشانی"
+
+#: .\accounts\templates\accounts\reset_password_email.html:6
+msgid "Please click on the link below to Reset your Password!"
+msgstr "لطفاً برای بازنشانی رمز عبور خود روی لینک زیر کلیک کنید!"
+
+#: .\carts\templates\carts\cart.html:15
+msgid "Your cart is empty"
+msgstr "سبد خرید شما خالی است"
+
+#: .\carts\templates\carts\cart.html:16
+msgid "Looks like you haven't added any items to your cart yet."
+msgstr "به نظر می‌رسد هنوز هیچ محصولی به سبد خرید خود اضافه نکرده‌اید."
+
+#: .\carts\templates\carts\cart.html:18
+msgid "Start Shopping"
+msgstr "شروع خرید"
+
+#: .\carts\templates\carts\cart.html:80
+msgid "each"
+msgstr "هر عدد"
+
+#: .\carts\templates\carts\cart.html:84
+msgid "Are you sure to delete!"
+msgstr "آیا از حذف اطمینان دارید!"
+
+#: .\carts\templates\carts\cart.html:84
+msgid "Remove"
+msgstr "حذف"
+
+#: .\carts\templates\carts\cart.html:96
+msgid "Total price"
+msgstr "قیمت مجموع"
+
+#: .\carts\templates\carts\cart.html:111
+msgid "Checkout"
+msgstr "تسویه حساب"
+
+#: .\carts\templates\carts\checkout.html:148
+#: .\orders\templates\orders\payment_cancelled.html:149
+#: .\orders\templates\orders\payment_process.html:176
+#: .\orders\templates\orders\payment_success.html:21
+msgid "Cart"
+msgstr "سبد خرید"
+
+#: .\carts\templates\carts\checkout.html:156
+#: .\orders\templates\orders\payment_cancelled.html:157
+#: .\orders\templates\orders\payment_process.html:184
+#: .\orders\templates\orders\payment_success.html:29
+msgid "Details"
+msgstr "جزئیات"
+
+#: .\carts\templates\carts\checkout.html:164
+#: .\orders\templates\orders\payment_cancelled.html:165
+#: .\orders\templates\orders\payment_process.html:192
+#: .\orders\templates\orders\payment_success.html:37
+msgid "Payment"
+msgstr "پرداخت"
+
+#: .\carts\templates\carts\checkout.html:172
+#: .\orders\templates\orders\payment_cancelled.html:173
+#: .\orders\templates\orders\payment_process.html:200
+#: .\orders\templates\orders\payment_success.html:45
+msgid "Confirmation"
+msgstr "تأیید"
+
+#: .\carts\templates\carts\checkout.html:183
+msgid "Billing & Shipping Information"
+msgstr "اطلاعات پرداخت و حمل و نقل"
+
+#: .\carts\templates\carts\checkout.html:190
+msgid "First Name"
+msgstr "نام"
+
+#: .\carts\templates\carts\checkout.html:194
+msgid "Last Name"
+msgstr "تخلص"
+
+#: .\carts\templates\carts\checkout.html:198
+#: .\orders\templates\orders\payment_process.html:218
+#: .\templates\include\header.html:53
+msgid "Email"
+msgstr "ایمیل"
+
+#: .\carts\templates\carts\checkout.html:206
+msgid "Address 1"
+msgstr "آدرس ۱"
+
+#: .\carts\templates\carts\checkout.html:210
+msgid "Address 2"
+msgstr "آدرس ۲"
+
+#: .\carts\templates\carts\checkout.html:214
+#: .\orders\templates\orders\payment_process.html:230
+msgid "City"
+msgstr "شهر"
+
+#: .\carts\templates\carts\checkout.html:218
+#: .\orders\templates\orders\payment_process.html:233
+msgid "State"
+msgstr "ایالت/ولایت"
+
+#: .\carts\templates\carts\checkout.html:222
+#: .\orders\templates\orders\payment_process.html:236
+msgid "Country"
+msgstr "کشور"
+
+#: .\carts\templates\carts\checkout.html:230
+msgid "Place Order"
+msgstr "ثبت سفارش"
+
+#: .\carts\templates\carts\checkout.html:243
+#: .\orders\templates\orders\payment_process.html:272
+msgid "Order Summary"
+msgstr "خلاصه سفارش"
+
+#: .\carts\templates\carts\checkout.html:253
+#: .\orders\templates\orders\payment_process.html:282
+msgid "Qty"
+msgstr "تعداد"
+
+#: .\carts\templates\carts\checkout.html:286
+#: .\orders\templates\orders\payment_process.html:330
+msgid "Secure Checkout"
+msgstr "پرداخت امن"
+
+#: .\carts\templates\carts\checkout.html:287
+#: .\orders\templates\orders\payment_process.html:331
+msgid "Your personal information is securely encrypted and protected."
+msgstr "اطلاعات شخصی شما به صورت امن رمزگذاری و محافظت می‌شود."
 
 #: .\core\settings.py:151
 msgid "English"
@@ -27,9 +479,337 @@ msgstr "انگلیسی"
 msgid "Persian"
 msgstr "فارسی"
 
+#: .\main\templates\home.html:22
+msgid "Popular products"
+msgstr "محصولات پرطرفدار"
+
+#: .\orders\templates\orders\order_received_email.html:6
+msgid "Thank you for your order!"
+msgstr "از سفارش شما سپاسگزاریم!"
+
+#: .\orders\templates\orders\order_received_email.html:6
+msgid ""
+"We are excited to let you know that we have received your order and it is "
+"now being processed."
+msgstr ""
+"با خرسندی به اطلاع می‌رسانیم که سفارش شما را دریافت کرده‌ایم و اکنون در حال "
+"پردازش است."
+
+#: .\orders\templates\orders\order_received_email.html:7
+msgid "Here are the details of your order:"
+msgstr "جزئیات سفارش شما به شرح زیر است:"
+
+#: .\orders\templates\orders\order_received_email.html:9
+msgid "Order Number"
+msgstr "شماره سفارش"
+
+#: .\orders\templates\orders\order_received_email.html:10
+msgid "Order Date"
+msgstr "تاریخ سفارش"
+
+#: .\orders\templates\orders\order_received_email.html:11
+#: .\orders\templates\orders\payment_process.html:313
+msgid "Total Amount"
+msgstr "مبلغ مجموع"
+
+#: .\orders\templates\orders\order_received_email.html:13
+msgid ""
+"We will notify you once your order has been shipped. If you have any "
+"questions or need further assistance, please feel free to contact our "
+"customer support team."
+msgstr ""
+"به محض ارسال سفارش به شما اطلاع خواهیم داد. اگر سوالی دارید یا نیاز به کمک "
+"بیشتری دارید، لطفاً با تیم پشتیبانی مشتریان ما تماس بگیرید."
+
+#: .\orders\templates\orders\order_received_email.html:14
+msgid "Thank you for choosing our store. We appreciate your business!"
+msgstr "از اینکه فروشگاه ما را انتخاب کردید متشکریم. قدردان اعتماد شما هستیم!"
+
+#: .\orders\templates\orders\order_received_email.html:15
+msgid "Best regards,"
+msgstr "با احترام،"
+
+#: .\orders\templates\orders\payment_cancelled.html:181
+msgid "Payment Cancelled!"
+msgstr "پرداخت لغو شد!"
+
+#: .\orders\templates\orders\payment_cancelled.html:182
+msgid "Looks like you faced problem while payment."
+msgstr "به نظر می‌رسد در حین پرداخت با مشکل مواجه شدید."
+
+#: .\orders\templates\orders\payment_cancelled.html:192
+msgid "I think you want to add new items!"
+msgstr "فکر می‌کنم می‌خواهید محصولات جدیدی اضافه کنید!"
+
+#: .\orders\templates\orders\payment_cancelled.html:193
+msgid "Do you want to add new items into your cart?"
+msgstr "آیا می‌خواهید محصولات جدیدی به سبد خرید خود اضافه کنید؟"
+
+#: .\orders\templates\orders\payment_process.html:154
+msgid "Loading..."
+msgstr "در حال بارگذاری..."
+
+#: .\orders\templates\orders\payment_process.html:156
+msgid "Processing Payment..."
+msgstr "در حال پردازش پرداخت..."
+
+#: .\orders\templates\orders\payment_process.html:157
+msgid "Please wait while we checking you payment"
+msgstr "لطفاً تا بررسی پرداخت شما منتظر بمانید"
+
+#: .\orders\templates\orders\payment_process.html:215
+msgid "Name"
+msgstr "نام"
+
+#: .\orders\templates\orders\payment_process.html:224
+msgid "Address"
+msgstr "آدرس"
+
+#: .\orders\templates\orders\payment_process.html:240
+#: .\orders\templates\orders\payment_process.html:325
+msgid "Note"
+msgstr "یادداشت"
+
+#: .\orders\templates\orders\payment_process.html:249
+msgid "Payment Method"
+msgstr "روش پرداخت"
+
+#: .\orders\templates\orders\payment_process.html:254
+msgid ""
+"You will be redirected to PayPal's secure payment page to complete your "
+"payment."
+msgstr "برای تکمیل پرداخت به صفحه امن پی‌پال منتقل خواهید شد."
+
+#: .\orders\templates\orders\payment_process.html:261
+msgid "Edit Billing Details"
+msgstr "ویرایش جزئیات پرداخت"
+
+#: .\orders\templates\orders\payment_process.html:301
+#, python-format
+msgid "Tax (2%%)"
+msgstr "مالیات (۲٪)"
+
+#: .\orders\templates\orders\payment_process.html:309
+msgid "Order Reference"
+msgstr "شناسه سفارش"
+
+#: .\orders\templates\orders\payment_process.html:325
+msgid ""
+"Your order will be created and confirmed only after successful payment."
+msgstr "سفارش شما تنها پس از پرداخت موفق ایجاد و تأیید خواهد شد."
+
+#: .\orders\templates\orders\payment_success.html:59
+msgid "Payment Successful!"
+msgstr "پرداخت موفقیت‌آمیز بود!"
+
+#: .\orders\templates\orders\payment_success.html:60
+msgid ""
+"Thank you! Your order has been placed successfully. We will deliver your "
+"products as soon as possible."
+msgstr ""
+"متشکریم! سفارش شما با موفقیت ثبت شد. محصولات شما در اسرع وقت ارسال خواهند "
+"شد."
+
+#: .\orders\templates\orders\payment_success.html:73
+msgid "PAYMENT RECEIPT"
+msgstr "رسید پرداخت"
+
+#: .\orders\templates\orders\payment_success.html:74
+msgid "This is your official payment receipt"
+msgstr "این رسید رسمی پرداخت شما است"
+
+#: .\orders\templates\orders\payment_success.html:96
+msgid "PAID"
+msgstr "پرداخت شده"
+
+#: .\orders\templates\orders\payment_success.html:157
+msgid "FREE"
+msgstr "رایگان"
+
+#: .\orders\templates\orders\payment_success.html:232
+msgid "Your cart is now empty"
+msgstr "سبد خرید شما اکنون خالی است"
+
+#: .\orders\templates\orders\payment_success.html:233
+msgid "Ready to discover more amazing products?"
+msgstr "آماده کشف محصولات شگفت‌انگیز بیشتر هستید؟"
+
+#: .\orders\templates\orders\payment_success.html:235
+msgid "Explore More Products"
+msgstr "مشاهده محصولات بیشتر"
+
+#: .\product\models.py:42
+msgid "Color"
+msgstr "رنگ"
+
+#: .\product\models.py:43
+msgid "Size"
+msgstr "سایز (اندازه)"
+
+#: .\product\templates\product\product_detail.html:52
+msgid "Average Rating"
+msgstr "میانگین امتیازات"
+
+#: .\product\templates\product\product_detail.html:73
+msgid "Select Color"
+msgstr "انتخاب رنگ"
+
+#: .\product\templates\product\product_detail.html:75
+msgid "Choose Color"
+msgstr "انواع رنگ‌ها"
+
+#: .\product\templates\product\product_detail.html:87
+msgid "Select Size"
+msgstr "انتخاب سایز (اندازه)"
+
+#: .\product\templates\product\product_detail.html:89
+msgid "Choose Size"
+msgstr "انواع سایزها"
+
+#: .\product\templates\product\product_detail.html:103
+msgid "Sorry, this product is out of stock!"
+msgstr "متأسفانه این محصول موجود نیست!"
+
+#: .\product\templates\product\product_detail.html:105
+msgid "Add to cart"
+msgstr "افزودن به سبد خرید"
+
+#: .\product\templates\product\product_detail.html:117
+msgid "Write Your Review"
+msgstr "نظر خود را درباره این محصول بنویسید!"
+
+#: .\product\templates\product\product_detail.html:120
+msgid "How do you rate this product?"
+msgstr "به این محصول چه امتیازی می‌دهید؟"
+
+#: .\product\templates\product\product_detail.html:135
+msgid "Review Title"
+msgstr "عنوان نظر"
+
+#: .\product\templates\product\product_detail.html:137
+msgid "Review"
+msgstr "نظر شما"
+
+#: .\product\templates\product\product_detail.html:142
+msgid "Submit Review"
+msgstr "ارسال نظر"
+
+#: .\product\templates\product\product_detail.html:144
+msgid "Note: you must purchase the product before leave a review!"
+msgstr "توجه: برای ارسال نظر باید ابتدا این محصول را خریده باشید!"
+
+#: .\product\templates\product\product_detail.html:147
+msgid "Login to Submit Review"
+msgstr "برای ارسال نظر وارد شوید"
+
+#: .\product\templates\product\product_detail.html:155
+msgid "Customer Reviews"
+msgstr "نظرات مشتریان"
+
+#: .\product\templates\product\product_list.html:9
+msgid "Our Store"
+msgstr "فروشگاه ما"
+
+#: .\product\templates\product\product_list.html:24
+#: .\templates\include\header.html:75
+msgid "Categories"
+msgstr "دسته‌بندی‌ها"
+
+#: .\product\templates\product\product_list.html:31
+#: .\templates\include\header.html:77
+msgid "All Products"
+msgstr "تمام محصولات"
+
+#: .\product\templates\product\product_list.html:80
+msgid "Price range"
+msgstr "محدوده قیمت"
+
+#: .\product\templates\product\product_list.html:96
+msgid "Min"
+msgstr "حداقل"
+
+#: .\product\templates\product\product_list.html:98
+msgid "Any Min"
+msgstr "هر حداقل"
+
+#: .\product\templates\product\product_list.html:110
+msgid "Max"
+msgstr "حداکثر"
+
+#: .\product\templates\product\product_list.html:112
+msgid "Any Max"
+msgstr "هر حداکثر"
+
+#: .\product\templates\product\product_list.html:127
+msgid "Quick select:"
+msgstr "انتخاب سریع:"
+
+#: .\product\templates\product\product_list.html:131
+msgid "Under $50"
+msgstr "زیر ۵۰ دالر"
+
+#: .\product\templates\product\product_list.html:135
+msgid "$50-100"
+msgstr "بین ۵۰ تا ۱۰۰ دالر"
+
+#: .\product\templates\product\product_list.html:139
+msgid "$100-200"
+msgstr "بین ۱۰۰ تا ۲۰۰ دالر"
+
+#: .\product\templates\product\product_list.html:149
+msgid "Clear Price Filter"
+msgstr "پاک کردن فیلتر قیمت"
+
+#: .\product\templates\product\product_list.html:162
+msgid "Items found"
+msgstr "محصولات یافت شده"
+
+#: .\product\templates\product\product_list.html:183
+msgid "View Details"
+msgstr "مشاهده جزئیات"
+
+#: .\product\templates\product\product_list.html:189
+msgid "No Product Found!"
+msgstr "محصولی پیدا نشد!"
+
+#: .\product\templates\product\product_list.html:207
+#: .\product\templates\product\product_list.html:212
+msgid "Previous"
+msgstr "قبلی"
+
+#: .\product\templates\product\product_list.html:247
+#: .\product\templates\product\product_list.html:252
+msgid "Next"
+msgstr "بعدی"
+
+#: .\templates\include\base.html:5
+msgid "dir"
+msgstr "rtl"
+
 #: .\templates\include\base.html:13
 msgid "Tanzaib | One of the Biggest Online Shopping Platform"
-msgstr ""
+msgstr "تن زیب | یکی از بزرگترین پلتفرم‌های خرید آنلاین"
+
+#: .\templates\include\dashboard_sidebar.html:5
+#: .\templates\include\header.html:110
+msgid "Dashboard"
+msgstr "داشبورد"
+
+#: .\templates\include\dashboard_sidebar.html:6
+msgid "My Orders"
+msgstr "سفارشات من"
+
+#: .\templates\include\dashboard_sidebar.html:7
+msgid "Edit Profile"
+msgstr "ویرایش پروفایل"
+
+#: .\templates\include\dashboard_sidebar.html:8
+msgid "Change Password"
+msgstr "تغییر رمز عبور"
+
+#: .\templates\include\dashboard_sidebar.html:11
+msgid "Log out"
+msgstr "خروج"
 
 #: .\templates\include\footer.html:9
 msgid "About Our Company"
@@ -41,11 +821,11 @@ msgid ""
 "confidence knowing we have served thousands of satisfied customers."
 msgstr ""
 "ما محصولات با کیفیت و خدمات عالی به مشتریان ارائه می‌دهیم. با اطمینان خاطر "
-"خرید کنید و بدانید که ما مفتخریم اعتماد هزار ها مشتری را با خود داریم!"
+"خرید کنید و بدانید که ما مفتخریم اعتماد هزاران مشتری را با خود داریم!"
 
 #: .\templates\include\footer.html:21
 msgid "Quick Links"
-msgstr "لینک های سریع"
+msgstr "لینک‌های سریع"
 
 #: .\templates\include\footer.html:24
 msgid "Home"
@@ -65,7 +845,7 @@ msgstr "تماس با ما"
 
 #: .\templates\include\footer.html:36
 msgid "FAQ"
-msgstr "FAQ"
+msgstr "سوالات متداول"
 
 #: .\templates\include\footer.html:43
 msgid "Customer Service"
@@ -81,92 +861,60 @@ msgstr "ردگیری سفارش"
 
 #: .\templates\include\footer.html:52
 msgid "Wishlist"
-msgstr "سبد اروزی خرید"
+msgstr "لیست علاقه‌مندی‌ها"
 
 #: .\templates\include\footer.html:55
 msgid "Returns"
-msgstr "برگشت"
-
-#: .\templates\include\footer.html:58
-msgid "Shipping"
-msgstr "خریداری"
+msgstr "مرجوعی"
 
 #: .\templates\include\footer.html:65
 msgid "Contact Info"
-msgstr "اطلاعات ما"
+msgstr "اطلاعات تماس"
 
 #: .\templates\include\footer.html:74 .\templates\include\footer.html:98
 msgid "123 Street, Avenue ABC"
-msgstr "سرک سوم وزیر اکبر خان"
+msgstr "سرک سوم، وزیر اکبر خان"
 
 #: .\templates\include\footer.html:80
 msgid "Subscribe to Newsletter"
-msgstr "اشتراک گزاری در ولاگ ها"
+msgstr "عضویت در خبرنامه"
 
 #: .\templates\include\footer.html:83
 msgid "Subscribe"
-msgstr "اشتراک گزاری"
+msgstr "عضویت"
 
 #: .\templates\include\footer.html:93
 msgid "Copyright 2026 Tanzaib LMT ©All Rights Reserved."
-msgstr ".حق ©کاپی رایت برای شرکت تن زیب محفوظ است"
+msgstr "حق نشر © ۲۰۲۶ شرکت تن زیب. تمامی حقوق محفوظ است."
 
 #: .\templates\include\header.html:22
 msgid "Language"
 msgstr "زبان"
 
-#: .\templates\include\header.html:53
-msgid "Email"
-msgstr "ایمیل"
+#: .\templates\include\header.html:48
+msgid "USD"
+msgstr "دالر"
 
 #: .\templates\include\header.html:56
 msgid "Call us"
 msgstr "تماس با ما"
 
-#: .\templates\include\header.html:75
-msgid "Categories"
-msgstr "دسته بندی ها"
-
-#: .\templates\include\header.html:77
-msgid "All Products"
-msgstr "تمام محصولات"
-
-#: .\templates\include\header.html:87
+#: .\templates\include\header.html:88
 msgid "Store"
 msgstr "فروشگاه"
 
-#: .\templates\include\header.html:107
+#: .\templates\include\header.html:95 .\templates\include\header.html:97
+msgid "Search"
+msgstr "جستجو"
+
+#: .\templates\include\header.html:108
 msgid "Welcome"
 msgstr "خوش آمدید"
 
-#: .\templates\include\header.html:109
-msgid "Dashboard"
-msgstr "داشبورد"
-
-#: .\templates\include\header.html:110
+#: .\templates\include\header.html:111
 msgid "Logout"
 msgstr "خروج"
 
-#: .\templates\include\header.html:113
+#: .\templates\include\header.html:114
 msgid "Welcome Guest!"
-msgstr "کاربر مهمان خوش آمدید!"
-
-#: .\templates\include\header.html:115
-msgid "Login"
-msgstr "ورود"
-
-#: .\templates\include\header.html:116
-msgid "Register"
-msgstr "ثبت نام"
-
-#~ msgid "Copyright"
-#~ msgstr "تمام حقوق این ویب سایت مختص شرکت"
-
-#~ msgid "Your Company Name"
-#~ msgstr "تن زیب میباشد"
-
-#~ msgid "All Rights Reserved."
-#~ msgstr "©تمام حقوق محفوظ است."
-
-#~ msgid "dir"
-#~ msgstr "rtl"
+msgstr "کاربر مهمان، خوش آمدید!"

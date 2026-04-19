@@ -1,6 +1,7 @@
 {% extends 'include/base.html' %}
 {% load static %}
 {% block content %}
+{% load i18n %}
   <!-- ========================= SECTION CONTENT ========================= -->
   <section class="section-content padding-y bg">
     <div class="container">
@@ -10,7 +11,7 @@
         <main class="col-md-9">
           <article class="card">
             <header class="card-header">
-              <strong class="d-inline-block">You Order History</strong>
+              <strong class="d-inline-block">{% trans "Your" %} {% trans "Order History" %}</strong>
             </header>
             <div class="card-body">
               <div class="row">
@@ -18,11 +19,11 @@
                   <table class="table table-hover">
                     <thead>
                       <tr>
-                        <th scope="col">Order</th>
-                        <th scope="col">Billing Name</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Order Total</th>
-                        <th scope="col">Date</th>
+                        <th scope="col">{% trans "Order" %}</th>
+                        <th scope="col">{% trans "Billing Name" %}</th>
+                        <th scope="col">{% trans "Phone" %}</th>
+                        <th scope="col">{% trans "Order Total" %}</th>
+                        <th scope="col">{% trans "Date" %}</th>
                       </tr>
                     </thead>
                     <tbody>

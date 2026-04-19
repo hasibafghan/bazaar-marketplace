@@ -1,8 +1,9 @@
 {% extends 'include/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-  Payment Successful
+  Payment failed
 {% endblock %}
 
 {% block content %}
@@ -145,7 +146,7 @@
             <div class="step-counter">
               <i class="fas fa-shopping-cart"></i>
             </div>
-            <div class="step-name">Cart</div>
+            <div class="step-name">{% trans "Cart" %}</div>
           </div>
 
           <!-- Step 2: Details -->
@@ -153,7 +154,7 @@
             <div class="step-counter">
               <i class="fas fa-user-edit"></i>
             </div>
-            <div class="step-name">Details</div>
+            <div class="step-name">{% trans "Details" %}</div>
           </div>
 
           <!-- Step 3: Payment -->
@@ -161,7 +162,7 @@
             <div class="step-counter">
               <i class="fas fa-credit-card"></i>
             </div>
-            <div class="step-name">Payment</div>
+            <div class="step-name">{% trans "Payment" %}</div>
           </div>
 
           <!-- Step 4: Confirmation -->
@@ -169,7 +170,7 @@
             <div class="step-counter">
               <i class="fas fa-check-circle"></i>
             </div>
-            <div class="step-name">Confirmation</div>
+            <div class="step-name">{% trans "Confirmation" %}</div>
           </div>
         </div>
       </div>
@@ -177,8 +178,8 @@
   </div>
   <div class="container">
     <div class="alert alert-danger my-2" role="alert">
-      <h2>Payment Cancelled!</h2>
-      <p>Looks like you faced problem while payment.</p>
+      <h2>{% trans "Payment Cancelled!" %}</h2>
+      <p>{% trans "Looks like you faced problem while payment." %}</p>
     </div>
 
     <div class="container">
@@ -188,9 +189,9 @@
           <div class="card">
             <div class="card-body py-5">
               <i class="fa fa-shopping-cart fa-3x text-muted mb-3"></i>
-              <h3>I think you want add new items!</h3>
-              <p class="text-muted">Do you want add new items into your cart </p>
-              <a href="{% url 'product_list' %}" class="btn btn-primary mt-3">Continue Shopping</a>
+              <h3>{% trans "I think you want to add new items!" %}</h3>
+              <p class="text-muted">{% trans "Do you want to add new items into your cart?" %}</p>
+              <a href="{% url 'product_list' %}" class="btn btn-primary mt-3">{% trans "Continue Shopping" %}</a>
             </div>
           </div>
         </div>

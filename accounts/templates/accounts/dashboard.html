@@ -1,6 +1,8 @@
 {% extends 'include/base.html' %}
 {% load static %}
 {% block content %}
+{% load i18n %}
+
   <!-- ========================= SECTION CONTENT ========================= -->
   <section class="section-content padding-y bg">
     <div class="container">
@@ -10,16 +12,16 @@
         <main class="col-md-9">
           <article class="card">
             <header class="card-header">
-              <strong class="d-inline-block">Login as:</strong>
+              <strong class="d-inline-block">{% trans "Login as:" %}</strong>
             </header>
             <div class="card-body">
               <div class="row">
                 <div class="col-md-6">
                   <div class="card" style="text-align:center;">
                     <div class="card-body">
-                      <h5 class="card-title">Total Orders</h5>
+                      <h5 class="card-title">{% trans "Total Orders" %}</h5>
                       <h4>{{ orders_count }}</h4>
-                      <a href="{% url 'my_orders' %}">View Orders</a>
+                      <a href="{% url 'my_orders' %}" class="text-decoration-none">{% trans "View Orders" %}</a>
                     </div>
                   </div>
                 </div>

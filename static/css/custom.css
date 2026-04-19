@@ -80,3 +80,22 @@
   display: block;
 }
 
+/* =================== Smooth Category Hover =============== */
+.category-link {
+  transition: all 0.3s ease;
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  position: relative;
+}
+
+.category-link:hover {
+  color: #fff !important;
+  transform: translateX(5px);
+  background: linear-gradient(135deg, #c9ced3 0%, #047cfc 100%);
+  box-shadow: 0 4px 12px rgba(147, 154, 162, 0.3);
+  width: 50%;
+  padding: 5px 10px;
+}
+
+  

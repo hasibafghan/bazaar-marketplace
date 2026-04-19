@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-11 00:25+0430\n"
+"POT-Creation-Date: 2026-04-19 16:29+0430\n"
 "PO-Revision-Date: 2026-04-10 23:21+0000\n"
 "Last-Translator: ali ali <ali@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,463 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.10.3\n"
 
+#: .\accounts\templates\accounts\account_verification_email.html:4
+#: .\accounts\templates\accounts\reset_password_email.html:5
+#: .\orders\templates\orders\order_received_email.html:5
+msgid "Hi"
+msgstr ""
+
+#: .\accounts\templates\accounts\account_verification_email.html:5
+msgid ""
+"Please click on the link below to verify your email address and activate "
+"your account:"
+msgstr ""
+
+#: .\accounts\templates\accounts\account_verification_email.html:8
+#: .\accounts\templates\accounts\reset_password_email.html:10
+msgid "If you did not make this request, please ignore this email."
+msgstr ""
+
+#: .\accounts\templates\accounts\account_verification_email.html:9
+#: .\accounts\templates\accounts\reset_password_email.html:11
+msgid "Thanks,"
+msgstr ""
+
+#: .\accounts\templates\accounts\account_verification_email.html:10
+#: .\accounts\templates\accounts\reset_password_email.html:12
+#: .\orders\templates\orders\order_received_email.html:16
+msgid "The Tanzib Team"
+msgstr ""
+
+#: .\accounts\templates\accounts\change_password.html:14
+msgid "Change Your Password"
+msgstr ""
+
+#: .\accounts\templates\accounts\change_password.html:20
+msgid "Current Password"
+msgstr ""
+
+#: .\accounts\templates\accounts\change_password.html:27
+msgid "Please enter your current password."
+msgstr ""
+
+#: .\accounts\templates\accounts\change_password.html:31
+msgid "New Password"
+msgstr ""
+
+#: .\accounts\templates\accounts\change_password.html:38
+msgid "Must be at least 8 characters."
+msgstr ""
+
+#: .\accounts\templates\accounts\change_password.html:39
+msgid "Please provide a valid new password."
+msgstr ""
+
+#: .\accounts\templates\accounts\change_password.html:43
+msgid "Confirm New Password"
+msgstr ""
+
+#: .\accounts\templates\accounts\change_password.html:50
+msgid "Passwords do not match."
+msgstr ""
+
+#: .\accounts\templates\accounts\change_password.html:53
+msgid "Update Password"
+msgstr ""
+
+#: .\accounts\templates\accounts\dashboard.html:15
+#, fuzzy
+#| msgid "Login"
+msgid "Login as:"
+msgstr "Login"
+
+#: .\accounts\templates\accounts\dashboard.html:22
+msgid "Total Orders"
+msgstr ""
+
+#: .\accounts\templates\accounts\dashboard.html:24
+msgid "View Orders"
+msgstr ""
+
+#: .\accounts\templates\accounts\edit_profile.html:15
+msgid "Edit Your Profile"
+msgstr ""
+
+#: .\accounts\templates\accounts\edit_profile.html:131
+msgid "Save Changes"
+msgstr ""
+
+#: .\accounts\templates\accounts\edit_profile.html:132
+msgid "Cancel"
+msgstr ""
+
+#: .\accounts\templates\accounts\forgot_password.html:10
+msgid "Forgot Password"
+msgstr ""
+
+#: .\accounts\templates\accounts\forgot_password.html:16
+#: .\accounts\templates\accounts\login_form.html:16
+msgid "Email Address"
+msgstr ""
+
+#: .\accounts\templates\accounts\forgot_password.html:20
+msgid "Back To Login!"
+msgstr ""
+
+#: .\accounts\templates\accounts\forgot_password.html:23
+msgid "Submit"
+msgstr ""
+
+#: .\accounts\templates\accounts\forgot_password.html:30
+#: .\accounts\templates\accounts\login_form.html:33
+#: .\accounts\templates\accounts\reset_password.html:30
+msgid "Don't have account?"
+msgstr ""
+
+#: .\accounts\templates\accounts\forgot_password.html:30
+#: .\accounts\templates\accounts\login_form.html:33
+#: .\accounts\templates\accounts\register_form.html:12
+#: .\accounts\templates\accounts\reset_password.html:30
+msgid "Sign up"
+msgstr ""
+
+#: .\accounts\templates\accounts\login_form.html:10
+msgid "Sign in"
+msgstr ""
+
+#: .\accounts\templates\accounts\login_form.html:19
+#: .\accounts\templates\accounts\reset_password.html:16
+msgid "Password"
+msgstr ""
+
+#: .\accounts\templates\accounts\login_form.html:23
+msgid "Forgot password?"
+msgstr ""
+
+#: .\accounts\templates\accounts\login_form.html:26
+#: .\templates\include\header.html:116
+msgid "Login"
+msgstr "Login"
+
+#: .\accounts\templates\accounts\my_orders.html:14
+msgid "Your"
+msgstr ""
+
+#: .\accounts\templates\accounts\my_orders.html:14
+msgid "Order History"
+msgstr ""
+
+#: .\accounts\templates\accounts\my_orders.html:22
+msgid "Order"
+msgstr ""
+
+#: .\accounts\templates\accounts\my_orders.html:23
+msgid "Billing Name"
+msgstr ""
+
+#: .\accounts\templates\accounts\my_orders.html:24
+#: .\carts\templates\carts\checkout.html:202
+#: .\orders\templates\orders\payment_process.html:221
+msgid "Phone"
+msgstr ""
+
+#: .\accounts\templates\accounts\my_orders.html:25
+#, fuzzy
+#| msgid "Order Tracking"
+msgid "Order Total"
+msgstr "Order Tracking"
+
+#: .\accounts\templates\accounts\my_orders.html:26
+#: .\accounts\templates\accounts\order_detail.html:44
+#: .\orders\templates\orders\payment_success.html:95
+msgid "Date"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:6
+#: .\orders\templates\orders\payment_success.html:5
+msgid "Payment Successful"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:21
+#: .\orders\templates\orders\payment_success.html:82
+msgid "Thank you for your order"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:26
+#: .\orders\templates\orders\payment_success.html:87
+msgid "Order Details"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:30
+#: .\orders\templates\orders\payment_success.html:90
+msgid "Order #"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:34
+#: .\orders\templates\orders\payment_success.html:93
+msgid "Transaction #"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:47
+#: .\orders\templates\orders\payment_success.html:96
+msgid "Status"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:61
+#: .\carts\templates\carts\cart.html:31
+#: .\orders\templates\orders\payment_success.html:109
+#, fuzzy
+#| msgid "All Products"
+msgid "Product"
+msgstr "All Products"
+
+#: .\accounts\templates\accounts\order_detail.html:62
+#: .\carts\templates\carts\cart.html:32
+#: .\orders\templates\orders\payment_success.html:110
+msgid "Quantity"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:63
+#: .\carts\templates\carts\cart.html:33
+#: .\orders\templates\orders\payment_success.html:111
+msgid "Price"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:64
+#: .\carts\templates\carts\cart.html:104
+#: .\carts\templates\carts\checkout.html:280
+#: .\orders\templates\orders\payment_success.html:112
+msgid "Total"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:128
+#: .\orders\templates\orders\payment_success.html:139
+msgid "Product Name"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:137
+#: .\carts\templates\carts\checkout.html:268
+#: .\orders\templates\orders\payment_process.html:297
+#: .\orders\templates\orders\payment_success.html:148
+msgid "Subtotal"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:141
+#: .\carts\templates\carts\cart.html:100
+#: .\carts\templates\carts\checkout.html:272
+#: .\orders\templates\orders\payment_success.html:152
+msgid "Tax"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:145
+#: .\carts\templates\carts\checkout.html:276
+#: .\orders\templates\orders\payment_process.html:305
+#: .\orders\templates\orders\payment_success.html:156
+#: .\templates\include\footer.html:58
+msgid "Shipping"
+msgstr "Shipping"
+
+#: .\accounts\templates\accounts\order_detail.html:149
+#: .\orders\templates\orders\payment_success.html:160
+msgid "Grand Total"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:160
+#: .\orders\templates\orders\payment_process.html:211
+#: .\orders\templates\orders\payment_success.html:171
+msgid "Billing Information"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:173
+#: .\orders\templates\orders\payment_success.html:182
+msgid "Shipping Information"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:191
+#: .\carts\templates\carts\checkout.html:226
+#: .\orders\templates\orders\payment_success.html:198
+msgid "Order Note"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:199
+#: .\orders\templates\orders\payment_success.html:206
+msgid ""
+"Thank you for shopping with us! We'll send you a confirmation email shortly."
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:203
+#: .\carts\templates\carts\cart.html:112
+#: .\orders\templates\orders\payment_cancelled.html:194
+#: .\orders\templates\orders\payment_success.html:211
+msgid "Continue Shopping"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:204
+#: .\orders\templates\orders\payment_success.html:214
+msgid "Back to Home"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:205
+#: .\orders\templates\orders\payment_success.html:217
+msgid "Print Receipt"
+msgstr ""
+
+#: .\accounts\templates\accounts\register_form.html:18
+#: .\templates\include\header.html:117
+msgid "Register"
+msgstr "Register"
+
+#: .\accounts\templates\accounts\register_form.html:24
+msgid "Already have an account?"
+msgstr ""
+
+#: .\accounts\templates\accounts\register_form.html:24
+msgid "Log In"
+msgstr ""
+
+#: .\accounts\templates\accounts\reset_password.html:10
+msgid "Reset Password"
+msgstr ""
+
+#: .\accounts\templates\accounts\reset_password.html:19
+msgid "Confirm Password"
+msgstr ""
+
+#: .\accounts\templates\accounts\reset_password.html:23
+msgid "Reset"
+msgstr ""
+
+#: .\accounts\templates\accounts\reset_password_email.html:6
+msgid "Please click on the link below to Reset your Password!"
+msgstr ""
+
+#: .\carts\templates\carts\cart.html:15
+msgid "Your cart is empty"
+msgstr ""
+
+#: .\carts\templates\carts\cart.html:16
+msgid "Looks like you haven't added any items to your cart yet."
+msgstr ""
+
+#: .\carts\templates\carts\cart.html:18
+#, fuzzy
+#| msgid "Shipping"
+msgid "Start Shopping"
+msgstr "Shipping"
+
+#: .\carts\templates\carts\cart.html:80
+msgid "each"
+msgstr ""
+
+#: .\carts\templates\carts\cart.html:84
+msgid "Are you sure to delete!"
+msgstr ""
+
+#: .\carts\templates\carts\cart.html:84
+msgid "Remove"
+msgstr ""
+
+#: .\carts\templates\carts\cart.html:96
+msgid "Total price"
+msgstr ""
+
+#: .\carts\templates\carts\cart.html:111
+msgid "Checkout"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:148
+#: .\orders\templates\orders\payment_cancelled.html:149
+#: .\orders\templates\orders\payment_process.html:176
+#: .\orders\templates\orders\payment_success.html:21
+msgid "Cart"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:156
+#: .\orders\templates\orders\payment_cancelled.html:157
+#: .\orders\templates\orders\payment_process.html:184
+#: .\orders\templates\orders\payment_success.html:29
+msgid "Details"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:164
+#: .\orders\templates\orders\payment_cancelled.html:165
+#: .\orders\templates\orders\payment_process.html:192
+#: .\orders\templates\orders\payment_success.html:37
+msgid "Payment"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:172
+#: .\orders\templates\orders\payment_cancelled.html:173
+#: .\orders\templates\orders\payment_process.html:200
+#: .\orders\templates\orders\payment_success.html:45
+msgid "Confirmation"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:183
+msgid "Billing & Shipping Information"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:190
+msgid "First Name"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:194
+msgid "Last Name"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:198
+#: .\orders\templates\orders\payment_process.html:218
+#: .\templates\include\header.html:53
+msgid "Email"
+msgstr "Email"
+
+#: .\carts\templates\carts\checkout.html:206
+msgid "Address 1"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:210
+msgid "Address 2"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:214
+#: .\orders\templates\orders\payment_process.html:230
+msgid "City"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:218
+#: .\orders\templates\orders\payment_process.html:233
+msgid "State"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:222
+#: .\orders\templates\orders\payment_process.html:236
+msgid "Country"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:230
+msgid "Place Order"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:243
+#: .\orders\templates\orders\payment_process.html:272
+msgid "Order Summary"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:253
+#: .\orders\templates\orders\payment_process.html:282
+msgid "Qty"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:286
+#: .\orders\templates\orders\payment_process.html:330
+msgid "Secure Checkout"
+msgstr ""
+
+#: .\carts\templates\carts\checkout.html:287
+#: .\orders\templates\orders\payment_process.html:331
+msgid "Your personal information is securely encrypted and protected."
+msgstr ""
+
 #: .\core\settings.py:151
 msgid "English"
 msgstr "english"
@@ -27,9 +484,340 @@ msgstr "english"
 msgid "Persian"
 msgstr "persian"
 
+#: .\main\templates\home.html:22
+#, fuzzy
+#| msgid "All Products"
+msgid "Popular products"
+msgstr "All Products"
+
+#: .\orders\templates\orders\order_received_email.html:6
+msgid "Thank you for your order!"
+msgstr ""
+
+#: .\orders\templates\orders\order_received_email.html:6
+msgid ""
+"We are excited to let you know that we have received your order and it is "
+"now being processed."
+msgstr ""
+
+#: .\orders\templates\orders\order_received_email.html:7
+msgid "Here are the details of your order:"
+msgstr ""
+
+#: .\orders\templates\orders\order_received_email.html:9
+msgid "Order Number"
+msgstr ""
+
+#: .\orders\templates\orders\order_received_email.html:10
+#, fuzzy
+#| msgid "Order Tracking"
+msgid "Order Date"
+msgstr "Order Tracking"
+
+#: .\orders\templates\orders\order_received_email.html:11
+#: .\orders\templates\orders\payment_process.html:313
+msgid "Total Amount"
+msgstr ""
+
+#: .\orders\templates\orders\order_received_email.html:13
+msgid ""
+"We will notify you once your order has been shipped. If you have any "
+"questions or need further assistance, please feel free to contact our "
+"customer support team."
+msgstr ""
+
+#: .\orders\templates\orders\order_received_email.html:14
+msgid "Thank you for choosing our store. We appreciate your business!"
+msgstr ""
+
+#: .\orders\templates\orders\order_received_email.html:15
+msgid "Best regards,"
+msgstr ""
+
+#: .\orders\templates\orders\payment_cancelled.html:181
+msgid "Payment Cancelled!"
+msgstr ""
+
+#: .\orders\templates\orders\payment_cancelled.html:182
+msgid "Looks like you faced problem while payment."
+msgstr ""
+
+#: .\orders\templates\orders\payment_cancelled.html:192
+msgid "I think you want to add new items!"
+msgstr ""
+
+#: .\orders\templates\orders\payment_cancelled.html:193
+msgid "Do you want to add new items into your cart?"
+msgstr ""
+
+#: .\orders\templates\orders\payment_process.html:154
+msgid "Loading..."
+msgstr ""
+
+#: .\orders\templates\orders\payment_process.html:156
+msgid "Processing Payment..."
+msgstr ""
+
+#: .\orders\templates\orders\payment_process.html:157
+msgid "Please wait while we checking you payment"
+msgstr ""
+
+#: .\orders\templates\orders\payment_process.html:215
+msgid "Name"
+msgstr ""
+
+#: .\orders\templates\orders\payment_process.html:224
+msgid "Address"
+msgstr ""
+
+#: .\orders\templates\orders\payment_process.html:240
+#: .\orders\templates\orders\payment_process.html:325
+msgid "Note"
+msgstr ""
+
+#: .\orders\templates\orders\payment_process.html:249
+msgid "Payment Method"
+msgstr ""
+
+#: .\orders\templates\orders\payment_process.html:254
+msgid ""
+"You will be redirected to PayPal's secure payment page to complete your "
+"payment."
+msgstr ""
+
+#: .\orders\templates\orders\payment_process.html:261
+msgid "Edit Billing Details"
+msgstr ""
+
+#: .\orders\templates\orders\payment_process.html:301
+#, python-format
+msgid "Tax (2%%)"
+msgstr ""
+
+#: .\orders\templates\orders\payment_process.html:309
+msgid "Order Reference"
+msgstr ""
+
+#: .\orders\templates\orders\payment_process.html:325
+msgid "Your order will be created and confirmed only after successful payment."
+msgstr ""
+
+#: .\orders\templates\orders\payment_success.html:59
+msgid "Payment Successful!"
+msgstr ""
+
+#: .\orders\templates\orders\payment_success.html:60
+msgid ""
+"Thank you! Your order has been placed successfully. We will deliver your "
+"products as soon as possible."
+msgstr ""
+
+#: .\orders\templates\orders\payment_success.html:73
+msgid "PAYMENT RECEIPT"
+msgstr ""
+
+#: .\orders\templates\orders\payment_success.html:74
+msgid "This is your official payment receipt"
+msgstr ""
+
+#: .\orders\templates\orders\payment_success.html:96
+msgid "PAID"
+msgstr ""
+
+#: .\orders\templates\orders\payment_success.html:157
+msgid "FREE"
+msgstr ""
+
+#: .\orders\templates\orders\payment_success.html:232
+msgid "Your cart is now empty"
+msgstr ""
+
+#: .\orders\templates\orders\payment_success.html:233
+msgid "Ready to discover more amazing products?"
+msgstr ""
+
+#: .\orders\templates\orders\payment_success.html:235
+#, fuzzy
+#| msgid "All Products"
+msgid "Explore More Products"
+msgstr "All Products"
+
+#: .\product\models.py:42
+msgid "Color"
+msgstr ""
+
+#: .\product\models.py:43
+msgid "Size"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:52
+msgid "Average Rating"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:73
+msgid "Select Color"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:75
+msgid "Choose Color"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:87
+msgid "Select Size"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:89
+msgid "Choose Size"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:103
+msgid "Sorry, this product is out of stock!"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:105
+msgid "Add to cart"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:117
+msgid "Write Your Review"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:120
+msgid "How do you rate this product?"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:135
+msgid "Review Title"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:137
+msgid "Review"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:142
+msgid "Submit Review"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:144
+msgid "Note: you must purchase the product before leave a review!"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:147
+msgid "Login to Submit Review"
+msgstr ""
+
+#: .\product\templates\product\product_detail.html:155
+#, fuzzy
+#| msgid "Customer Service"
+msgid "Customer Reviews"
+msgstr "Customer Service"
+
+#: .\product\templates\product\product_list.html:9
+#, fuzzy
+#| msgid "Store"
+msgid "Our Store"
+msgstr "Store"
+
+#: .\product\templates\product\product_list.html:24
+#: .\templates\include\header.html:75
+msgid "Categories"
+msgstr "Categories"
+
+#: .\product\templates\product\product_list.html:31
+#: .\templates\include\header.html:77
+msgid "All Products"
+msgstr "All Products"
+
+#: .\product\templates\product\product_list.html:80
+msgid "Price range"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:96
+msgid "Min"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:98
+msgid "Any Min"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:110
+msgid "Max"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:112
+msgid "Any Max"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:127
+msgid "Quick select:"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:131
+msgid "Under $50"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:135
+msgid "$50-100"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:139
+msgid "$100-200"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:149
+msgid "Clear Price Filter"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:162
+msgid "Items found"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:183
+msgid "View Details"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:189
+msgid "No Product Found!"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:207
+#: .\product\templates\product\product_list.html:212
+msgid "Previous"
+msgstr ""
+
+#: .\product\templates\product\product_list.html:247
+#: .\product\templates\product\product_list.html:252
+msgid "Next"
+msgstr ""
+
+#: .\templates\include\base.html:5
+msgid "dir"
+msgstr "ltr"
+
 #: .\templates\include\base.html:13
 msgid "Tanzaib | One of the Biggest Online Shopping Platform"
 msgstr "Tanzaib | One of the Biggest Online Shopping Platform"
+
+#: .\templates\include\dashboard_sidebar.html:5
+#: .\templates\include\header.html:110
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: .\templates\include\dashboard_sidebar.html:6
+msgid "My Orders"
+msgstr ""
+
+#: .\templates\include\dashboard_sidebar.html:7
+msgid "Edit Profile"
+msgstr ""
+
+#: .\templates\include\dashboard_sidebar.html:8
+msgid "Change Password"
+msgstr ""
+
+#: .\templates\include\dashboard_sidebar.html:11
+msgid "Log out"
+msgstr ""
 
 #: .\templates\include\footer.html:9
 msgid "About Our Company"
@@ -87,10 +875,6 @@ msgstr "Wishlist"
 msgid "Returns"
 msgstr "Returns"
 
-#: .\templates\include\footer.html:58
-msgid "Shipping"
-msgstr "Shipping"
-
 #: .\templates\include\footer.html:65
 msgid "Contact Info"
 msgstr "Contact Info"
@@ -115,49 +899,30 @@ msgstr "Copyright 2026 Tanzaib LMT ©All Rights Reserved."
 msgid "Language"
 msgstr "Language"
 
-#: .\templates\include\header.html:53
-msgid "Email"
-msgstr "Email"
+#: .\templates\include\header.html:48
+msgid "USD"
+msgstr ""
 
 #: .\templates\include\header.html:56
 msgid "Call us"
 msgstr "Call us"
 
-#: .\templates\include\header.html:75
-msgid "Categories"
-msgstr "Categories"
-
-#: .\templates\include\header.html:77
-msgid "All Products"
-msgstr "All Products"
-
-#: .\templates\include\header.html:87
+#: .\templates\include\header.html:88
 msgid "Store"
 msgstr "Store"
 
-#: .\templates\include\header.html:107
+#: .\templates\include\header.html:95 .\templates\include\header.html:97
+msgid "Search"
+msgstr ""
+
+#: .\templates\include\header.html:108
 msgid "Welcome"
 msgstr "Welcome"
 
-#: .\templates\include\header.html:109
-msgid "Dashboard"
-msgstr "Dashboard"
-
-#: .\templates\include\header.html:110
+#: .\templates\include\header.html:111
 msgid "Logout"
 msgstr "Logout"
 
-#: .\templates\include\header.html:113
+#: .\templates\include\header.html:114
 msgid "Welcome Guest!"
 msgstr "Welcome Guest!"
-
-#: .\templates\include\header.html:115
-msgid "Login"
-msgstr "Login"
-
-#: .\templates\include\header.html:116
-msgid "Register"
-msgstr "Register"
-
-#~ msgid "dir"
-#~ msgstr "ltr"

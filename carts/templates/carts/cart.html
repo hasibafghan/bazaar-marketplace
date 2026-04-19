@@ -1,5 +1,6 @@
 {% extends 'include/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
       <section class="section-content padding-y bg">
@@ -11,10 +12,10 @@
             <div class="card">
               <div class="card-body py-5">
                 <i class="fa fa-shopping-cart fa-3x text-muted mb-3"></i>
-                <h3>Your cart is empty</h3>
-                <p class="text-muted">Looks like you haven't added any items to your cart yet.</p>
+                <h3>{% trans "Your cart is empty" %}</h3>
+                <p class="text-muted">{% trans "Looks like you haven't added any items to your cart yet." %}</p>
                 <a href="{% url 'product_list' %}" class="btn btn-primary mt-3">
-                  Start Shopping
+                  {% trans "Start Shopping" %}
                 </a>
               </div>
             </div>
@@ -27,9 +28,9 @@
                   <table class="table table-borderless table-shopping-cart">
                     <thead class="text-muted">
                       <tr class="small text-uppercase">
-                        <th scope="col">Product</th>
-                        <th scope="col" class="pl-5">Quantity</th>
-                        <th scope="col" width="120">Price</th>
+                        <th scope="col">{% trans "Product" %}</th>
+                        <th scope="col" class="pl-5">{% trans "Quantity" %}</th>
+                        <th scope="col" width="120">{% trans "Price" %}</th>
                         <th scope="col" class="text-right" width="200"></th>
                       </tr>
                     </thead>
@@ -76,11 +77,11 @@
                           <td>
                             <div class="price-wrap">
                               <var class="price">${{ cart_item.sub_total }}</var>
-                              <small class="text-muted">${{ cart_item.product.price }} each</small>
+                              <small class="text-muted">${{ cart_item.product.price }} {% trans "each" %} </small>
                             </div> <!-- price-wrap .// -->
                           </td>
                           <td class="text-right">
-                            <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" class="btn btn-danger" onclick="return confirm('Are you sure to delete!')">Remove</a>
+                            <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}" class="btn btn-danger" onclick="return confirm({% trans 'Are you sure to delete!' %})">{% trans "Remove" %} </a>
                           </td>
                         </tr>
                       {% endfor %}
@@ -92,23 +93,23 @@
                 <div class="card">
                   <div class="card-body">
                     <dl class="dlist-align">
-                      <dt>Total price:</dt>
+                      <dt>{% trans "Total price" %}:</dt>
                       <dd class="text-right">${{ total }}</dd>
                     </dl>
                     <dl class="dlist-align">
-                      <dt>Tax:</dt>
+                      <dt>{% trans "Tax" %}:</dt>
                       <dd class="text-right">${{ tax }}</dd>
                     </dl>
                     <dl class="dlist-align">
-                      <dt>Total:</dt>
+                      <dt>{% trans "Total" %}:</dt>
                       <dd href="" class="text-right text-dark"><strong>${{ grand_total }}</strong></dd>
                     </dl>
                     <hr />
                     <p class="text-center mb-3">
                       <img src="{% static './images/misc/payments.png' %}" height="26" />
                     </p>
-                    <a href="{% url 'checkout' %}" class="btn btn-primary btn-block">Checkout</a>
-                    <a href="{% url 'product_list' %}" class="btn btn-light btn-block">Continue Shopping</a>
+                    <a href="{% url 'checkout' %}" class="btn btn-primary btn-block">{% trans "Checkout" %}</a>
+                    <a href="{% url 'product_list' %}" class="btn btn-light btn-block">{% trans "Continue Shopping" %}</a>
                   </div> <!-- card-body.// -->
                 </div> <!-- card.// -->
               </aside> <!-- col.// -->

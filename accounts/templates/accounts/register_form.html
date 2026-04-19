@@ -2,25 +2,26 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% load i18n %}
   <!-- ========================= SECTION CONTENT ========================= -->
   <section class="section-content padding-y">
     <!-- ============================ COMPONENT REGISTER ================================= -->
     <div class="card mx-auto" style="max-width:520px; margin-top:40px;">
       <article class="card-body">
         <header class="mb-4">
-          <h4 class="card-title">Sign up</h4>
+          <h4 class="card-title">{% trans "Sign up" %}</h4>
           {% include 'include/alerts.html' %}
         </header>
         <form method="POST" action="{% url 'register_user' %}">
           {% csrf_token %}
           {{ form|crispy }}
-          <button type="submit" class="btn btn-primary">Register</button>
+          <button type="submit" class="btn btn-primary">{% trans "Register" %}</button>
         </form>
       </article>
       <!-- card-body.// -->
     </div> <!-- card .// -->
     <p class="text-center mt-4">
-      Have an account? <a href="{% url 'login_user' %}">Log In</a>
+     {% trans "Already have an account?" %} <a href="{% url 'login_user' %}">{% trans "Log In" %}</a>
     </p>
     <br /><br />
     <!-- ============================ COMPONENT REGISTER END.// ================================= -->

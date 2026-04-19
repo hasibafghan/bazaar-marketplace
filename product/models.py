@@ -3,6 +3,7 @@ from django.urls import reverse
 from category.models import Category
 from accounts.models import Account
 from django.db.models import Avg
+from django.utils.translation import gettext_lazy as _
 from parler.models import TranslatableModel, TranslatedFields
 
 class Product(TranslatableModel):
@@ -36,19 +37,26 @@ class Product(TranslatableModel):
 
 #  ==========================| variation model |===============================
 
+
 variation_category_choice = (
-    ('color' , 'color'),
-    ('size' , 'size'),
+    ('color', _('Color')),  # also fix: translate the labels
+    ('size',  _('Size')),
 )
-class Variation(models.Model):
+
+class Variation(TranslatableModel):
+    translations = TranslatedFields(
+        variation_value=models.CharField(max_length=100),
+    )
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    variation_category = models.CharField(max_length=100 , choices=variation_category_choice)
-    variation_value = models.CharField(max_length=100)
+    variation_category = models.CharField(max_length=100, choices=variation_category_choice)
     is_active = models.BooleanField(default=True)
     created_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.variation_value
+        try:
+            return self.variation_value  # safe with try/except
+        except Exception:
+            return f"Variation {self.pk}"
     
 
 class ReviewRating(TranslatableModel):
