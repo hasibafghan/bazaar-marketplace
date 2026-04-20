@@ -8,7 +8,7 @@
         {% include 'include/alerts.html' %}
         <!-- ============================ COMPONENT 1 ================================= -->
         <div class="card">
-          <div class="row no-gutters">
+          <div class="row g-0">
             <aside class="col-md-6">
               <article class="gallery-wrap">
                 <div class="img-big-wrap text-center">
@@ -32,7 +32,7 @@
               </article> <!-- gallery-wrap .end// -->
             </aside>
             <!-- right side -->
-            <main class="col-md-6 border-left">
+            <main class="col-md-6 border-start">
               <div class="card rating-card">
                 <div class="card-body text-center">
                   <div class="rating-score display-4 fw-bold text-primary">{{ product.averageReview|floatformat:1 }}</div>
@@ -71,7 +71,7 @@
                       <div class="row">
                         <div class="item-option-select">
                           <h6>{% trans "Select Color" %}</h6>
-                          <select name="color" class="form-control">
+                          <select name="color" class="form-control" required>
                             <option value="" hidden disabled selected>{% trans "Choose Color" %}</option>
                             {% for i in category.list %}
                               {% if i.is_active %}
@@ -85,7 +85,7 @@
                       <div class="row">
                         <div class="item-option-select">
                           <h6>{% trans "Select Size" %}</h6>
-                          <select name="size" class="form-control">
+                          <select name="size" class="form-control" required>
                             <option value="" hidden disabled selected>{% trans "Choose Size" %}</option>
                             {% for i in category.list %}
                               {% if i.is_active %}
@@ -102,7 +102,7 @@
                   {% if product.stock <= 0 %}
                     <h4 class="text-danger">{% trans "Sorry, this product is out of stock!" %}</h4>
                   {% else %}
-                    <button href="" class="btn btn-primary"><span class="text">{% trans "Add to cart" %}</span> <i class="fas fa-shopping-cart"></i></button>
+                    <button type="submit" class="btn btn-primary"><span class="text">{% trans "Add to cart" %}</span> <i class="fas fa-shopping-cart"></i></button>
                   {% endif %}
                 </article> <!-- product-info-aside .// -->
               </form>

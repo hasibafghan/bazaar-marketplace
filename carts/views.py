@@ -1,4 +1,5 @@
 from django.shortcuts import render , redirect, get_object_or_404
+from django.contrib import messages
 from product.models import Product , Variation
 from .models import Cart , CartItem
 from django.contrib.auth.decorators import login_required
@@ -16,6 +17,12 @@ def _cart_id(request):
 def add_cart(request, product_id):
     current_user = request.user
     product = get_object_or_404(Product, id=product_id)
+    active_variation_categories = list(Variation.objects.filter(
+        product=product,
+        is_active=True
+    ).values_list('variation_category', flat=True).distinct())
+    required_variation_count = len(active_variation_categories)
+
     # If the user is authenticated, we will associate the cart items with the user
     if current_user.is_authenticated:
         product_variations = []
@@ -32,6 +39,10 @@ def add_cart(request, product_id):
                         product_variations.append(variation)
                 except Exception:
                     pass
+
+        if required_variation_count and len(product_variations) != required_variation_count:
+            messages.error(request, 'Please select all required product options before adding to cart.')
+            return redirect('product_detail', category_slug=product.category.slug, product_slug=product.slug)
 
         # CartItem Section: try to find an existing cart item with the same variations
         cart_items = CartItem.objects.filter(product=product, user=current_user)
@@ -70,6 +81,10 @@ def add_cart(request, product_id):
                         product_variations.append(variation)
                 except Exception:
                     pass
+
+        if required_variation_count and len(product_variations) != required_variation_count:
+            messages.error(request, 'Please select all required product options before adding to cart.')
+            return redirect('product_detail', category_slug=product.category.slug, product_slug=product.slug)
 
         try:
             cart = Cart.objects.get(cart_id=_cart_id(request))

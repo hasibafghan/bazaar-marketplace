@@ -8,6 +8,6 @@
     <a class="list-group-item {% if request.resolver_match.url_name == 'change_password' %}active{% endif %}" href="{% url 'change_password' %}">{% trans "Change Password" %}</a>
   </ul>
   <br />
-  <a class="btn btn-light btn-block" href="{% url 'logout_user' %}"><i class="fa fa-power-off"></i> <span class="text">{% trans "Log out" %}</span></a>
+  <a class="btn btn-light w-100" href="{% url 'logout_user' %}"><i class="fa fa-power-off"></i> <span class="text">{% trans "Log out" %}</span></a>
   <!-- SIDEBAR .//END -->
 </aside>

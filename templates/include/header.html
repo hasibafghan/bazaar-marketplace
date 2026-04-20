@@ -11,15 +11,15 @@
       <a href="{% url 'home' %}" class="navbar-brand d-lg-none"><img class="logo" src="{% static './images/logo.png' %}" alt="Logo" /></a>
 
       <!-- Toggle Button -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarTop4" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTop4" aria-controls="navbarTop4" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 
       <!-- Menu -->
-      <div class="collapse navbar-collapse" id="navbarTop4">
-        <ul class="navbar-nav mr-auto">
+      <div class="collapse navbar-collapse justify-content-between " id="navbarTop4">
+        <ul class="navbar-nav m-0 p-0">
          
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{% trans 'Language' %}</a>
-            <ul class="dropdown-menu scroll-auto">
+            <ul class="dropdown-menu scroll-auto ">
               {% get_current_language as LANGUAGE_CODE %}
               {% get_available_languages as AVAILABLE_LANGUAGES %}
               {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
@@ -47,7 +47,7 @@
             <a href="#" class="nav-link">{% trans "USD" %}</a>
           </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav">
           <li>
             <a href="#" class="nav-link"><i class="fa fa-envelope"></i> {% trans 'Email' %}</a>
           </li>
@@ -62,7 +62,7 @@
   <!-- Main Header -->
   <section class="header-main border-bottom">
     <div class="container">
-      <div class="row align-items-center text-center text-md-left">
+      <div class="row align-items-center text-center text-md-start">
         <!-- Logo (hidden on mobile, shown on large) -->
         <div class="col-lg-2 col-md-3 col-6 order-1 order-lg-1 mb-2 mb-lg-0">
           <a href="{% url 'home' %}" class="brand-wrap d-none d-lg-block"><img class="logo" src="{% static './images/logo.png' %}" alt="Logo" /></a>
@@ -71,7 +71,7 @@
         <!-- Category Dropdown -->
         <div class="col-lg-2 col-md-3 col-6 order-3 order-lg-2 mb-2 mb-lg-0">
           <div class="dropdown w-100">
-            <button class="btn btn-primary dropdown-toggle w-100" data-toggle="dropdown"><i class="fa fa-bars"></i> {% trans 'Categories' %}</button>
+            <button class="btn btn-primary dropdown-toggle w-100" data-bs-toggle="dropdown"><i class="fa fa-bars"></i> {% trans 'Categories' %}</button>
             <div class="dropdown-menu w-100">
               <a class="dropdown-item" href="{% url 'product_list' %}">{% trans 'All Products' %}</a>
               <div class="dropdown-divider m-auto" style="width: 85%;"></div>
@@ -100,11 +100,11 @@
         </div>
 
         <!-- User + Cart -->
-        <div class="col-lg-3 col-md-6 col-12 order-2 order-lg-5 mb-2 mb-lg-0">
-          <div class="d-flex justify-content-center justify-content-lg-end align-items-center">
-            <div class="widget-header mr-3 text-center text-lg-left">
+        <div class="col-lg-3 col-md-6 col-12 order-2 order-lg-5 mb-2 mb-lg-0 d-flex justify-content-center justify-content-lg-end">
+          <div class="d-flex justify-content-between align-items-center gap-3">
+            <div class="widget-header text-center text-lg-start">
               {% if user.is_authenticated %}
-                <small class="title text-muted">!{% trans 'Welcome' %} {{ user.first_name|capfirst }}</small>
+                <small class="title text-muted">{% trans 'Welcome' %} {{ user.first_name|capfirst }}!</small>
                 <div >
                   <a href="{% url 'dashboard' %}" class="text-decoration-none">{% trans 'Dashboard' %}</a> <span class="dark-transp">|</span>
                   <a href="{% url 'logout_user' %}" class="text-decoration-none">{% trans 'Logout' %}</a>
@@ -117,11 +117,11 @@
                 </div>
               {% endif %}
             </div>
-            <a href="{% url 'cart' %}" class="widget-header ml-2">
+            <a href="{% url 'cart' %}" class="widget-header position-relative">
               <div class="icon icon-sm rounded-circle border">
                 <i class="fa fa-shopping-cart"></i>
               </div>
-              <span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>
+              <span class="badge rounded-pill bg-danger notify">{{ cart_count }}</span>
             </a>
           </div>
         </div>

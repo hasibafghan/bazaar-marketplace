@@ -6,7 +6,7 @@
   border: 0;
 }
 .rate > label {
-  float: right;
+  float: inline-end;
 }
 
 /* Showing the stars */
@@ -94,8 +94,110 @@
   transform: translateX(5px);
   background: linear-gradient(135deg, #c9ced3 0%, #047cfc 100%);
   box-shadow: 0 4px 12px rgba(147, 154, 162, 0.3);
-  width: 50%;
+  width: 90%;
   padding: 5px 10px;
 }
 
+/* ====================== RTL SUPPORT FOR BOOTSTRAP 5 ====================== */
+/* Ensure proper text direction and alignment for RTL languages */
+
+html[dir="rtl"] .category-link:hover {
+  transform: translateX(-5px);
+}
+
+/* Fix rating stars float for RTL */
+html[dir="rtl"] .rate > label {
+  float: inline-end;
+}
+
+html[dir="rtl"] .rate > label {
+  float: inline-start;
+}
+
+/* Fix half star padding for RTL */
+html[dir="rtl"] .rate .half:before {
+  padding-left: 0;
+  padding-right: unset;
+}
+
+/* Ensure proper icon alignment in RTL */
+html[dir="rtl"] .icon-wrap {
+  text-align: center;
+}
+
+/* Fix form alignment in RTL */
+html[dir="rtl"] .form-control,
+html[dir="rtl"] .form-select {
+  direction: rtl !important;
+}
+
+/* Fix dropdown menu alignment for RTL */
+html[dir="rtl"] .dropdown-menu {
+  text-align: right;
+}
+
+/* Proper input group styling for RTL */
+html[dir="rtl"] .input-group {
+  flex-direction: row-reverse;
+}
+
+/* Fix button group for RTL */
+html[dir="rtl"] .btn-group {
+  flex-direction: row-reverse;
+}
+
+/* Fix alert styling for RTL */
+html[dir="rtl"] .alert {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Fix modal and dialogs for RTL */
+html[dir="rtl"] .modal-header,
+html[dir="rtl"] .modal-footer {
+  flex-direction: row-reverse;
+}
+
+/* Fix list menu items for RTL */
+html[dir="rtl"] .list-menu li a {
+  display: block;
+  text-align: right;
+}
+
+/* Fix navbar for RTL */
+html[dir="rtl"] .navbar-collapse {
+  flex-basis: 100%;
+  flex-grow: 1;
+}
+
+html[dir="rtl"] .navbar-nav {
+  flex-direction: row;
+}
+
+html[dir="rtl"] .navbar-nav .me-auto {
+  margin-inline-end: auto !important;
+}
+
+html[dir="rtl"] .navbar-nav .ms-auto {
+  margin-inline-start: auto !important;
+}
+
+/* Fix navbar brand and toggler position */
+html[dir="rtl"] .navbar-brand {
+  margin-right: 0;
+  margin-left: 1rem;
+}
+
+/* Ensure dropdown menus align properly in RTL navbar */
+html[dir="rtl"] .navbar .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+/* Fix order of navbar elements in RTL */
+html[dir="rtl"] .search .input-group {
+  flex-direction: row-reverse;
+}
+
+/* ====================== END RTL SUPPORT ====================== */
   

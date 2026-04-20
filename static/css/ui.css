@@ -463,8 +463,14 @@ p:last-child {
 }
 .widget-header .notify {
   position: absolute;
-  top: -3px;
-  right: -10px;
+  top: -6px;
+  right: -14px;
+  min-width: 20px;
+  padding: 0.2rem 0.55rem;
+}
+html[dir="rtl"] .widget-header .notify {
+  right: auto;
+  left: -14px;
 }
 .widget-header:hover i {
   color: #3167eb;
