@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-19 16:29+0430\n"
+"POT-Creation-Date: 2026-04-22 15:55+0430\n"
 "PO-Revision-Date: 2026-04-10 23:21+0000\n"
 "Last-Translator: ali ali <ali@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -186,138 +186,146 @@ msgid "Order Total"
 msgstr "Order Tracking"
 
 #: .\accounts\templates\accounts\my_orders.html:26
-#: .\accounts\templates\accounts\order_detail.html:44
-#: .\orders\templates\orders\payment_success.html:95
+#: .\accounts\templates\accounts\order_detail.html:33
+#: .\orders\templates\orders\payment_success.html:33
 msgid "Date"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:6
+#: .\accounts\templates\accounts\order_detail.html:5
 #: .\orders\templates\orders\payment_success.html:5
 msgid "Payment Successful"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:21
-#: .\orders\templates\orders\payment_success.html:82
-msgid "Thank you for your order"
+#: .\accounts\templates\accounts\order_detail.html:18
+#: .\orders\templates\orders\payment_success.html:18
+msgid "PAYMENT RECEIPT"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:26
-#: .\orders\templates\orders\payment_success.html:87
+#: .\accounts\templates\accounts\order_detail.html:19
+#: .\orders\templates\orders\payment_success.html:19
+msgid "This is your official payment receipt"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:25
+#: .\orders\templates\orders\payment_success.html:25
 msgid "Order Details"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:30
-#: .\orders\templates\orders\payment_success.html:90
+#: .\accounts\templates\accounts\order_detail.html:28
+#: .\orders\templates\orders\payment_success.html:28
 msgid "Order #"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:34
-#: .\orders\templates\orders\payment_success.html:93
+#: .\accounts\templates\accounts\order_detail.html:31
+#: .\orders\templates\orders\payment_success.html:31
 msgid "Transaction #"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:47
-#: .\orders\templates\orders\payment_success.html:96
+#: .\accounts\templates\accounts\order_detail.html:34
+#: .\orders\templates\orders\payment_success.html:34
 msgid "Status"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:61
-#: .\carts\templates\carts\cart.html:31
-#: .\orders\templates\orders\payment_success.html:109
+#: .\accounts\templates\accounts\order_detail.html:34
+#: .\orders\templates\orders\payment_success.html:34
+msgid "PAID"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:38
+#: .\orders\templates\orders\payment_success.html:38
+#, fuzzy
+#| msgid "Customer Service"
+msgid "Customer"
+msgstr "Customer Service"
+
+#: .\accounts\templates\accounts\order_detail.html:57
+#: .\carts\templates\carts\cart.html:32
+#: .\orders\templates\orders\payment_success.html:57
 #, fuzzy
 #| msgid "All Products"
 msgid "Product"
 msgstr "All Products"
 
-#: .\accounts\templates\accounts\order_detail.html:62
-#: .\carts\templates\carts\cart.html:32
-#: .\orders\templates\orders\payment_success.html:110
+#: .\accounts\templates\accounts\order_detail.html:58
+#: .\carts\templates\carts\cart.html:35
+#: .\orders\templates\orders\payment_success.html:58
 msgid "Quantity"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:63
-#: .\carts\templates\carts\cart.html:33
-#: .\orders\templates\orders\payment_success.html:111
+#: .\accounts\templates\accounts\order_detail.html:59
+#: .\carts\templates\carts\cart.html:38
+#: .\orders\templates\orders\payment_success.html:59
 msgid "Price"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:64
-#: .\carts\templates\carts\cart.html:104
+#: .\accounts\templates\accounts\order_detail.html:60
+#: .\carts\templates\carts\cart.html:120
 #: .\carts\templates\carts\checkout.html:280
-#: .\orders\templates\orders\payment_success.html:112
+#: .\orders\templates\orders\payment_success.html:60
 msgid "Total"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:128
-#: .\orders\templates\orders\payment_success.html:139
+#: .\accounts\templates\accounts\order_detail.html:83
+#: .\orders\templates\orders\payment_success.html:83
 msgid "Product Name"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:137
+#: .\accounts\templates\accounts\order_detail.html:92
 #: .\carts\templates\carts\checkout.html:268
 #: .\orders\templates\orders\payment_process.html:297
-#: .\orders\templates\orders\payment_success.html:148
+#: .\orders\templates\orders\payment_success.html:92
 msgid "Subtotal"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:141
-#: .\carts\templates\carts\cart.html:100
+#: .\accounts\templates\accounts\order_detail.html:96
+#: .\carts\templates\carts\cart.html:114
 #: .\carts\templates\carts\checkout.html:272
-#: .\orders\templates\orders\payment_success.html:152
+#: .\orders\templates\orders\payment_success.html:96
 msgid "Tax"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:145
+#: .\accounts\templates\accounts\order_detail.html:100
 #: .\carts\templates\carts\checkout.html:276
 #: .\orders\templates\orders\payment_process.html:305
-#: .\orders\templates\orders\payment_success.html:156
+#: .\orders\templates\orders\payment_success.html:100
 #: .\templates\include\footer.html:58
 msgid "Shipping"
 msgstr "Shipping"
 
-#: .\accounts\templates\accounts\order_detail.html:149
-#: .\orders\templates\orders\payment_success.html:160
+#: .\accounts\templates\accounts\order_detail.html:101
+#: .\orders\templates\orders\payment_success.html:101
+msgid "FREE"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:104
+#: .\orders\templates\orders\payment_success.html:104
 msgid "Grand Total"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:160
-#: .\orders\templates\orders\payment_process.html:211
-#: .\orders\templates\orders\payment_success.html:171
-msgid "Billing Information"
-msgstr ""
-
-#: .\accounts\templates\accounts\order_detail.html:173
-#: .\orders\templates\orders\payment_success.html:182
-msgid "Shipping Information"
-msgstr ""
-
-#: .\accounts\templates\accounts\order_detail.html:191
+#: .\accounts\templates\accounts\order_detail.html:114
 #: .\carts\templates\carts\checkout.html:226
-#: .\orders\templates\orders\payment_success.html:198
+#: .\orders\templates\orders\payment_success.html:114
 msgid "Order Note"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:199
-#: .\orders\templates\orders\payment_success.html:206
-msgid ""
-"Thank you for shopping with us! We'll send you a confirmation email shortly."
+#: .\accounts\templates\accounts\order_detail.html:121
+#: .\orders\templates\orders\payment_success.html:121
+msgid "Thank you for shopping with us!"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:203
-#: .\carts\templates\carts\cart.html:112
-#: .\orders\templates\orders\payment_cancelled.html:194
-#: .\orders\templates\orders\payment_success.html:211
-msgid "Continue Shopping"
+#: .\accounts\templates\accounts\order_detail.html:122
+#: .\orders\templates\orders\payment_success.html:122
+msgid "Printed on"
 msgstr ""
 
-#: .\accounts\templates\accounts\order_detail.html:204
-#: .\orders\templates\orders\payment_success.html:214
-msgid "Back to Home"
-msgstr ""
-
-#: .\accounts\templates\accounts\order_detail.html:205
-#: .\orders\templates\orders\payment_success.html:217
+#: .\accounts\templates\accounts\order_detail.html:133
+#: .\orders\templates\orders\payment_success.html:133
 msgid "Print Receipt"
+msgstr ""
+
+#: .\accounts\templates\accounts\order_detail.html:136
+#: .\orders\templates\orders\payment_success.html:136
+msgid "Back to Home"
 msgstr ""
 
 #: .\accounts\templates\accounts\register_form.html:18
@@ -353,61 +361,62 @@ msgstr ""
 msgid "Your cart is empty"
 msgstr ""
 
-#: .\carts\templates\carts\cart.html:16
+#: .\carts\templates\carts\cart.html:17
 msgid "Looks like you haven't added any items to your cart yet."
 msgstr ""
 
-#: .\carts\templates\carts\cart.html:18
+#: .\carts\templates\carts\cart.html:19
 #, fuzzy
 #| msgid "Shipping"
 msgid "Start Shopping"
 msgstr "Shipping"
 
-#: .\carts\templates\carts\cart.html:80
+#: .\carts\templates\carts\cart.html:89
 msgid "each"
 msgstr ""
 
-#: .\carts\templates\carts\cart.html:84
+#: .\carts\templates\carts\cart.html:95
 msgid "Are you sure to delete!"
 msgstr ""
 
-#: .\carts\templates\carts\cart.html:84
+#: .\carts\templates\carts\cart.html:95
 msgid "Remove"
 msgstr ""
 
-#: .\carts\templates\carts\cart.html:96
+#: .\carts\templates\carts\cart.html:108
 msgid "Total price"
 msgstr ""
 
-#: .\carts\templates\carts\cart.html:111
+#: .\carts\templates\carts\cart.html:128
 msgid "Checkout"
+msgstr ""
+
+#: .\carts\templates\carts\cart.html:129
+#: .\orders\templates\orders\payment_cancelled.html:194
+msgid "Continue Shopping"
 msgstr ""
 
 #: .\carts\templates\carts\checkout.html:148
 #: .\orders\templates\orders\payment_cancelled.html:149
 #: .\orders\templates\orders\payment_process.html:176
-#: .\orders\templates\orders\payment_success.html:21
 msgid "Cart"
 msgstr ""
 
 #: .\carts\templates\carts\checkout.html:156
 #: .\orders\templates\orders\payment_cancelled.html:157
 #: .\orders\templates\orders\payment_process.html:184
-#: .\orders\templates\orders\payment_success.html:29
 msgid "Details"
 msgstr ""
 
 #: .\carts\templates\carts\checkout.html:164
 #: .\orders\templates\orders\payment_cancelled.html:165
 #: .\orders\templates\orders\payment_process.html:192
-#: .\orders\templates\orders\payment_success.html:37
 msgid "Payment"
 msgstr ""
 
 #: .\carts\templates\carts\checkout.html:172
 #: .\orders\templates\orders\payment_cancelled.html:173
 #: .\orders\templates\orders\payment_process.html:200
-#: .\orders\templates\orders\payment_success.html:45
 msgid "Confirmation"
 msgstr ""
 
@@ -562,6 +571,10 @@ msgstr ""
 msgid "Please wait while we checking you payment"
 msgstr ""
 
+#: .\orders\templates\orders\payment_process.html:211
+msgid "Billing Information"
+msgstr ""
+
 #: .\orders\templates\orders\payment_process.html:215
 msgid "Name"
 msgstr ""
@@ -601,46 +614,6 @@ msgstr ""
 #: .\orders\templates\orders\payment_process.html:325
 msgid "Your order will be created and confirmed only after successful payment."
 msgstr ""
-
-#: .\orders\templates\orders\payment_success.html:59
-msgid "Payment Successful!"
-msgstr ""
-
-#: .\orders\templates\orders\payment_success.html:60
-msgid ""
-"Thank you! Your order has been placed successfully. We will deliver your "
-"products as soon as possible."
-msgstr ""
-
-#: .\orders\templates\orders\payment_success.html:73
-msgid "PAYMENT RECEIPT"
-msgstr ""
-
-#: .\orders\templates\orders\payment_success.html:74
-msgid "This is your official payment receipt"
-msgstr ""
-
-#: .\orders\templates\orders\payment_success.html:96
-msgid "PAID"
-msgstr ""
-
-#: .\orders\templates\orders\payment_success.html:157
-msgid "FREE"
-msgstr ""
-
-#: .\orders\templates\orders\payment_success.html:232
-msgid "Your cart is now empty"
-msgstr ""
-
-#: .\orders\templates\orders\payment_success.html:233
-msgid "Ready to discover more amazing products?"
-msgstr ""
-
-#: .\orders\templates\orders\payment_success.html:235
-#, fuzzy
-#| msgid "All Products"
-msgid "Explore More Products"
-msgstr "All Products"
 
 #: .\product\models.py:42
 msgid "Color"
@@ -790,11 +763,11 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: .\templates\include\base.html:5
+#: .\templates\include\base.html:6
 msgid "dir"
 msgstr "ltr"
 
-#: .\templates\include\base.html:13
+#: .\templates\include\base.html:14
 msgid "Tanzaib | One of the Biggest Online Shopping Platform"
 msgstr "Tanzaib | One of the Biggest Online Shopping Platform"
 
@@ -887,6 +860,10 @@ msgstr "123 Street, Avenue ABC"
 msgid "Subscribe to Newsletter"
 msgstr "Subscribe to Newsletter"
 
+#: .\templates\include\footer.html:82
+msgid "Your email"
+msgstr ""
+
 #: .\templates\include\footer.html:83
 msgid "Subscribe"
 msgstr "Subscribe"
@@ -926,3 +903,8 @@ msgstr "Logout"
 #: .\templates\include\header.html:114
 msgid "Welcome Guest!"
 msgstr "Welcome Guest!"
+
+#, fuzzy
+#~| msgid "All Products"
+#~ msgid "Explore More Products"
+#~ msgstr "All Products"

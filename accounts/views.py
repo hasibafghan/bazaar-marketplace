@@ -339,6 +339,7 @@ def order_detail(request, order_id):
     context = {
         'order_detail' : order_detail,
         'order' : order,
+        'payment': order.payment,
         'subtotal': subtotal,
     }
 
