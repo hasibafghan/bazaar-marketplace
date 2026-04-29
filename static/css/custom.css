@@ -4,9 +4,16 @@
 .rate {
   display: inline-block;
   border: 0;
+  direction: ltr;
+  unicode-bidi: bidi-override;
 }
 .rate > label {
-  float: inline-end;
+  float: right;
+  position: relative;
+  width: 1.1rem;
+  margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 /* Showing the stars */
@@ -16,14 +23,20 @@
   font-family: FontAwesome ;
   content: "\f005";
   margin: 0;
-  padding: 0.3rem 0.2rem;
+  padding: 0.3rem 0.1rem;
   cursor: pointer;
 }
 /* Half star */
+.rate > label.half {
+  width: 0.55rem;
+  margin-right: -0.55rem;
+  z-index: 2;
+}
+
 .rate .half:before {
   content: "\f089";
-  position: absolute;
-  padding-right: 0;
+  position: relative;
+  padding: 0.3rem 0 0.3rem 0.1rem;
 }
 /* Click and hover */
 .rate > input:checked ~ label:before, .rate > label:hover ~ label:before {
@@ -103,21 +116,6 @@
 
 html[dir="rtl"] .category-link:hover {
   transform: translateX(-5px);
-}
-
-/* Fix rating stars float for RTL */
-html[dir="rtl"] .rate > label {
-  float: inline-end;
-}
-
-html[dir="rtl"] .rate > label {
-  float: inline-start;
-}
-
-/* Fix half star padding for RTL */
-html[dir="rtl"] .rate .half:before {
-  padding-left: 0;
-  padding-right: unset;
 }
 
 /* Ensure proper icon alignment in RTL */

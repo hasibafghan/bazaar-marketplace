@@ -36,7 +36,7 @@
               <div class="card rating-card">
                 <div class="card-body text-center">
                   <div class="rating-score display-4 fw-bold text-primary">{{ product.averageReview|floatformat:1 }}</div>
-                  <div class="stars my-2">
+                  <div class="stars my-2" dir="ltr">
                     {% with avg_rating=product.averageReview %}
                       {% for i in '12345' %}
                         {% if avg_rating >= forloop.counter %}
@@ -119,7 +119,7 @@
             <!-- Rating stars -->
             <label>{% trans "How do you rate this product?" %}</label>
             <br />
-            <div class="rate">
+            <div class="rate" dir="ltr">
               <input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10" title="5 stars"></label>
               <input type="radio" name="rating" id="rating9" value="4.5" required /><label for="rating9" title="4.5 stars" class="half"></label>
               <input type="radio" name="rating" id="rating8" value="4" required /><label for="rating8" title="4 stars"></label>

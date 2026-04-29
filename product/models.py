@@ -58,12 +58,10 @@ class Variation(TranslatableModel):
         except Exception:
             return f"Variation {self.pk}"
     
-
-class ReviewRating(TranslatableModel):
-    translations = TranslatedFields(
-        subject=models.CharField(max_length=100, blank=True),
-        review=models.TextField(max_length=500, blank=True),
-    )
+    
+class ReviewRating(models.Model):
+    subject = models.CharField(max_length=100, blank=True)
+    review = models.TextField(max_length=500, blank=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     rating = models.FloatField()
@@ -71,7 +69,12 @@ class ReviewRating(TranslatableModel):
     status = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    userporfile = models.OneToOneField('accounts.UserProfile', on_delete=models.CASCADE, null=True, blank=True)
+    userprofile = models.OneToOneField(
+        'accounts.UserProfile', 
+        on_delete=models.CASCADE, 
+        null=True, 
+        blank=True
+    )
     
     def __str__(self):
         return self.subject
