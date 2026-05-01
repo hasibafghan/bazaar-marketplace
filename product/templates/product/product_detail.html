@@ -6,6 +6,7 @@
     <section class="section-content padding-y bg">
       <div class="container">
         {% include 'include/alerts.html' %}
+        
         <!-- ============================ COMPONENT 1 ================================= -->
         <div class="card">
           <div class="row g-0">
@@ -120,6 +121,7 @@
             <label>{% trans "How do you rate this product?" %}</label>
             <br />
             <div class="rate" dir="ltr">
+              
               <input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10" title="5 stars"></label>
               <input type="radio" name="rating" id="rating9" value="4.5" required /><label for="rating9" title="4.5 stars" class="half"></label>
               <input type="radio" name="rating" id="rating8" value="4" required /><label for="rating8" title="4 stars"></label>
@@ -211,6 +213,8 @@
                         {% else %}
                           <i class="far fa-star"></i>
                         {% endif %}
+
+                        
                       </span>
                     </div>
                   </div>
