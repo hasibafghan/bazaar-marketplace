@@ -48,7 +48,7 @@ def product_list(request):
     
     # Pagination
     products_counter = products.count()
-    paginator = Paginator(products, 3)
+    paginator = Paginator(products, 6)
     page_number = request.GET.get('page')
     page_products = paginator.get_page(page_number)
 
@@ -70,7 +70,7 @@ def products_by_category(request , category_slug):
     category = get_object_or_404(Category , slug = category_slug)
     products = Product.objects.filter(category = category , is_available = True).order_by('created_date')
     
-    paginator = Paginator(products , 3)
+    paginator = Paginator(products , 6)
     page_number = request.GET.get('page')
     page_products = paginator.get_page(page_number)
 
@@ -100,7 +100,7 @@ def search_product(request):
         products = Product.objects.all().order_by('-id')
 
     # Pagination for search results too
-    paginator = Paginator(products, 3)
+    paginator = Paginator(products, 6)
     page = request.GET.get('page')
     products_page = paginator.get_page(page)
 

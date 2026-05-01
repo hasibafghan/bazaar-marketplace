@@ -6,7 +6,6 @@ from .models import Order, Payment, OrderProduct
 from .forms import OrderForm
 from carts.models import CartItem
 import datetime
-from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json, traceback
 from django.core.mail import EmailMessage
@@ -92,7 +91,6 @@ def payment_process(request):
         return HttpResponse("Invalid request method.", status=400)
 
 
-@csrf_exempt
 @login_required
 def payment_success(request):
     """

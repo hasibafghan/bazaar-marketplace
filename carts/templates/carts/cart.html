@@ -125,7 +125,11 @@
                 <p class="text-center mb-3">
                   <img src="{% static './images/misc/payments.png' %}" height="26" />
                 </p>
-                <a href="{% url 'checkout' %}" class="btn btn-primary w-100">{% trans 'Checkout' %}</a>
+                {% if user.is_authenticated %}
+                  <a href="{% url 'checkout' %}" class="btn btn-primary w-100">{% trans 'Checkout' %}</a>
+                {% else %}
+                  <a href="{% url 'login_user' %}?next={{ request.path }}" class="btn btn-primary w-100">{% trans 'Login to Checkout' %}</a>
+                {% endif %}
                 <a href="{% url 'product_list' %}" class="btn btn-light w-100">{% trans 'Continue Shopping' %}</a>
               </div> <!-- card-body.// -->
             </div> <!-- card.// -->

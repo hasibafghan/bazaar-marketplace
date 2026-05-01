@@ -98,11 +98,12 @@
                       </div> <!-- row.// -->
                     {% endif %}
                   {% endfor %}
-                  <hr />
-
-                  {% if product.stock <= 0 %}
+                  
+                  {% if product.stock <= 0 or not product.variation_set.exists %}
+                    <hr />
                     <h4 class="text-danger">{% trans "Sorry, this product is out of stock!" %}</h4>
                   {% else %}
+                    <hr />
                     <button type="submit" class="btn btn-primary"><span class="text">{% trans "Add to cart" %}</span> <i class="fas fa-shopping-cart"></i></button>
                   {% endif %}
                 </article> <!-- product-info-aside .// -->
@@ -146,7 +147,9 @@
                 <p class="text-muted">{% trans "Note: you must purchase the product before leave a review!" %}</p>
               {% endif %}
             {% else %}
-              <a href="{% url 'login_user' %}?next={{ request.path }}" class="btn btn-primary">{% trans "Login to Submit Review" %}</a>
+              <a style="text-decoration: none;" href="{% url 'login_user' %}?next={{ request.path }}" >
+                 <p class="text-muted">{% trans "Note: you must purchase the product before leave a review!" %}</p>
+                <span class="btn btn-warning">{% trans "Login to Submit Review" %}</span></a>
             {% endif %}
           </div>
         </form>

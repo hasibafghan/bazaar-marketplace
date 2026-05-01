@@ -1,6 +1,5 @@
-
-{% autoescape off %}
 {% load i18n %}
+{% autoescape off %}
  {% trans "Hi" %} {{ user.username }},
 {% trans "Please click on the link below to verify your email address and activate your account:" %}
 http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
@@ -9,6 +8,6 @@ http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
 {% trans "Thanks," %}
 {% trans "The Tanzib Team" %}
     
-{% endautoescape % }
+{% endautoescape %}
 
 

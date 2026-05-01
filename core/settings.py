@@ -150,6 +150,7 @@ LANGUAGE_CODE = 'en'
 LANGUAGES = [
     ('en' , _('English')),
     ('fa' , _('Persian')),
+    # ('fr' , _('French')),
 ]
 
 
@@ -157,6 +158,8 @@ PARLER_LANGUAGES = {
     None: (
         {'code': 'en'},
         {'code': 'fa'},
+        # {'code': 'fr'},
+        
     ),
     'default': {
         'fallbacks': ['en'],
