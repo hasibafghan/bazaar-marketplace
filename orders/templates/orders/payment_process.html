@@ -10,6 +10,7 @@
       align-items: center;
       margin: 0 auto;
       max-width: 800px;
+      direction: ltr;
     }
     
     .stepper-item {
@@ -26,7 +27,7 @@
       border-bottom: 3px solid #dee2e6;
       width: 100%;
       top: 25px;
-      left: -50%;
+      inset-inline-start: -50%;
       z-index: 1;
     }
     
@@ -36,7 +37,7 @@
       border-bottom: 3px solid #dee2e6;
       width: 100%;
       top: 25px;
-      left: 50%;
+      inset-inline-start: 50%;
       z-index: 1;
     }
     
@@ -82,6 +83,27 @@
     .stepper-item.completed::after,
     .stepper-item.completed::before,
     .stepper-item.active::before {
+      border-color: #4e73df;
+    }
+
+    /* RTL stepper fixes */
+    html[dir="rtl"] .stepper-wrapper {
+      direction: rtl;
+    }
+
+    html[dir="rtl"] .stepper-item::before {
+      inset-inline-start: 50%;
+    }
+
+    html[dir="rtl"] .stepper-item::after {
+      inset-inline-start: -50%;
+    }
+
+    html[dir="rtl"] .stepper-item.active::before {
+      border-color: #dee2e6;
+    }
+
+    html[dir="rtl"] .stepper-item.active::after {
       border-color: #4e73df;
     }
     
