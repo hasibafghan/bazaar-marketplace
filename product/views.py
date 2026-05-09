@@ -12,39 +12,55 @@ from orders.models import OrderProduct
 from django.db.models import Min, Max
 
 
+def _clean_price(value):
+    if value in (None, ''):
+        return None
 
-def product_list(request):
-    # Get all available products
-    products = Product.objects.all().filter(is_available=True).order_by('created_date')
-    
-    # Get min and max prices - force min to 0
+    try:
+        price = int(value)
+    except (TypeError, ValueError):
+        return None
+
+    return max(price, 0)
+
+
+def _apply_price_filter(request, products):
     price_range = products.aggregate(
         min_price=Min('price'),
         max_price=Max('price')
     )
-    min_price = 0  # Always start from 0
-    max_price = int(price_range['max_price'] or 1000)
-    
-    # Handle price filtering
-    min_filter = request.GET.get('min_price')
-    max_filter = request.GET.get('max_price')
-    
-    if min_filter:
-        products = products.filter(price__gte=min_filter)
-    if max_filter:
-        products = products.filter(price__lte=max_filter)
-    
-    # Generate price options starting from 0
-    price_options = []
-    current = 0
-    while current <= max_price:
-        price_options.append(current)
-        if current < 50:
-            current += 10
-        elif current < 200:
-            current += 50
-        else:
-            current += 100
+    min_price = 0
+    max_price = int(price_range['max_price'] or 0)
+
+    selected_min = _clean_price(request.GET.get('min_price'))
+    selected_max = _clean_price(request.GET.get('max_price'))
+
+    if selected_min is not None and selected_max is not None and selected_min > selected_max:
+        selected_min, selected_max = selected_max, selected_min
+
+    if selected_min is not None:
+        products = products.filter(price__gte=selected_min)
+    if selected_max is not None:
+        products = products.filter(price__lte=selected_max)
+
+    query_params = request.GET.copy()
+    query_params.pop('page', None)
+    querystring = query_params.urlencode()
+
+    return products, {
+        'min_price': min_price,
+        'max_price': max_price,
+        'selected_min': selected_min,
+        'selected_max': selected_max,
+        'querystring': querystring,
+    }
+
+
+
+def product_list(request):
+    # Get all available products
+    products = Product.objects.all().filter(is_available=True).order_by('created_date')
+    products, price_context = _apply_price_filter(request, products)
     
     # Pagination
     products_counter = products.count()
@@ -55,12 +71,8 @@ def product_list(request):
     context = {
         'products': page_products,
         'products_counter': products_counter,
-        'min_price': min_price,
-        'max_price': max_price,
-        'price_options': price_options,
-        'selected_min': min_filter,
-        'selected_max': max_filter,
     }
+    context.update(price_context)
     
     return render(request, 'product/product_list.html', context)
 
@@ -69,6 +81,7 @@ def product_list(request):
 def products_by_category(request , category_slug):
     category = get_object_or_404(Category , slug = category_slug)
     products = Product.objects.filter(category = category , is_available = True).order_by('created_date')
+    products, price_context = _apply_price_filter(request, products)
     
     paginator = Paginator(products , 6)
     page_number = request.GET.get('page')
@@ -82,6 +95,7 @@ def products_by_category(request , category_slug):
         'products' : page_products,
         'products_counter' : products_counter
     }
+    context.update(price_context)
 
     return render (request , 'product/product_list.html' , context) 
 
@@ -99,16 +113,21 @@ def search_product(request):
     else:
         products = Product.objects.all().order_by('-id')
 
+    products, price_context = _apply_price_filter(request, products)
+
     # Pagination for search results too
     paginator = Paginator(products, 6)
     page = request.GET.get('page')
     products_page = paginator.get_page(page)
 
-    return render(request, 'product/product_list.html', {
+    context = {
         'products': products_page,
         'products_counter': products.count(),
         # 'categories': categories,
-    })
+    }
+    context.update(price_context)
+
+    return render(request, 'product/product_list.html', context)
 
 
 from accounts.models import UserProfile

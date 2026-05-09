@@ -9,16 +9,14 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-02 16:20+0430\n"
-"PO-Revision-Date: 2026-04-10 23:21+0000\n"
-"Last-Translator: ali ali <ali@gmail.com>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Translated-Using: django-rosetta 0.10.3\n"
-
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 #: .\accounts\templates\accounts\account_verification_email.html:3
 #: .\accounts\templates\accounts\reset_password_email.html:5
 #: .\orders\templates\orders\order_received_email.html:5
@@ -84,10 +82,8 @@ msgid "Update Password"
 msgstr ""
 
 #: .\accounts\templates\accounts\dashboard.html:15
-#, fuzzy
-#| msgid "Login"
 msgid "Login as:"
-msgstr "Login"
+msgstr ""
 
 #: .\accounts\templates\accounts\dashboard.html:22
 msgid "Total Orders"
@@ -155,7 +151,7 @@ msgstr ""
 #: .\accounts\templates\accounts\login_form.html:26
 #: .\templates\include\header.html:116
 msgid "Login"
-msgstr "Login"
+msgstr ""
 
 #: .\accounts\templates\accounts\my_orders.html:14
 msgid "Your"
@@ -180,10 +176,8 @@ msgid "Phone"
 msgstr ""
 
 #: .\accounts\templates\accounts\my_orders.html:25
-#, fuzzy
-#| msgid "Order Tracking"
 msgid "Order Total"
-msgstr "Order Tracking"
+msgstr ""
 
 #: .\accounts\templates\accounts\my_orders.html:26
 #: .\orders\templates\orders\payment_success.html:33
@@ -193,7 +187,7 @@ msgstr ""
 #: .\accounts\templates\accounts\register_form.html:18
 #: .\templates\include\header.html:117
 msgid "Register"
-msgstr "Register"
+msgstr ""
 
 #: .\accounts\templates\accounts\register_form.html:24
 msgid "Already have an account?"
@@ -228,17 +222,13 @@ msgid "Looks like you haven't added any items to your cart yet."
 msgstr ""
 
 #: .\carts\templates\carts\cart.html:19
-#, fuzzy
-#| msgid "Shipping"
 msgid "Start Shopping"
-msgstr "Shipping"
+msgstr ""
 
 #: .\carts\templates\carts\cart.html:32
 #: .\orders\templates\orders\payment_success.html:58
-#, fuzzy
-#| msgid "All Products"
 msgid "Product"
-msgstr "All Products"
+msgstr ""
 
 #: .\carts\templates\carts\cart.html:35
 #: .\orders\templates\orders\payment_success.html:59
@@ -331,7 +321,7 @@ msgstr ""
 #: .\orders\templates\orders\payment_process.html:240
 #: .\templates\include\header.html:53
 msgid "Email"
-msgstr "Email"
+msgstr ""
 
 #: .\carts\templates\carts\checkout.html:228
 msgid "Address 1"
@@ -386,7 +376,7 @@ msgstr ""
 #: .\orders\templates\orders\payment_success.html:101
 #: .\templates\include\footer.html:58
 msgid "Shipping"
-msgstr "Shipping"
+msgstr ""
 
 #: .\carts\templates\carts\checkout.html:308
 #: .\orders\templates\orders\payment_process.html:352
@@ -400,21 +390,19 @@ msgstr ""
 
 #: .\core\settings.py:151
 msgid "English"
-msgstr "english"
+msgstr ""
 
 #: .\core\settings.py:152
 msgid "Persian"
-msgstr "persian"
+msgstr ""
 
 #: .\core\settings.py:153
 msgid "French"
 msgstr ""
 
 #: .\main\templates\home.html:22
-#, fuzzy
-#| msgid "All Products"
 msgid "Popular products"
-msgstr "All Products"
+msgstr ""
 
 #: .\orders\templates\orders\order_received_email.html:6
 msgid "Thank you for your order!"
@@ -435,10 +423,8 @@ msgid "Order Number"
 msgstr ""
 
 #: .\orders\templates\orders\order_received_email.html:10
-#, fuzzy
-#| msgid "Order Tracking"
 msgid "Order Date"
-msgstr "Order Tracking"
+msgstr ""
 
 #: .\orders\templates\orders\order_received_email.html:11
 #: .\orders\templates\orders\payment_process.html:335
@@ -565,10 +551,8 @@ msgid "PAID"
 msgstr ""
 
 #: .\orders\templates\orders\payment_success.html:38
-#, fuzzy
-#| msgid "Customer Service"
 msgid "Customer"
-msgstr "Customer Service"
+msgstr ""
 
 #: .\orders\templates\orders\payment_success.html:84
 msgid "Product Name"
@@ -664,26 +648,22 @@ msgid "Login to Submit Review"
 msgstr ""
 
 #: .\product\templates\product\product_detail.html:160
-#, fuzzy
-#| msgid "Customer Service"
 msgid "Customer Reviews"
-msgstr "Customer Service"
+msgstr ""
 
 #: .\product\templates\product\product_list.html:24
-#, fuzzy
-#| msgid "Store"
 msgid "Our Store"
-msgstr "Store"
+msgstr ""
 
 #: .\product\templates\product\product_list.html:40
 #: .\templates\include\header.html:75
 msgid "Categories"
-msgstr "Categories"
+msgstr ""
 
 #: .\product\templates\product\product_list.html:47
 #: .\templates\include\header.html:77
 msgid "All Products"
-msgstr "All Products"
+msgstr ""
 
 #: .\product\templates\product\product_list.html:96
 msgid "Price range"
@@ -729,16 +709,16 @@ msgstr ""
 
 #: .\templates\include\base.html:6
 msgid "dir"
-msgstr "ltr"
+msgstr ""
 
 #: .\templates\include\base.html:14
 msgid "Tanzaib | One of the Biggest Online Shopping Platform"
-msgstr "Tanzaib | One of the Biggest Online Shopping Platform"
+msgstr ""
 
 #: .\templates\include\dashboard_sidebar.html:5
 #: .\templates\include\header.html:110
 msgid "Dashboard"
-msgstr "Dashboard"
+msgstr ""
 
 #: .\templates\include\dashboard_sidebar.html:6
 msgid "My Orders"
@@ -758,71 +738,69 @@ msgstr ""
 
 #: .\templates\include\footer.html:9
 msgid "About Our Company"
-msgstr "About Our Company"
+msgstr ""
 
 #: .\templates\include\footer.html:10
 msgid ""
 "We provide quality products and excellent customer service. Shop with "
 "confidence knowing we have served thousands of satisfied customers."
 msgstr ""
-"We provide quality products and excellent customer service. Shop with "
-"confidence knowing we have served thousands of satisfied customers."
 
 #: .\templates\include\footer.html:21
 msgid "Quick Links"
-msgstr "Quick Links"
+msgstr ""
 
 #: .\templates\include\footer.html:24
 msgid "Home"
-msgstr "Home"
+msgstr ""
 
 #: .\templates\include\footer.html:27
 msgid "Shop"
-msgstr "Shop"
+msgstr ""
 
 #: .\templates\include\footer.html:30
 msgid "About"
-msgstr "About"
+msgstr ""
 
 #: .\templates\include\footer.html:33
 msgid "Contact"
-msgstr "Contact"
+msgstr ""
 
 #: .\templates\include\footer.html:36
 msgid "FAQ"
-msgstr "FAQ"
+msgstr ""
 
 #: .\templates\include\footer.html:43
 msgid "Customer Service"
-msgstr "Customer Service"
+msgstr ""
 
 #: .\templates\include\footer.html:46
 msgid "My Account"
-msgstr "My Account"
+msgstr ""
 
 #: .\templates\include\footer.html:49
 msgid "Order Tracking"
-msgstr "Order Tracking"
+msgstr ""
 
 #: .\templates\include\footer.html:52
 msgid "Wishlist"
-msgstr "Wishlist"
+msgstr ""
 
 #: .\templates\include\footer.html:55
 msgid "Returns"
-msgstr "Returns"
+msgstr ""
 
 #: .\templates\include\footer.html:65
 msgid "Contact Info"
-msgstr "Contact Info"
+msgstr ""
 
 #: .\templates\include\footer.html:74 .\templates\include\footer.html:98
 msgid "123 Street, Avenue ABC"
-msgstr "123 Street, Avenue ABC"
+msgstr ""
 
 #: .\templates\include\footer.html:80
 msgid "Subscribe to Newsletter"
-msgstr "Subscribe to Newsletter"
+msgstr ""
 
 #: .\templates\include\footer.html:82
 msgid "Your email"
@@ -830,15 +808,15 @@ msgstr ""
 
 #: .\templates\include\footer.html:83
 msgid "Subscribe"
-msgstr "Subscribe"
+msgstr ""
 
 #: .\templates\include\footer.html:93
 msgid "Copyright 2026 Tanzaib LMT ©All Rights Reserved."
-msgstr "Copyright 2026 Tanzaib LMT ©All Rights Reserved."
+msgstr ""
 
 #: .\templates\include\header.html:22
 msgid "Language"
-msgstr "Language"
+msgstr ""
 
 #: .\templates\include\header.html:48
 msgid "USD"
@@ -846,11 +824,11 @@ msgstr ""
 
 #: .\templates\include\header.html:56
 msgid "Call us"
-msgstr "Call us"
+msgstr ""
 
 #: .\templates\include\header.html:88
 msgid "Store"
-msgstr "Store"
+msgstr ""
 
 #: .\templates\include\header.html:95 .\templates\include\header.html:97
 msgid "Search"
@@ -858,17 +836,12 @@ msgstr ""
 
 #: .\templates\include\header.html:108
 msgid "Welcome"
-msgstr "Welcome"
+msgstr ""
 
 #: .\templates\include\header.html:111
 msgid "Logout"
-msgstr "Logout"
+msgstr ""
 
 #: .\templates\include\header.html:114
 msgid "Welcome Guest!"
-msgstr "Welcome Guest!"
-
-#, fuzzy
-#~| msgid "All Products"
-#~ msgid "Explore More Products"
-#~ msgstr "All Products"
+msgstr ""

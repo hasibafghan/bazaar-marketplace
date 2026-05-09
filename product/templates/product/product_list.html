@@ -6,7 +6,23 @@
   <!-- ========================= SECTION PAGETOP ========================= -->
   <section class="section-pagetop bg">
     <div class="container">
-      <h2 class="title-page">{% trans "Our Store" %}</h2>
+      {% if category %}
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <h2 class="title-page">{{ category.category_name }}</h2>
+            {% if category.description %}
+              <p class="mb-0 text-muted">{{ category.description }}</p>
+            {% endif %}
+          </div>
+          {% if category.category_image %}
+            <div class="col-md-4 mt-3 mt-md-0 text-md-end">
+              <img src="{{ category.category_image.url }}" alt="{{ category.category_name }}" class="img-fluid rounded" style="max-height: 180px; object-fit: cover;">
+            </div>
+          {% endif %}
+        </div>
+      {% else %}
+        <h2 class="title-page">{% trans "Our Store" %}</h2>
+      {% endif %}
     </div> <!-- container // -->
   </section>
   <!-- ========================= SECTION INTRO END// ========================= -->
@@ -82,10 +98,6 @@
     <div class="filter-content collapse show" id="collapse_3" style="">
         <div class="card-body">
             <form method="GET" action="">
-                <!-- Preserve page and search parameters -->
-                {% if request.GET.page %}
-                    <input type="hidden" name="page" value="{{ request.GET.page }}">
-                {% endif %}
                 {% if request.GET.search %}
                     <input type="hidden" name="search" value="{{ request.GET.search }}">
                 {% endif %}
@@ -93,57 +105,35 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label>{% trans "Min" %}</label>
-                        <select name="min_price" class="form-control" onchange="this.form.submit()">
-                            <option value="">{% trans "Any Min" %}</option>
-                            <option value="0" {% if selected_min == '0' or not selected_min %}selected{% endif %}>$0</option>
-                            {% for price in price_options %}
-                                {% if price > 0 %}
-                                    <option value="{{ price }}" {% if selected_min == price|stringformat:"i" %}selected{% endif %}>
-                                        ${{ price }}
-                                    </option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
+                        <input type="number"
+                               name="min_price"
+                               class="form-control"
+                               min="0"
+                               step="1"
+                               placeholder="$0"
+                               value="{% if selected_min != None %}{{ selected_min }}{% endif %}">
                     </div>
                     <div class="form-group col-md-6">
                         <label>{% trans "Max" %}</label>
-                        <select name="max_price" class="form-control" onchange="this.form.submit()">
-                            <option value="">{% trans "Any Max" %}</option>
-                            {% for price in price_options %}
-                                <option value="{{ price }}" {% if selected_max == price|stringformat:"i" %}selected{% endif %}>
-                                    ${{ price }}
-                                </option>
-                            {% endfor %}
-                            <option value="{{ max_price|add:100 }}" {% if selected_max == max_price|add:100|stringformat:"i" %}selected{% endif %}>
-                                ${{ max_price|add:100 }}+
-                            </option>
-                        </select>
+                        <input type="number"
+                               name="max_price"
+                               class="form-control"
+                               min="0"
+                               step="1"
+                               placeholder="${{ max_price }}"
+                               value="{% if selected_max != None %}{{ selected_max }}{% endif %}">
                     </div>
                 </div> <!-- form-row.// -->
                 
-                <!-- Quick Price Buttons -->
                 <div class="mt-2">
-                    <small class="">{% trans "Quick select:" %}</small>
-                    <div class="btn-group btn-group-sm w-100 mt-1">
-                        <a href="?{% if request.GET.page %}page={{ request.GET.page }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}min_price=0&max_price=50" 
-                           class="btn btn-outline-secondary {% if selected_min == '0' and selected_max == '50' %}active{% endif %}">
-                            {% trans "Under $50" %}
-                        </a>
-                        <a href="?{% if request.GET.page %}page={{ request.GET.page }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}min_price=50&max_price=100" 
-                           class="btn btn-outline-secondary {% if selected_min == '50' and selected_max == '100' %}active{% endif %}">
-                            {% trans "$50-100" %}
-                        </a>
-                        <a href="?{% if request.GET.page %}page={{ request.GET.page }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}min_price=100&max_price=200" 
-                           class="btn btn-outline-secondary {% if selected_min == '100' and selected_max == '200' %}active{% endif %}">
-                            {% trans "$100-200" %}
-                        </a>
-                    </div>
+                    <button type="submit" class="btn btn-sm btn-primary w-100">
+                        {% trans "Apply Price Filter" %}
+                    </button>
                 </div>
                 
-                <!-- Clear Filter Button -->
-                {% if selected_min or selected_max %}
+                {% if selected_min != None or selected_max != None %}
                 <div class="mt-2">
-                    <a href="?{% if request.GET.page %}page={{ request.GET.page }}&{% endif %}{% if request.GET.search %}search={{ request.GET.search }}{% endif %}" 
+                    <a href="?{% if request.GET.search %}search={{ request.GET.search }}{% endif %}" 
                        class="btn btn-sm btn-outline-danger w-100">
                         {% trans "Clear Price Filter" %}
                     </a>
@@ -198,11 +188,7 @@
                   {% if products.has_previous %}
                     <li class="page-item">
                       <a class="page-link"
-                        href="?{% if request.GET.search %}
-                          
-                          search={{ request.GET.search }}&
-
-                        {% endif %}page={{ products.previous_page_number }}">
+                        href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ products.previous_page_number }}">
                         {% trans "Previous" %}
                       </a>
                     </li>
@@ -222,11 +208,7 @@
                       {% else %}
                         <li class="page-item">
                           <a class="page-link"
-                            href="?{% if request.GET.search %}
-                              
-                              search={{ request.GET.search }}&
-
-                            {% endif %}page={{ i }}">
+                            href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ i }}">
                             {{ i }}
                           </a>
                         </li>
@@ -238,11 +220,7 @@
                   {% if products.has_next %}
                     <li class="page-item">
                       <a class="page-link"
-                        href="?{% if request.GET.search %}
-                          
-                          search={{ request.GET.search }}&
-
-                        {% endif %}page={{ products.next_page_number }}">
+                        href="?{% if querystring %}{{ querystring }}&{% endif %}page={{ products.next_page_number }}">
                         {% trans "Next" %}
                       </a>
                     </li>
